@@ -53,6 +53,9 @@ class Piece(ABC):
         """
         pass
 
+    def __repr__(self):
+        return f"Piece({self.player}, loc:({self.loc}))"
+
 
 class RegularPiece(Piece):
     def __init__(self, player, loc):
@@ -60,10 +63,11 @@ class RegularPiece(Piece):
 
     def immediate_move_options(self) -> list[tuple[int, int]]:
         options = []
-        if self.loc[1] != 0:
-            options.append((self.loc[0] + self.player, self.loc[1] - 1))
-        if self.loc[1] != self.board_size - 1:
-            options.append((self.loc[0] + self.player, self.loc[1] + 1))
+        if 0 < self.loc[0] < self.board_size - 1:
+            if self.loc[1] != 0:
+                options.append((self.loc[0] + self.player, self.loc[1] - 1))
+            if self.loc[1] != self.board_size - 1:
+                options.append((self.loc[0] + self.player, self.loc[1] + 1))
         return options
 
     def is_queen(self) -> bool:

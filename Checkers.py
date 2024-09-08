@@ -1,5 +1,6 @@
 from Board import Board
 from DNNPlayer import DNNPlayer
+from FirstChoisePlayer import FirstChoisePlayer
 from HumanPlayer import HumanPlayer
 from MinimaxPlayer import MinimaxPlayer
 from Player import Player
@@ -10,7 +11,7 @@ from Constants import *
 from Pieces import *
 import argparse
 
-TYPE_PLAYERS = ['random', 'human', 'minimax', 'rl', 'dnn']
+TYPE_PLAYERS = ['random', 'human', 'minimax', 'rl', 'dnn', 'first_choice']
 
 
 def initialize_board():
@@ -66,19 +67,22 @@ def main():
             playerA = ReinforcementPlayer(BLACK)
         elif args.playerA == 'dnn':
             playerA = DNNPlayer(BLACK)
+        elif args.playerA == 'first_choice':
+            playerA = FirstChoisePlayer(BLACK)
 
     if args.playerB in TYPE_PLAYERS:
         if args.playerB == 'random':
-            playerB = RandomPlayer(BLACK)
+            playerB = RandomPlayer(WHITE)
         elif args.playerB == 'human':
-            playerB = HumanPlayer(BLACK)
+            playerB = HumanPlayer(WHITE)
         elif args.playerB == 'minimax':
-            playerB = MinimaxPlayer(BLACK)
+            playerB = MinimaxPlayer(WHITE)
         elif args.playerB == 'rl':
-            playerB = ReinforcementPlayer(BLACK)
+            playerB = ReinforcementPlayer(WHITE)
         elif args.playerA == 'dnn':
-            playerB = DNNPlayer(BLACK)
-
+            playerB = DNNPlayer(WHITE)
+        elif args.playerB == 'first_choice':
+            playerB = FirstChoisePlayer(WHITE)
     else:
         raise Exception('unrecognized options')
 
@@ -89,7 +93,7 @@ def main():
     n_games = args.number_games
     while n_games > 0:
         while state.is_over() == NOT_OVER_YET:
-            print(state.get_board_list())  # Print the current board state
+            # print(state.get_board_list())  # Print the current board state
 
             print(state)
             print(f"{current_player.color}'s turn")
@@ -104,6 +108,7 @@ def main():
 
         # Announce the winner
         if (final := state.is_over()) != NOT_OVER_YET:
+            print(state)
             if final == BLACK:
                 print("Black wins!")
             elif final == WHITE:

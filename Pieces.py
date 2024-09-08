@@ -53,6 +53,7 @@ class Piece(ABC):
         """
         pass
 
+
     def __repr__(self):
         return f"Piece({self.player}, loc:({self.loc}))"
 
@@ -71,6 +72,7 @@ class RegularPiece(Piece):
 
     def is_queen(self) -> bool:
         return False
+
 
 
 """    def get_all_moves(self, board: Board):
@@ -103,3 +105,4 @@ class QueenPiece(Piece):
 
     def is_queen(self) -> bool:
         return True
+    

@@ -1,6 +1,6 @@
 import numpy as np
 from Constants import *
-from Pieces import Piece
+from Pieces import Piece, RegularPiece, QueenPiece
 from Move import Move
 
 
@@ -49,9 +49,14 @@ class Board:
         Args:
             move (Move): the move to be made
         """
-        move.get_piece_moved().set_location(move.get_destination())
+        piece_moved = move.get_piece_moved()
+        piece_moved.set_location(move.get_destination())
+        if move.get_destination()[0] == self._get_other_end(piece_moved.get_player) and not piece_moved.is_queen():
+            self.get_pieces(piece_moved.get_player()).remove(piece_moved)
+            self.get_pieces(piece_moved.get_player()).append(QueenPiece(piece_moved.get_player(), piece_moved.get_location()))
         for piece in move.get_pieces_eaten():
             self._remove_piece(piece)
+        
 
     # for now, nothing
     def can_eat(self, piece: Piece):
@@ -90,3 +95,8 @@ class Board:
             self.white_pieces.remove(piece)
         else:
             self.black_pieces.remove(piece)
+
+    def _get_other_end(self, player: int) -> int:
+        if player == BLACK:
+            return BOARD_SIZE
+        return 0

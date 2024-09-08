@@ -84,8 +84,9 @@ class State:
         Returns:
             list[list[int]]: representaion of the current state of the board 
         """
-        board_list = [[0]*8]*8
+        board_list = [[0] * BOARD_SIZE for i in range(BOARD_SIZE)]
         for player in [BLACK, WHITE]:
+            l=self.board.get_pieces(player)
             for piece in self.board.get_pieces(player):
                 row, col = piece.get_location()
                 if piece.is_queen():

@@ -31,7 +31,7 @@ class State:
                         )
                     elif piece_in_dest.get_player() == self.last_player:
                         after_eating_option_loc = self.next_step(loc, option)
-                        if self.board.get_piece(after_eating_option_loc) is None:
+                        if self.board.get_piece(after_eating_option_loc) is None and self._loc_in_board(after_eating_option_loc):
                             moves.append(
                                 Move(
                                     piece_moved=piece,
@@ -120,3 +120,6 @@ class State:
             tar_row + np.sign(tar_row - cur_row),
             tar_col + np.sign(tar_col - cur_col),
         )
+
+    def _loc_in_board(self, loc: tuple[int,int]) -> bool:
+        return 0 < loc[0] < BOARD_SIZE and 0 < loc[1] < BOARD_SIZE

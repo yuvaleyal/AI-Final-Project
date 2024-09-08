@@ -1,7 +1,8 @@
 from CheckersDisplay import CheckersDisplay
-from Constants import WHITE, BLACK
+from Constants import WHITE, BLACK, PLAYER_NAME_A, PLAYER_NAME_B
 from Game import Game
 from PlayerFactory import PlayerFactory
+from ReinforcementPlayer import ReinforcementPlayer
 
 
 class GameManager:
@@ -40,11 +41,17 @@ class GameManager:
                 self.ties += 1
             game_counter += 1
             print(game_counter)
-            # else:
-            #     break
+            if isinstance(self.player1, ReinforcementPlayer):
+                self.player1.q_agent.decay_epsilon()
+            if isinstance(self.player2, ReinforcementPlayer):
+                self.player2.q_agent.decay_epsilon()
         print(f"BLACK: {self.black_score}, WHITE: {self.white_score}, Ties: {self.ties}")
         if self.display:
             self.display.show_end_result(self.white_score, self.black_score, self.ties)
+        if isinstance(self.player1, ReinforcementPlayer):
+            self.player1.save_object(PLAYER_NAME_A, self.num_of_games)
+        if isinstance(self.player2, ReinforcementPlayer):
+            self.player2.save_object(PLAYER_NAME_B, self.num_of_games)
 
     def run(self):
         if self.display:

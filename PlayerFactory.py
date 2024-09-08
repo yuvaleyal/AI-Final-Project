@@ -1,5 +1,5 @@
 import Player
-from Constants import BLACK, WHITE
+from Constants import BLACK, WHITE, PLAYER_NAME_A, PLAYER_NAME_B
 from DNNPlayer import DNNPlayer
 from FirstChoicePlayer import FirstChoicePlayer
 from HumanPlayer import HumanPlayer
@@ -19,7 +19,12 @@ class PlayerFactory:
         elif player_type == 'minimax':
             return MinimaxPlayer(color)
         elif player_type == 'rl':
-            return ReinforcementPlayer(color)
+            player = ReinforcementPlayer(color)
+            if player_num == BLACK:
+                player.load_object(PLAYER_NAME_A)
+            elif player_num == WHITE:
+                player.load_object(PLAYER_NAME_B)
+            return player
         elif player_type == 'dnn':
             return DNNPlayer(color)
         elif player_type == 'first_choice':

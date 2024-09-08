@@ -55,7 +55,8 @@ class State:
         Returns:
             State: next state
         """
-        self.board.make_move(move)
+        if move:
+            self.board.make_move(move)
         return State(self.board, -self.last_player)
 
     def is_over(self) -> int:
@@ -152,4 +153,3 @@ class State:
                         chain_options.append(new_move)
                         queue.append(new_move)
         return chain_options
-                

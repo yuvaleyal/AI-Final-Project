@@ -8,3 +8,6 @@ EMPTY = 0
 TIE = 0
 NOT_OVER_YET = 2
 CMD = False
+Q_Learning_OB_PATH = lambda player: f'objects/{player}_Q_LearningAgent.pkl'
+PLAYER_NAME_A = "pa"
+PLAYER_NAME_B = "pb"

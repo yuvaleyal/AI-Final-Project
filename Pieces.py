@@ -1,5 +1,7 @@
 from abcmeta import ABC, abstractmethod
 from Constants import *
+
+
 # from Board import Board
 
 
@@ -53,7 +55,6 @@ class Piece(ABC):
         """
         pass
 
-
     def __repr__(self):
         return f"Piece({self.player}, loc:({self.loc}))"
 
@@ -63,7 +64,7 @@ class RegularPiece(Piece):
         super().__init__(player, loc)
 
     def immediate_move_options(self) -> list[tuple[int, int]]:
-        options = [(self.loc[0] + self.player, self.loc[1] - 1), 
+        options = [(self.loc[0] + self.player, self.loc[1] - 1),
                    (self.loc[0] + self.player, self.loc[1] + 1)]
         options_to_return = []
         for option in options:
@@ -73,7 +74,6 @@ class RegularPiece(Piece):
 
     def is_queen(self) -> bool:
         return False
-
 
 
 """    def get_all_moves(self, board: Board):
@@ -103,8 +103,6 @@ class QueenPiece(Piece):
             if 0 <= option[0] < self.board_size and 0 <= option[1] < self.board_size:
                 options_to_return.append(option)
         return options_to_return
-            
 
     def is_queen(self) -> bool:
         return True
-    

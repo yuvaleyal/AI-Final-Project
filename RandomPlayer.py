@@ -11,5 +11,10 @@ class RandomPlayer(Player):
 
     def make_move(self, state: State) -> State:
         options = state.find_all_moves()
-        move = random.choice(options)
+        if not options:
+            # print("ERROR, missing options in Random Player")
+            # print(state)
+            move = None
+        else:
+            move = random.choice(options)
         return state.next_state(move)

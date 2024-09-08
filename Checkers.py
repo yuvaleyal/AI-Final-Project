@@ -68,6 +68,7 @@ def main():
             playerA = MinimaxPlayer(BLACK)
         elif args.playerA == 'rl':
             playerA = ReinforcementPlayer(BLACK)
+            playerA.load_object(PLAYER_NAME_A)
         elif args.playerA == 'dnn':
             playerA = DNNPlayer(BLACK)
         elif args.playerA == 'first_choice':
@@ -82,6 +83,7 @@ def main():
             playerB = MinimaxPlayer(WHITE)
         elif args.playerB == 'rl':
             playerB = ReinforcementPlayer(WHITE)
+            playerB.load_object(PLAYER_NAME_B)
         elif args.playerA == 'dnn':
             playerB = DNNPlayer(WHITE)
         elif args.playerB == 'first_choice':
@@ -90,14 +92,18 @@ def main():
         raise Exception('unrecognized options')
 
     n_games = args.number_games
+    wins_dict = {BLACK: 0, WHITE: 0, TIE: 0}
+    the_game_winner = ""
     while n_games > 0:
         board = initialize_board()
         current_player = playerA
         state = State(board, WHITE)
-
+        # print("q_table:", playerA.g_agent.q_table)
+        # if CMD:
+        #     print("q_table num_games:", playerA.q_agent.num_games)
         while state.is_over() == NOT_OVER_YET:
             if CMD:
-                print(state)# Print the current board state
+                print(state)  # Print the current board state
                 print(f"{current_player.color}'s turn")
                 print(state.find_all_moves())
             state = current_player.make_move(state)
@@ -110,15 +116,30 @@ def main():
 
         # Announce the winner
         if (final := state.is_over()) != NOT_OVER_YET:
-            if CMD:
-                print(state)
             if final == BLACK:
-                print("Black wins!")
+                the_game_winner = "Black wins!"
+                wins_dict[BLACK] += 1
             elif final == WHITE:
-                print("White wins!")
+                the_game_winner = "White wins!"
+                wins_dict[WHITE] += 1
             elif final == TIE:
-                print("Tie!")
+                the_game_winner = "Tie!"
+                wins_dict[TIE] += 1
+        if CMD:
+            print(state)
+            print(the_game_winner)
+
         n_games -= 1
+        if args.playerA == 'rl':
+            playerA.q_agent.decay_epsilon()
+        if args.playerB == 'rl':
+            playerB.q_agent.decay_epsilon()
+
+    if args.playerA == 'rl':
+        playerA.save_object(PLAYER_NAME_A, args.number_games)
+    if args.playerB == 'rl':
+        playerB.save_object(PLAYER_NAME_B, args.number_games)
+    print(wins_dict)
 
 
 if __name__ == "__main__":

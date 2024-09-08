@@ -18,6 +18,7 @@ class State:
             list[Move]: all the possible moves
         """
         moves = []
+        can_eat = False
         for piece in self.board.get_pieces(-self.last_player):
             loc = piece.get_location()
             for option in piece.immediate_move_options():
@@ -38,6 +39,9 @@ class State:
                                     pieces_eaten=[piece_in_dest],
                                 )
                             )
+                            can_eat = True
+        if can_eat:
+            return [move for move in moves if len(move.get_pieces_eaten()) > 0]
         return moves
 
     def next_state(self, move: Move):

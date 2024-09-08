@@ -49,6 +49,9 @@ class Board:
         Args:
             move (Move): the move to be made
         """
+        ### to check for the weird problem:
+        cur_black_num, cur_white_num = len(self.black_pieces), len(self.white_pieces)
+        ###
         piece_moved = move.get_piece_moved()
         piece_moved.set_location(move.get_destination())
         if move.get_destination()[0] == self._get_other_end(piece_moved.get_player()):
@@ -57,6 +60,12 @@ class Board:
                 self.get_pieces(piece_moved.get_player()).append(QueenPiece(piece_moved.get_player(), piece_moved.get_location()))
         for piece in move.get_pieces_eaten():
             self._remove_piece(piece)
+            
+        ##checking for the weird problem:
+        if len(self.black_pieces) > cur_black_num or len(self.white_pieces)>cur_white_num:
+            #so, somehow pieces where added...
+            #place breakpoint here:
+            pass
         
 
     # for now, nothing

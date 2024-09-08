@@ -150,7 +150,6 @@ class State:
                     if self.board.get_piece(dest) is None:
                         new_move = Move(piece, dest, cur_move.get_pieces_eaten() + [piece_in_dest])
                         chain_options.append(new_move)
-                        #chain_options += self.make_chain(piece, new_move)
                         queue.append(new_move)
         return chain_options
                 

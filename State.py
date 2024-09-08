@@ -31,7 +31,8 @@ class State:
                         )
                     elif piece_in_dest.get_player() == self.last_player:
                         after_eating_option_loc = self.next_step(loc, option)
-                        if self.board.get_piece(after_eating_option_loc) is None and self._loc_in_board(after_eating_option_loc):
+                        if self.board.get_piece(after_eating_option_loc) is None and self._loc_in_board(
+                            after_eating_option_loc):
                             moves.append(
                                 Move(
                                     piece_moved=piece,
@@ -86,15 +87,14 @@ class State:
         """
         board_list = [[0] * BOARD_SIZE for i in range(BOARD_SIZE)]
         for player in [BLACK, WHITE]:
-            l=self.board.get_pieces(player)
+            l = self.board.get_pieces(player)
             for piece in self.board.get_pieces(player):
                 row, col = piece.get_location()
                 if piece.is_queen():
-                    board_list[row][col]=player*QUEEN_MULTIPLIER
+                    board_list[row][col] = player * QUEEN_MULTIPLIER
                 else:
-                    board_list[row][col]=player
+                    board_list[row][col] = player
         return board_list
-
 
     # private methods:
     def _path_to_location(
@@ -123,8 +123,11 @@ class State:
 
     def __repr__(self):
         show_board = self.get_board_list()
+        str_ = ""
         for row in show_board:
-            print(' '.join(f'{num:2}' for num in row))
+            str_ += ' '.join(f'{num:2}' for num in row)
+            str_ += "\n"
+        return str_
 
-    def _loc_in_board(self, loc: tuple[int,int]) -> bool:
+    def _loc_in_board(self, loc: tuple[int, int]) -> bool:
         return 0 < loc[0] < BOARD_SIZE and 0 < loc[1] < BOARD_SIZE

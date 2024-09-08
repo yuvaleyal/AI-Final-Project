@@ -1,5 +1,6 @@
 from Board import Board
 from Move import Move
+from Pieces import Piece, RegularPiece, QueenPiece
 import numpy as np
 from Constants import *
 
@@ -33,13 +34,13 @@ class State:
                         after_eating_option_loc = self.next_step(loc, option)
                         if self.board.get_piece(after_eating_option_loc) is None and self._loc_in_board(
                             after_eating_option_loc):
-                            moves.append(
-                                Move(
+                            eat_one_move = Move(
                                     piece_moved=piece,
                                     destination=after_eating_option_loc,
                                     pieces_eaten=[piece_in_dest],
                                 )
-                            )
+                            moves.append(eat_one_move)
+                            moves += self.make_chain(piece, eat_one_move)
                             can_eat = True
         if can_eat:
             return [move for move in moves if len(move.get_pieces_eaten()) > 0]
@@ -132,3 +133,18 @@ class State:
 
     def _loc_in_board(self, loc: tuple[int, int]) -> bool:
         return 0 <= loc[0] < BOARD_SIZE and 0 <= loc[1] < BOARD_SIZE
+
+    def make_chain(self, piece: Piece, eat_move: Move) -> list[Move]:
+        chain_options = []
+        if piece.is_queen():
+            temp_piece = QueenPiece(piece.get_player(), eat_move.get_destination())
+        else:
+            temp_piece = RegularPiece(piece.get_player(), eat_move.get_destination())
+        for option in temp_piece.immediate_move_options():
+            piece_in_dest = self.board.get_piece(option)
+            if piece_in_dest is not None and piece_in_dest.get_player() != temp_piece.get_player() and piece_in_dest not in eat_move.get_pieces_eaten():
+                new_move = Move(piece, self.next_step(eat_move.get_destination(), option), eat_move.get_pieces_eaten() + [piece_in_dest])
+                chain_options.append(new_move)
+                chain_options += self.make_chain(piece, new_move)
+        return chain_options
+                

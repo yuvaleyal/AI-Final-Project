@@ -21,31 +21,42 @@ class State:
         moves = []
         can_eat = False
         for piece in self.board.get_pieces(-self.last_player):
-            loc = piece.get_location()
-            for option in piece.immediate_move_options():
-                steps = self._path_to_location(loc, option)
-                if all(self.board.get_piece(step) is None for step in steps):
-                    piece_in_dest = self.board.get_piece(option)
-                    if piece_in_dest is None:
-                        moves.append(
-                            Move(piece_moved=piece, destination=option, pieces_eaten=[])
-                        )
-                    elif piece_in_dest.get_player() == self.last_player:
-                        after_eating_option_loc = self.next_step(loc, option)
-                        if self.board.get_piece(after_eating_option_loc) is None and self._loc_in_board(
-                            after_eating_option_loc):
-                            eat_one_move = Move(
-                                    piece_moved=piece,
-                                    destination=after_eating_option_loc,
-                                    pieces_eaten=[piece_in_dest],
-                                )
-                            moves.append(eat_one_move)
-                            moves += self.make_chain(piece, eat_one_move)
-                            can_eat = True
+            piece_moves = self.get_piece_moves(piece)
+            if len(piece_moves) > 0:
+                if len(piece_moves[0].get_pieces_eaten()) > 0:
+                    can_eat = True
+            moves += piece_moves
         if can_eat:
             return [move for move in moves if len(move.get_pieces_eaten()) > 0]
         return moves
 
+    def get_piece_moves(self, piece):
+        loc = piece.get_location()
+        moves = []
+        can_eat = False
+        for option in piece.immediate_move_options():
+            steps = self._path_to_location(loc, option)
+            if all(self.board.get_piece(step) is None for step in steps):
+                piece_in_dest = self.board.get_piece(option)
+                if piece_in_dest is None:
+                    moves.append(
+                        Move(piece_moved=piece, destination=option, pieces_eaten=[])
+                    )
+                elif piece_in_dest.get_player() == self.last_player:
+                    after_eating_option_loc = self.next_step(loc, option)
+                    if self.board.get_piece(after_eating_option_loc) is None and self._loc_in_board(
+                        after_eating_option_loc):
+                        eat_one_move = Move(
+                            piece_moved=piece,
+                            destination=after_eating_option_loc,
+                            pieces_eaten=[piece_in_dest],
+                        )
+                        moves.append(eat_one_move)
+                        moves += self.make_chain(piece, eat_one_move)
+                        can_eat = True
+        if can_eat:
+            return [move for move in moves if len(move.get_pieces_eaten()) > 0]
+        return moves
     def next_state(self, move: Move):
         """returns the state after the current player makes a move
 

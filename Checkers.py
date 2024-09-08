@@ -89,7 +89,8 @@ def main():
     n_games = args.number_games
     while n_games > 0:
         while state.is_over() == NOT_OVER_YET:
-            print(state.board)  # Print the current board state
+            print(state.get_board_list())  # Print the current board state
+            print(state)
             print(f"{current_player.color}'s turn")
             print(state.find_all_moves())
             state = current_player.make_move(state)

@@ -77,12 +77,12 @@ class State:
         ):
             return TIE
         return NOT_OVER_YET
-    
+
     def get_board_list(self) -> list[list[int]]:
         """returns a list of lists representing the board
 
         Returns:
-            list[list[int]]: representaion of the current state of the board 
+            list[list[int]]: representaion of the current state of the board
         """
         board_list = [[0] * BOARD_SIZE for i in range(BOARD_SIZE)]
         for player in [BLACK, WHITE]:
@@ -94,7 +94,7 @@ class State:
                 else:
                     board_list[row][col]=player
         return board_list
-        
+
 
     # private methods:
     def _path_to_location(
@@ -120,6 +120,11 @@ class State:
             tar_row + np.sign(tar_row - cur_row),
             tar_col + np.sign(tar_col - cur_col),
         )
+
+    def __repr__(self):
+        show_board = self.get_board_list()
+        for row in show_board:
+            print(' '.join(f'{num:2}' for num in row))
 
     def _loc_in_board(self, loc: tuple[int,int]) -> bool:
         return 0 < loc[0] < BOARD_SIZE and 0 < loc[1] < BOARD_SIZE

@@ -73,6 +73,23 @@ class State:
         ):
             return TIE
         return NOT_OVER_YET
+    
+    def get_board_list(self) -> list[list[int]]:
+        """returns a list of lists representing the board
+
+        Returns:
+            list[list[int]]: representaion of the current state of the board 
+        """
+        board_list = [[0]*8]*8
+        for player in [BLACK, WHITE]:
+            for piece in self.board.get_pieces(player):
+                row, col = piece.get_location()
+                if piece.is_queen():
+                    board_list[row][col]=player*QUEEN_MULTIPLIER
+                else:
+                    board_list[row][col]=player
+        return board_list
+        
 
     # private methods:
     def _path_to_location(

@@ -9,12 +9,10 @@ class RandomPlayer(Player):
     def __init__(self, color: int) -> None:
         super().__init__(color)
 
-    def make_move(self, state: State) -> State:
+    def make_move(self, state: State):
         options = state.find_all_moves()
-        if not options:
-            # print("ERROR, missing options in Random Player")
-            # print(state)
-            move = None
-        else:
-            move = random.choice(options)
-        return state.next_state(move)
+        move = random.choice(options)
+        return move
+        # if 7 < move.destination[0] < 0 or 0 < move.destination[1] >= 8:
+        #     print("error")
+        # return state.next_state(move)

@@ -22,4 +22,4 @@ class Move:
         return self.pieces_eaten
 
     def __repr__(self):
-        return f" from: {self.piece_moved}, to {self.destination}, eaten: {self.pieces_eaten}\n"
+        return f"\n from: {self.piece_moved}, to {self.destination}, eaten: {self.pieces_eaten}"

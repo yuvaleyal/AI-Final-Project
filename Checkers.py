@@ -48,13 +48,16 @@ def main():
                         type=int)
 
     args = parser.parse_args()
-    print("args:", args)
+    global CMD
+
+    if CMD:
+        print("args:", args)
     if args.display == 'yes':
         pass
     elif args.display == 'no':
         pass
     elif args.display == 'cmd':
-        pass
+        CMD = True
 
     if args.playerA in TYPE_PLAYERS:
         if args.playerA == 'random':
@@ -93,11 +96,10 @@ def main():
         state = State(board, WHITE)
 
         while state.is_over() == NOT_OVER_YET:
-            # print(state.get_board_list())  # Print the current board state
-
-            print(state)
-            print(f"{current_player.color}'s turn")
-            print(state.find_all_moves())
+            if CMD:
+                print(state)# Print the current board state
+                print(f"{current_player.color}'s turn")
+                print(state.find_all_moves())
             state = current_player.make_move(state)
             if state.last_player == BLACK:
                 current_player = playerA
@@ -108,7 +110,8 @@ def main():
 
         # Announce the winner
         if (final := state.is_over()) != NOT_OVER_YET:
-            print(state)
+            if CMD:
+                print(state)
             if final == BLACK:
                 print("Black wins!")
             elif final == WHITE:

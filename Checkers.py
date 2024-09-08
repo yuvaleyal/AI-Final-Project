@@ -1,6 +1,6 @@
 from Board import Board
 from DNNPlayer import DNNPlayer
-from FirstChoisePlayer import FirstChoisePlayer
+from FirstChoicePlayer import FirstChoicePlayer
 from HumanPlayer import HumanPlayer
 from MinimaxPlayer import MinimaxPlayer
 from Player import Player
@@ -68,7 +68,7 @@ def main():
         elif args.playerA == 'dnn':
             playerA = DNNPlayer(BLACK)
         elif args.playerA == 'first_choice':
-            playerA = FirstChoisePlayer(BLACK)
+            playerA = FirstChoicePlayer(BLACK)
 
     if args.playerB in TYPE_PLAYERS:
         if args.playerB == 'random':
@@ -82,7 +82,7 @@ def main():
         elif args.playerA == 'dnn':
             playerB = DNNPlayer(WHITE)
         elif args.playerB == 'first_choice':
-            playerB = FirstChoisePlayer(WHITE)
+            playerB = FirstChoicePlayer(WHITE)
     else:
         raise Exception('unrecognized options')
 

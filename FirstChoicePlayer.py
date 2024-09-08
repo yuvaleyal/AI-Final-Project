@@ -1,7 +1,7 @@
 from Player import Player
 from State import State
 
-class FirstChoisePlayer(Player):
+class FirstChoicePlayer(Player):
     """this player makes moves by random"""
 
     def __init__(self, color: int) -> None:

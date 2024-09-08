@@ -86,12 +86,12 @@ def main():
     else:
         raise Exception('unrecognized options')
 
-    board = initialize_board()
-
-    current_player = playerA
-    state = State(board, WHITE)
     n_games = args.number_games
     while n_games > 0:
+        board = initialize_board()
+        current_player = playerA
+        state = State(board, WHITE)
+
         while state.is_over() == NOT_OVER_YET:
             # print(state.get_board_list())  # Print the current board state
 

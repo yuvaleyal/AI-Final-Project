@@ -36,9 +36,6 @@ class HumanPlayer(Player):
         self.legal_moves = state.find_all_moves()
         self.move = None
 
-        # If we are during a continuous eating move, continue to highlight the eating piece.
-        self.highlight_eating_piece()
-
         # Bind the click event to handle the move
         self.display.canvas.bind("<Button-1>", self.on_click)
         while self.move is None:
@@ -48,7 +45,7 @@ class HumanPlayer(Player):
         self.check_for_move()  # This keeps the UI responsive while waiting
 
         self.display.canvas.unbind("<Button-1>")
-        return self.move
+        return self.state.next_state(self.move)
 
     def check_for_move(self):
         """Periodically checks if a move has been made."""
@@ -63,6 +60,10 @@ class HumanPlayer(Player):
         """Handle mouse click events to select pieces and make moves."""
         row = int(event.y // self.display.cell_size)
         col = int(event.x // self.display.cell_size)
+
+        # Adjust that black is on bottom:
+        row = BOARD_SIZE - 1 - row
+
         print(f"Clicked at: row={row}, col={col}")
 
         piece = self.state.board.get_piece((row, col))
@@ -80,7 +81,7 @@ class HumanPlayer(Player):
         if piece and piece.get_player() == self.color and self.is_movable_piece(piece):
             self.selected_piece = piece
             self.previous_piece = self.selected_piece
-            self.legal_piece_moves = self.state.get_piece_moves(piece)
+            self.legal_piece_moves = self.state.find_moves_for_piece(piece)
             self.display.highlight_legal_moves(self.selected_piece, self.legal_piece_moves)
             print(f"Selected piece at {row}, {col}")
 
@@ -105,12 +106,3 @@ class HumanPlayer(Player):
             if move.get_destination() == (row, col):
                 return move
         return None
-
-    def highlight_eating_piece(self):
-        player_pieces = self.state.board.white_pieces if self.color == WHITE else self.state.board.black_pieces
-        for piece in player_pieces:
-            if isinstance(piece, EatingPiece):
-                self.selected_piece = piece
-                self.legal_moves = self.state.get_piece_moves(piece)
-                self.display.highlight_legal_moves(self.selected_piece, self.legal_moves)
-                return

@@ -323,7 +323,6 @@ class CheckersDisplay:
         self.player_selection_frame = None
 
         self.num_games = tk.IntVar(value=1)
-        self.display_board = tk.BooleanVar(value=True)
 
         self.crown_image = Image.open("crown.png")
         self.crown_photos = []
@@ -367,9 +366,6 @@ class CheckersDisplay:
 
         num_games_entry.focus_set()
 
-        toggle_button = tk.Checkbutton(self.player_selection_frame, text="Display Board", variable=self.display_board)
-        toggle_button.grid(row=5, pady=20)
-
         tk.Button(self.player_selection_frame, text="Start Game", command=self.start_game).grid(row=6, column=0,
                                                                                                 columnspan=2, pady=20)
 
@@ -389,70 +385,26 @@ class CheckersDisplay:
         player1 = self.player1_type.get()
         player2 = self.player2_type.get()
 
-        try:
-            display_board = self.display_board.get()
-
-            if not display_board and (player1 == "human" or player2 == "human"):
-                raise ValueError("Board must be displayed when human is playing.")
-        except (tk.TclError, ValueError) as e:
-            tk.messagebox.showerror("Invalid Input", str(e))
-            return
-
-        self.game_manager.set_board_display(display_board)
-
         self.game_manager.init_game(player1, player2)
 
         self.player_selection_frame.pack_forget()
-        if display_board:
-            self.create_game_screen()
-        else:
-            self.create_progress_bar(num_games)
+
+        self.create_game_screen()
         import threading
         game_thread = threading.Thread(target=self.game_manager.run_game_loop)
         game_thread.start()
         # self.game_manager.run_game_loop()
-
-    def create_progress_bar(self, num_games):
-        """Create and display the progress bar for non-board games."""
-        self.progress_frame = tk.Frame(self.root)
-        self.progress_frame.pack(padx=20, pady=20)
-
-        # Progress label
-        self.progress_label = tk.Label(self.progress_frame, text="Playing games...", font=("Helvetica", 14))
-        self.progress_label.pack(pady=10)
-
-        # Create progress bar
-        self.progress_bar = ttk.Progressbar(self.progress_frame, orient='horizontal', length=300, mode='determinate')
-        self.progress_bar.pack(pady=20)
-
-        # Set the maximum value of the progress bar to the number of games
-        self.progress_bar['maximum'] = num_games
-
-        # Initialize the progress bar value to 0
-        self.progress_bar['value'] = 0
-
-    def update_progress_bar(self, completed_games):
-        """Update the progress bar based on the number of completed games."""
-        if hasattr(self, 'progress_bar'):
-            self.progress_bar['value'] = completed_games
-
-            # Update the label to show the progress
-            self.progress_label.config(text=f"Completed {completed_games} out of {self.num_games.get()} games")
-
-            # Check if all games are completed
-            if completed_games == self.num_games.get():
-                self.progress_label.config(text="All games completed!")
 
     def create_game_screen(self):
         self.game_frame = tk.Frame(self.root)
         self.game_frame.pack(fill='both', expand=True)
 
         # Timer label
-        self.timer_label = tk.Label(self.game_frame, text="Timer: 00:00", font=("Helvetica", 16))
+        self.timer_label = tk.Label(self.game_frame, text="Timer: 00:00", font=("Verdana", 16))
         self.timer_label.pack(pady=10)
 
         # Turn label
-        self.turn_label = tk.Label(self.game_frame, text="Turn: Player 1 (Red)", font=("Helvetica", 14))
+        self.turn_label = tk.Label(self.game_frame, text="Turn: Player 1 (Red)", font=("Verdana", 14))
         self.turn_label.pack(pady=5)
 
         # Frame to hold the board and scores
@@ -460,27 +412,21 @@ class CheckersDisplay:
         self.board_frame.pack()
 
         # Player 1 score label
-        self.player1_score_label = tk.Label(self.board_frame, text="Player 1 (Black) Score: 0", font=("Helvetica", 12))
+        self.player1_score_label = tk.Label(self.board_frame, text="Player 1 (BLUE) Score: 0", font=("Verdana", 16))
         self.player1_score_label.grid(row=0, column=0, padx=20, pady=10)
 
         # Canvas for the board
-        self.canvas = tk.Canvas(self.board_frame, width=8 * 60, height=8 * 60, bg='white')
+        self.canvas = tk.Canvas(self.board_frame, width=8 * 80, height=8 * 80, bg='white')
         self.canvas.grid(row=0, column=1)
 
         # Player 2 score label
-        self.player2_score_label = tk.Label(self.board_frame, text="Player 2 (White) Score: 0", font=("Helvetica", 12))
+        self.player2_score_label = tk.Label(self.board_frame, text="Player 2 (RED) Score: 0", font=("Verdana", 16))
         self.player2_score_label.grid(row=0, column=2, padx=20, pady=10)
 
-        self.board = [[None] * 8 for _ in range(8)]
-        self.pieces = [[None] * 8 for _ in range(8)]
-
-        self.cell_size = 60  # Size of each cell in pixels
+        self.cell_size = 80  # Size of each cell in pixels
 
         # Draw the grid
         self.draw_grid()
-
-        # Draw the pieces
-        self.render_board()
 
         # Start the timer
         self.start_timer()
@@ -506,7 +452,7 @@ class CheckersDisplay:
                 y1 = y0 + self.cell_size
 
                 # Alternate colors
-                color = 'black' if (row + col) % 2 == 0 else 'white'
+                color = 'white' if (row + col) % 2 == 0 else 'black'
                 self.canvas.create_rectangle(x0, y0, x1, y1, fill=color, outline='black')
 
     def render_board(self):
@@ -516,120 +462,49 @@ class CheckersDisplay:
         # Clear any existing pieces
         self.canvas.delete('piece')
 
-        counter = 0
-
         for piece in black_pieces:
             try:
-                row, col = piece.get_location()
+                self.render_piece(piece, 'blue')
 
-                x_center = col * self.cell_size + self.cell_size / 2
-                y_center = row * self.cell_size + self.cell_size / 2
-                piece_radius = self.cell_size / 3  # Radius of the pieces
-                self.canvas.create_oval(
-                    x_center - piece_radius, y_center - piece_radius,
-                    x_center + piece_radius, y_center + piece_radius,
-                    fill='blue', outline='black', tags='b' + str(counter)
-                )
-                self.pieces[row][col] = 'b' + str(counter)
-                counter += 1
             except Exception as e:
                 print(f"Error rendering black piece: {e}")
 
-        counter = 0
         for piece in white_pieces:
             try:
-                row, col = piece.get_location()
+                self.render_piece(piece, 'red')
 
-                x_center = col * self.cell_size + self.cell_size / 2
-                y_center = row * self.cell_size + self.cell_size / 2
-                piece_radius = self.cell_size / 3  # Radius of the pieces
-                self.canvas.create_oval(
-                    x_center - piece_radius, y_center - piece_radius,
-                    x_center + piece_radius, y_center + piece_radius,
-                    fill='red', outline='black', tags='w' + str(counter)
-                )
-                self.pieces[row][col] = 'w' + str(counter)
-                counter += 1
             except Exception as e:
                 print(f"Error rendering white piece: {e}")
 
-    def update_board(self, start_move_location, destination, pieces_eaten, color):
-        # Remove the pieces eaten by the move
-        # if len(pieces_eaten):
-        for piece in pieces_eaten:
-            row, col = piece.get_location()
-            piece_id = self.pieces[row][col]
-            if piece_id:  # Check if a piece exists in the location
-                self.canvas.delete(piece_id)
-                self.pieces[row][col] = None
-            # row, col = piece_eaten.get_location()
-            # piece_id = self.pieces[row][col]
-            # if piece_id:  # Check if a piece exists in the location
-            #     self.canvas.delete(piece_id)
-            #     self.pieces[row][col] = None
+        self.switch_turn()
 
-        # Remove the moved piece from its original location
+    def render_piece(self, piece, color):
+        row, col = piece.get_location()
 
-        row, col = start_move_location
-        piece_id = self.pieces[row][col]
-        if piece_id:  # Check if a piece exists in the location
-            self.canvas.delete(piece_id)
-            self.pieces[row][col] = None
-
-        # Draw the cell background again at the new location
-        new_row, new_col = destination
-        x0 = new_col * self.cell_size
-        y0 = new_row * self.cell_size
-        x1 = x0 + self.cell_size
-        y1 = y0 + self.cell_size
-
-        # Redraw the cell background color based on its position
-        # color = 'white' if (new_row + new_col) % 2 == 0 else 'black'
-        self.canvas.create_rectangle(x0, y0, x1, y1, fill='black', outline='black')
-
-        # Add the moved piece to its new location
-        x_center_new = new_col * self.cell_size + self.cell_size / 2
-        y_center_new = new_row * self.cell_size + self.cell_size / 2
+        x_center = col * self.cell_size + self.cell_size / 2
+        y_center = (BOARD_SIZE - 1 - row) * self.cell_size + self.cell_size / 2
         piece_radius = self.cell_size / 3  # Radius of the pieces
+        self.canvas.create_oval(
+            x_center - piece_radius, y_center - piece_radius,
+            x_center + piece_radius, y_center + piece_radius,
+            fill=color, outline='black', tags='piece'
+        )
 
-        # Redraw the moved piece at its new location
-        if color == BLACK:
-            self.canvas.create_oval(
-                x_center_new - piece_radius, y_center_new - piece_radius,
-                x_center_new + piece_radius, y_center_new + piece_radius,
-                fill='blue', outline='black', tags=piece_id
-            )
-        else:
-            self.canvas.create_oval(
-                x_center_new - piece_radius, y_center_new - piece_radius,
-                x_center_new + piece_radius, y_center_new + piece_radius,
-                fill='red', outline='black', tags=piece_id
-            )
-
-        # If the piece is a queen, draw the crown
-        if self.game_manager.game.board.get_piece((new_row, new_col)).is_queen():
+        if piece.is_queen():
             crown_size = int(self.cell_size / 2)
             resized_crown = self.crown_image.resize((crown_size, crown_size))
             crown_photo = ImageTk.PhotoImage(resized_crown)  # Convert to Tkinter format
-            self.crown_photos.append(crown_photo)  # Store the crown image to prevent it from being garbage collected
-            crown_x = x_center_new - crown_size / 2
-            crown_y = y_center_new - crown_size / 2
-            self.canvas.create_image(crown_x, crown_y, image=crown_photo, anchor='nw', tags=piece_id)
-
-            # Store the new piece ID in the pieces matrix
-        self.pieces[new_row][new_col] = piece_id
-
-        self.switch_turn()
+            self.crown_photos.append(
+                crown_photo)  # Store the crown image to prevent it from being garbage collected
+            crown_x = x_center - crown_size / 2
+            crown_y = y_center - crown_size / 2
+            self.canvas.create_image(crown_x, crown_y, image=crown_photo, anchor='nw', tags='piece')
 
     def switch_turn(self):
         if self.game_manager.game.current_player.color == BLACK:
-            self.turn_label.config(text="Turn: Player 2 (Blue)")
+            self.turn_label.config(text="Turn: Player 1 (Blue)")
         else:
-            self.turn_label.config(text="Turn: Player 1 (Red)")
-
-    def on_button_click(self, row, col):
-        # Handle button click events here
-        print(f'Button clicked at {row}, {col}')
+            self.turn_label.config(text="Turn: Player 2 (Red)")
 
     def highlight_legal_moves(self, piece, legal_moves):
         """Highlights the legal moves for the selected piece."""
@@ -642,13 +517,14 @@ class CheckersDisplay:
         for move in legal_moves:
             destination = move.get_destination()
             row, col = destination
+            row = BOARD_SIZE - 1 - row
 
             # Highlight the legal move destination (for example, with a light green color)
             self.canvas.create_rectangle(
-                col * self.cell_size,
-                row * self.cell_size,
-                (col + 1) * self.cell_size,
-                (row + 1) * self.cell_size,
+                col * self.cell_size + 4,
+                row * self.cell_size + 4,
+                (col + 1) * self.cell_size - 4,
+                (row + 1) * self.cell_size - 4,
                 outline="#00FF00",  # Dark green outline
                 width=6,  # Thicker outline for better visibility
                 tags="highlight"  # Tag for clearing later
@@ -658,6 +534,7 @@ class CheckersDisplay:
         """Highlights the selected piece by drawing a border around it."""
         # Get the location of the selected piece
         row, col = piece.get_location()
+        row = BOARD_SIZE - 1 - row
 
         # Calculate the center and radius of the piece
         piece_x = col * self.cell_size + self.cell_size // 2
@@ -671,7 +548,7 @@ class CheckersDisplay:
             piece_x + piece_radius,
             piece_y + piece_radius,
             outline="lightblue",  # Blue outline for selection
-            width=6,  # Thickness of the border
+            width=5,  # Thickness of the border
             tags="highlight"  # Tag for clearing later
         )
 
@@ -682,22 +559,18 @@ class CheckersDisplay:
 
     def show_end_result(self, player1_score, player2_score, num_ties):
         # Create a new window for the end result
-        if self.display_board.get():
-            self.end_screen_root = self.game_frame
-        else:
-            self.end_screen_root = self.progress_frame
-        end_result_window = tk.Toplevel(self.end_screen_root)
+        end_result_window = tk.Toplevel(self.game_frame)
         end_result_window.title("Game Over")
 
         # Get the dimensions of the current window
-        # window_width = self.end_screen_root.winfo_width()
-        # window_height = self.end_screen_root.winfo_height()
-        #
-        # # Set the dimensions and position of the end result window relative to the main window
-        # end_result_window.geometry(
-        #     f"{window_width // 2}x{window_height // 2}"
-        #     f"+{self.end_screen_root.winfo_x() + window_width // 4}"
-        #     f"+{self.end_screen_root.winfo_y() + window_height // 4}")
+        window_width = self.game_frame.winfo_width()
+        window_height = self.game_frame.winfo_height()
+
+        # Set the dimensions and position of the end result window relative to the main window
+        end_result_window.geometry(
+            f"{window_width // 2}x{window_height // 2}"
+            f"+{self.game_frame.winfo_x() + window_width // 4}"
+            f"+{self.game_frame.winfo_y() + window_height // 4}")
 
         # Create labels for the scores
         tk.Label(end_result_window, text="Game Over!", font=("Arial", 16)).pack(pady=10)
@@ -734,7 +607,7 @@ class CheckersDisplay:
     def play_again(self, end_result_window):
         # Destroy the end result window
         end_result_window.destroy()
-        self.end_screen_root.destroy()
+        self.game_frame.destroy()
 
         self.num_games.set(1)
 
@@ -743,13 +616,10 @@ class CheckersDisplay:
     def return_to_player_selection(self, end_result_window):
         # Destroy the end result window
         end_result_window.destroy()
-        self.end_screen_root.destroy()
+        self.game_frame.destroy()
 
         self.game_manager.reset_scores()
 
         # Return to the player selection screen
         # self.player_selection_frame.pack(fill=tk.BOTH, expand=True)
         self.create_player_selection_screen()
-
-
-

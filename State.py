@@ -124,7 +124,8 @@ class State:
     def __repr__(self):
         show_board = self.get_board_list()
         str_ = ""
-        for row in show_board:
+        for ind_row in range(len(show_board) -1, -1, -1):
+            row = show_board[ind_row]
             str_ += ' '.join(f'{num:2}' for num in row)
             str_ += "\n"
         return str_

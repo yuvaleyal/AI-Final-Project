@@ -54,20 +54,26 @@ class Piece(ABC):
         pass
 
 
+    def __repr__(self):
+        return f"Piece({self.player}, loc:({self.loc}))"
+
+
 class RegularPiece(Piece):
     def __init__(self, player, loc):
         super().__init__(player, loc)
 
     def immediate_move_options(self) -> list[tuple[int, int]]:
-        options = []
-        if self.loc[1] != 0:
-            options.append((self.loc[0] + self.player, self.loc[1] - 1))
-        if self.loc[1] != self.board_size - 1:
-            options.append((self.loc[0] + self.player, self.loc[1] + 1))
-        return options
+        options = [(self.loc[0] + self.player, self.loc[1] - 1), 
+                   (self.loc[0] + self.player, self.loc[1] + 1)]
+        options_to_return = []
+        for option in options:
+            if 0 <= option[0] < self.board_size and 0 <= option[1] < self.board_size:
+                options_to_return.append(option)
+        return options_to_return
 
     def is_queen(self) -> bool:
         return False
+
 
 
 """    def get_all_moves(self, board: Board):
@@ -88,14 +94,17 @@ class QueenPiece(Piece):
         super().__init__(player, loc)
 
     def immediate_move_options(self) -> list[tuple[int, int]]:
-        options = []
-        for i, j in [(-1, -1), (-1, 1), (1, -1), (1, 1)]:
-            row, col = self.loc
-            while 0 <= row + i < self.board_size and 0 <= col + j < BOARD_SIZE:
-                row += i
-                col += j
-                options.append((row, col))
-        return options
+        options = [(self.loc[0] + 1, self.loc[1] + 1),
+                   (self.loc[0] + 1, self.loc[1] - 1),
+                   (self.loc[0] - 1, self.loc[1] + 1),
+                   (self.loc[0] - 1, self.loc[1] - 1)]
+        options_to_return = []
+        for option in options:
+            if 0 <= option[0] < self.board_size and 0 <= option[1] < self.board_size:
+                options_to_return.append(option)
+        return options_to_return
+            
 
     def is_queen(self) -> bool:
         return True
+    

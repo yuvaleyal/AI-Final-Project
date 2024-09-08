@@ -1,7 +1,3 @@
-.venv/Lib/site-packages/base32hex.py
-.venv/Lib/site-packages/__pycache__/base32hex.cpython-310.pyc
-.venv/Lib/site-packages/typing.py
-.venv/Lib/site-packages/typing_extensions.py
-.venv/Lib/site-packages/abcmeta-2.2.0.dist-info/INSTALLER
-.venv/Lib/site-packages/abcmeta/__pycache__/__init__.cpython-310.pyc
-.venv/Lib/site-packages/abcmeta-2.2.0.dist-info/WHEEL
+.venv
+**.pyc
+.vscode/launch.json

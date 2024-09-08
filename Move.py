@@ -20,3 +20,6 @@ class Move:
 
     def get_pieces_eaten(self) -> list[Piece]:
         return self.pieces_eaten
+
+    def __repr__(self):
+        return f"\n from: {self.piece_moved}, to {self.destination}, eaten: {self.pieces_eaten}"

@@ -1,6 +1,6 @@
 import numpy as np
 from Constants import *
-from Pieces import Piece
+from Pieces import Piece, RegularPiece, QueenPiece
 from Move import Move
 
 
@@ -49,9 +49,24 @@ class Board:
         Args:
             move (Move): the move to be made
         """
-        move.get_piece_moved().set_location(move.get_destination())
+        ### to check for the weird problem:
+        cur_black_num, cur_white_num = len(self.black_pieces), len(self.white_pieces)
+        ###
+        piece_moved = move.get_piece_moved()
+        piece_moved.set_location(move.get_destination())
+        if move.get_destination()[0] == self._get_other_end(piece_moved.get_player()):
+            if not piece_moved.is_queen():
+                self.get_pieces(piece_moved.get_player()).remove(piece_moved)
+                self.get_pieces(piece_moved.get_player()).append(QueenPiece(piece_moved.get_player(), piece_moved.get_location()))
         for piece in move.get_pieces_eaten():
             self._remove_piece(piece)
+            
+        ##checking for the weird problem:
+        if len(self.black_pieces) > cur_black_num or len(self.white_pieces)>cur_white_num:
+            #so, somehow pieces where added...
+            #place breakpoint here:
+            pass
+        
 
     # for now, nothing
     def can_eat(self, piece: Piece):
@@ -90,3 +105,8 @@ class Board:
             self.white_pieces.remove(piece)
         else:
             self.black_pieces.remove(piece)
+
+    def _get_other_end(self, player: int) -> int:
+        if player == BLACK:
+            return BOARD_SIZE-1
+        return 0

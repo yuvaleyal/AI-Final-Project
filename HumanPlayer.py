@@ -1,0 +1,11 @@
+from Player import Player
+from State import State
+
+
+class HumanPlayer(Player):
+
+    def __init__(self, color: int) -> None:
+        super().__init__(color)
+
+    def make_move(self, state: State) -> State:
+        pass

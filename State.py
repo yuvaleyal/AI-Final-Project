@@ -1,5 +1,6 @@
 from Board import Board
 from Move import Move
+from Pieces import Piece, RegularPiece, QueenPiece
 import numpy as np
 from Constants import *
 
@@ -18,6 +19,7 @@ class State:
             list[Move]: all the possible moves
         """
         moves = []
+        can_eat = False
         for piece in self.board.get_pieces(-self.last_player):
             loc = piece.get_location()
             for option in piece.immediate_move_options():
@@ -30,14 +32,18 @@ class State:
                         )
                     elif piece_in_dest.get_player() == self.last_player:
                         after_eating_option_loc = self.next_step(loc, option)
-                        if self.board.get_piece(after_eating_option_loc) is None:
-                            moves.append(
-                                Move(
+                        if self.board.get_piece(after_eating_option_loc) is None and self._loc_in_board(
+                            after_eating_option_loc):
+                            eat_one_move = Move(
                                     piece_moved=piece,
                                     destination=after_eating_option_loc,
                                     pieces_eaten=[piece_in_dest],
                                 )
-                            )
+                            moves.append(eat_one_move)
+                            moves += self.make_chain(piece, eat_one_move)
+                            can_eat = True
+        if can_eat:
+            return [move for move in moves if len(move.get_pieces_eaten()) > 0]
         return moves
 
     def next_state(self, move: Move):
@@ -74,6 +80,23 @@ class State:
             return TIE
         return NOT_OVER_YET
 
+    def get_board_list(self) -> list[list[int]]:
+        """returns a list of lists representing the board
+
+        Returns:
+            list[list[int]]: representaion of the current state of the board
+        """
+        board_list = [[0] * BOARD_SIZE for i in range(BOARD_SIZE)]
+        for player in [BLACK, WHITE]:
+            l = self.board.get_pieces(player)
+            for piece in self.board.get_pieces(player):
+                row, col = piece.get_location()
+                if piece.is_queen():
+                    board_list[row][col] = player * QUEEN_MULTIPLIER
+                else:
+                    board_list[row][col] = player
+        return board_list
+
     # private methods:
     def _path_to_location(
         self, loc: tuple[int, int], dest: tuple[int, int]
@@ -98,3 +121,35 @@ class State:
             tar_row + np.sign(tar_row - cur_row),
             tar_col + np.sign(tar_col - cur_col),
         )
+
+    def __repr__(self):
+        show_board = self.get_board_list()
+        str_ = ""
+        for ind_row in range(len(show_board) -1, -1, -1):
+            row = show_board[ind_row]
+            str_ += ' '.join(f'{num:3}' for num in row)
+            str_ += "\n"
+        return str_
+
+    def _loc_in_board(self, loc: tuple[int, int]) -> bool:
+        return 0 <= loc[0] < BOARD_SIZE and 0 <= loc[1] < BOARD_SIZE
+
+    def make_chain(self, piece: Piece, eat_move: Move) -> list[Move]:
+        chain_options = []
+        queue = [eat_move]
+        while len(queue) > 0:
+            cur_move = queue.pop(0)
+            if piece.is_queen():
+                temp_piece = QueenPiece(piece.get_player(), cur_move.get_destination())
+            else:
+                temp_piece = RegularPiece(piece.get_player(), cur_move.get_destination())
+            for option in temp_piece.immediate_move_options():
+                piece_in_dest = self.board.get_piece(option)
+                if piece_in_dest is not None and piece_in_dest.get_player() != temp_piece.get_player() and piece_in_dest not in cur_move.get_pieces_eaten():
+                    dest = self.next_step(cur_move.get_destination(), option)
+                    if self.board.get_piece(dest) is None:
+                        new_move = Move(piece, dest, cur_move.get_pieces_eaten() + [piece_in_dest])
+                        chain_options.append(new_move)
+                        queue.append(new_move)
+        return chain_options
+                

@@ -136,15 +136,21 @@ class State:
 
     def make_chain(self, piece: Piece, eat_move: Move) -> list[Move]:
         chain_options = []
-        if piece.is_queen():
-            temp_piece = QueenPiece(piece.get_player(), eat_move.get_destination())
-        else:
-            temp_piece = RegularPiece(piece.get_player(), eat_move.get_destination())
-        for option in temp_piece.immediate_move_options():
-            piece_in_dest = self.board.get_piece(option)
-            if piece_in_dest is not None and piece_in_dest.get_player() != temp_piece.get_player() and piece_in_dest not in eat_move.get_pieces_eaten():
-                new_move = Move(piece, self.next_step(eat_move.get_destination(), option), eat_move.get_pieces_eaten() + [piece_in_dest])
-                chain_options.append(new_move)
-                chain_options += self.make_chain(piece, new_move)
+        queue = [eat_move]
+        while len(queue) > 0:
+            cur_move = queue.pop(0)
+            if piece.is_queen():
+                temp_piece = QueenPiece(piece.get_player(), cur_move.get_destination())
+            else:
+                temp_piece = RegularPiece(piece.get_player(), cur_move.get_destination())
+            for option in temp_piece.immediate_move_options():
+                piece_in_dest = self.board.get_piece(option)
+                if piece_in_dest is not None and piece_in_dest.get_player() != temp_piece.get_player() and piece_in_dest not in cur_move.get_pieces_eaten():
+                    dest = self.next_step(cur_move.get_destination(), option)
+                    if self.board.get_piece(dest) is None:
+                        new_move = Move(piece, dest, cur_move.get_pieces_eaten() + [piece_in_dest])
+                        chain_options.append(new_move)
+                        #chain_options += self.make_chain(piece, new_move)
+                        queue.append(new_move)
         return chain_options
                 

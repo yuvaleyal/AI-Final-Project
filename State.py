@@ -130,4 +130,4 @@ class State:
         return str_
 
     def _loc_in_board(self, loc: tuple[int, int]) -> bool:
-        return 0 < loc[0] < BOARD_SIZE and 0 < loc[1] < BOARD_SIZE
+        return 0 <= loc[0] < BOARD_SIZE and 0 <= loc[1] < BOARD_SIZE

@@ -67,7 +67,7 @@ class RegularPiece(Piece):
                    (self.loc[0] + self.player, self.loc[1] + 1)]
         options_to_return = []
         for option in options:
-            if 0 < option[0] < self.board_size and 0 < option[1] < self.board_size:
+            if 0 <= option[0] < self.board_size and 0 <= option[1] < self.board_size:
                 options_to_return.append(option)
         return options_to_return
 
@@ -100,7 +100,7 @@ class QueenPiece(Piece):
                    (self.loc[0] - 1, self.loc[1] - 1)]
         options_to_return = []
         for option in options:
-            if 0 < option[0] < self.board_size and 0 < option[1] < self.board_size:
+            if 0 <= option[0] < self.board_size and 0 <= option[1] < self.board_size:
                 options_to_return.append(option)
         return options_to_return
             

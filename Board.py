@@ -51,9 +51,10 @@ class Board:
         """
         piece_moved = move.get_piece_moved()
         piece_moved.set_location(move.get_destination())
-        if move.get_destination()[0] == self._get_other_end(piece_moved.get_player) and not piece_moved.is_queen():
-            self.get_pieces(piece_moved.get_player()).remove(piece_moved)
-            self.get_pieces(piece_moved.get_player()).append(QueenPiece(piece_moved.get_player(), piece_moved.get_location()))
+        if move.get_destination()[0] == self._get_other_end(piece_moved.get_player()):
+            if not piece_moved.is_queen():
+                self.get_pieces(piece_moved.get_player()).remove(piece_moved)
+                self.get_pieces(piece_moved.get_player()).append(QueenPiece(piece_moved.get_player(), piece_moved.get_location()))
         for piece in move.get_pieces_eaten():
             self._remove_piece(piece)
         
@@ -98,5 +99,5 @@ class Board:
 
     def _get_other_end(self, player: int) -> int:
         if player == BLACK:
-            return BOARD_SIZE
+            return BOARD_SIZE-1
         return 0

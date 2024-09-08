@@ -89,7 +89,7 @@ def main():
     board = initialize_board()
 
     current_player = playerA
-    state = State(board, BLACK)
+    state = State(board, WHITE)
     n_games = args.number_games
     while n_games > 0:
         while state.is_over() == NOT_OVER_YET:

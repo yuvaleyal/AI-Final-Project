@@ -62,12 +62,11 @@ class RegularPiece(Piece):
         super().__init__(player, loc)
 
     def immediate_move_options(self) -> list[tuple[int, int]]:
-        options = []
-        if 0 < self.loc[0] < self.board_size - 1:
-            if self.loc[1] != 0:
-                options.append((self.loc[0] + self.player, self.loc[1] - 1))
-            if self.loc[1] != self.board_size - 1:
-                options.append((self.loc[0] + self.player, self.loc[1] + 1))
+        options = [(self.loc[0] + self.player, self.loc[1] - 1), 
+                   (self.loc[0] + self.player, self.loc[1] + 1)]
+        for option in options:
+            if not (0 < option[0] < self.board_size and 0 < option[1] < self.board_size):
+                options.remove(option)
         return options
 
     def is_queen(self) -> bool:
@@ -92,14 +91,15 @@ class QueenPiece(Piece):
         super().__init__(player, loc)
 
     def immediate_move_options(self) -> list[tuple[int, int]]:
-        options = []
-        for i, j in [(-1, -1), (-1, 1), (1, -1), (1, 1)]:
-            row, col = self.loc
-            while 0 <= row + i < self.board_size and 0 <= col + j < BOARD_SIZE:
-                row += i
-                col += j
-                options.append((row, col))
+        options = [(self.loc[0] + 1, self.loc[1] + 1),
+                   (self.loc[0] + 1, self.loc[1] - 1),
+                   (self.loc[0] - 1, self.loc[1] + 1),
+                   (self.loc[0] - 1, self.loc[1] - 1)]
+        for option in options:
+            if not (0 < option[0] < self.board_size and 0 < option[1] < self.board_size):
+                options.remove(option)
         return options
+            
 
     def is_queen(self) -> bool:
         return True

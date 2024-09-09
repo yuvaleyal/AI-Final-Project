@@ -180,6 +180,9 @@ class CheckersDisplay:
         # Start the timer
         self.start_timer()
 
+        self.message_label = tk.Label(self.game_frame, text='', font=("Verdana", 20, 'bold'), fg='red')
+        self.message_label.pack(side="bottom", pady=10)
+
     def start_timer(self):
         self.timer_seconds = 0
         self.update_timer()
@@ -378,10 +381,7 @@ class CheckersDisplay:
         self.player2_score_label.config(text=f"Player 2 (RED) score: {player2_score}")
 
     def display_message_beneath_board(self, message):
-        self.hide_message()
-        self.message_label = tk.Label(self.game_frame, text=message, font=("Verdana", 20, 'bold'), fg='red')
-        self.message_label.pack(side="bottom", pady=10)
+        self.message_label.config(text=message)
 
     def hide_message(self):
-        if hasattr(self, 'message_label'):
-            self.message_label.pack_forget()
+        self.message_label.config(text='')

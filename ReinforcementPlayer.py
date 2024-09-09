@@ -17,10 +17,7 @@ class ReinforcementPlayer(Player):
     def make_move(self, state: State) -> State:
         options = state.find_all_moves()
         vec_state = tuple(np.array(state.get_board_list()).flatten())
-        # print("vec_state", vec_state)
         if not options:
-            # print("ERROR, missing options in Q learning")
-            # print(state)
             move = None
             reward = -1.0
         else:
@@ -55,7 +52,6 @@ def calculate_reward(move, player):
     """
     reward = 0.0
     for piece in move.get_pieces_eaten():
-        # print(type(piece), piece)
         if isinstance(piece, RegularPiece):
             reward += 2
         if isinstance(piece, QueenPiece):

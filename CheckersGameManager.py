@@ -1,5 +1,5 @@
 from CheckersDisplay import CheckersDisplay
-from Constants import WHITE, BLACK, PLAYER_NAME_A, PLAYER_NAME_B
+from Constants import WHITE, BLACK, PLAYER_NAME_A, PLAYER_NAME_B, CMD
 from Game import Game
 from PlayerFactory import PlayerFactory
 from ReinforcementPlayer import ReinforcementPlayer
@@ -42,7 +42,8 @@ class GameManager:
             else:
                 self.ties += 1
             game_counter += 1
-            print(game_counter)
+            if CMD:
+                print(game_counter)
             if isinstance(self.player1, ReinforcementPlayer):
                 self.player1.q_agent.decay_epsilon()
             if isinstance(self.player2, ReinforcementPlayer):

@@ -34,6 +34,7 @@ class State:
     def find_moves_for_piece(self, piece: Piece) -> list[Move]:
         loc = piece.get_location()
         moves = []
+        can_eat = False
         for option in piece.immediate_move_options():
             steps = self._path_to_location(loc, option)
             if all(self.board.get_piece(step) is None for step in steps):

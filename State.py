@@ -159,7 +159,7 @@ class State:
                 piece_in_dest = self.board.get_piece(option)
                 if piece_in_dest is not None and piece_in_dest.get_player() != temp_piece.get_player() and piece_in_dest not in cur_move.get_pieces_eaten():
                     dest = self.next_step(cur_move.get_destination(), option)
-                    if self.board.get_piece(dest) is None:
+                    if self._loc_in_board(dest) and self.board.get_piece(dest) is None:
                         new_move = Move(piece, dest, cur_move.get_pieces_eaten() + [piece_in_dest])
                         chain_options.append(new_move)
                         queue.append(new_move)

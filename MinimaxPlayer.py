@@ -90,49 +90,83 @@ class MinimaxPlayer(Player):
         """
         Evaluates the current state of the board for the checkers game.
 
-        This evaluation function is based on the material, position, and mobility of pieces.
+        This evaluation function takes into account material, positioning, captures,
+        and threats, aiming to improve the AI's decision-making.
         :param state: The current state of the game.
         :return: A score representing the evaluation of the board.
         """
         # Weights for different factors
-        piece_weight = 8  # Weight for a regular piece
-        king_weight = 10  # Weight for a king piece
-        positional_weight = 1  # Positional value (for central and advanced pieces)
-        mobility_weight = 0.1  # Weight for the number of legal moves
+        piece_weight = 10  # Regular piece weight
+        king_weight = 15  # Queen piece weight
+        positional_weight = 1  # Weight for positional value
+        capture_weight = 20  # Weight for possible capture moves
+        threat_weight = -12  # Penalty for pieces at risk of being captured
 
-        # Get the board from the state
+        # Get the current board and pieces
         board = state.board
         player_pieces = board.get_pieces(self.color)
-        opponent_pieces = board.get_pieces(state.last_player)
+        opponent_pieces = board.get_pieces(-self.color)
 
-        # Material count: count pieces and kings
-        player_queens = self.num_of_queens(player_pieces)
-        opponent_queens = self.num_of_queens(opponent_pieces)
+        # Material score (difference in pieces and queens)
+        player_queens = self._num_of_queens(player_pieces)
+        opponent_queens = self._num_of_queens(opponent_pieces)
         material_score = (
             piece_weight * ((len(player_pieces) - player_queens) - (len(opponent_pieces) - opponent_queens)) +
             king_weight * (player_queens - opponent_queens)
         )
 
-        # Positional score: favor central positions or advanced pieces
+        # Positional score (favoring central and advanced pieces)
         positional_score = 0
-        # for piece in player_pieces:
-        #     row, col = piece.get_location()
-        #     positional_score += self.get_positional_value(row, col)
-        #
-        # for piece in opponent_pieces:
-        #     row, col = piece.get_location()
-        #     positional_score -= self.get_positional_value(row, col)
+        for piece in player_pieces:
+            row, col = piece.get_location()
+            positional_score += self._get_positional_value(row, col)
 
-        # Mobility score: favor the player with more legal moves
-        player_moves = len(state.find_all_moves())
-        mobility_score = mobility_weight * (player_moves)
+        for piece in opponent_pieces:
+            row, col = piece.get_location()
+            positional_score -= self._get_positional_value(row, col)
+
+        # Capture score (number of capture opportunities for both players)
+        capture_score = 0
+        player_moves = state.find_all_moves()
+        opponent_moves = State(state.board, -self.color).find_all_moves()
+
+        for move in player_moves:
+            if len(move.get_pieces_eaten()) > 0:  # Capture move for player
+                capture_score += capture_weight
+
+        for move in opponent_moves:
+            if len(move.get_pieces_eaten()) > 0:  # Capture move for opponent
+                capture_score -= capture_weight
+
+        # Threat score (penalizing pieces that are at risk of being captured)
+        threat_score = 0
+        for piece in player_pieces:
+            if self._is_threatened(piece, opponent_moves):
+                threat_score += threat_weight
+
+        for piece in opponent_pieces:
+            if self._is_threatened(piece, player_moves):
+                threat_score -= threat_weight
 
         # Total evaluation score
-        evaluation_score = material_score + positional_weight * positional_score + mobility_score
+        evaluation_score = material_score + positional_weight * positional_score + capture_score + threat_score
 
         return evaluation_score
 
-    def get_positional_value(self, row, col) -> int:
+    def _is_threatened(self, piece, opponent_moves):
+        """
+        Checks if a piece is under threat of being captured by looking at opponent moves.
+
+        :param piece: The piece to check.
+        :param opponent_moves: List of moves the opponent can make.
+        :return: True if the piece is threatened, False otherwise.
+        """
+        for move in opponent_moves:
+            if piece in move.get_pieces_eaten():
+                return True
+        return False
+
+    def _get_positional_value(self, row, col) -> int:
         """
         Assigns a positional value to a piece based on its location on the board.
         :param row: The row of the piece.
@@ -147,7 +181,7 @@ class MinimaxPlayer(Player):
         else:  # Black pieces
             return row  # More advanced rows (lower row index) get higher scores
 
-    def num_of_queens(self, pieces: List[Piece]) -> int:
+    def _num_of_queens(self, pieces: List[Piece]) -> int:
         result = 0
         for piece in pieces:
             if piece.is_queen():

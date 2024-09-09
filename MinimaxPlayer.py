@@ -37,7 +37,7 @@ class MinimaxPlayer(Player):
         best_move = None
 
         for move in legal_moves:
-            successor_state = self.generate_successor(state, move)
+            successor_state = state.generate_successor(move)
             successor_value, _ = self._min_value(successor_state, current_depth, alpha, beta)
 
             if successor_value > value:
@@ -71,7 +71,7 @@ class MinimaxPlayer(Player):
         best_move = None
 
         for move in legal_moves:
-            successor_state = self.generate_successor(state, move)
+            successor_state = state.generate_successor(move)
             successor_value, _ = self._max_value(successor_state, current_depth + 1, alpha, beta)
 
             if successor_value < value:
@@ -139,32 +139,20 @@ class MinimaxPlayer(Player):
                 capture_score -= capture_weight
 
         # Threat score (penalizing pieces that are at risk of being captured)
-        threat_score = 0
-        for piece in player_pieces:
-            if self._is_threatened(piece, opponent_moves):
-                threat_score += threat_weight
+        threatened_player_pieces = set()
+        for move in opponent_moves:
+            for piece in move.get_pieces_eaten():
+                threatened_player_pieces.add(piece)
 
-        for piece in opponent_pieces:
-            if self._is_threatened(piece, player_moves):
-                threat_score -= threat_weight
+        threatened_opponent_pieces = set()
+        for move in player_moves:
+            for piece in move.get_pieces_eaten():
+                threatened_opponent_pieces.add(piece)
 
-        # Total evaluation score
+        threat_score = threat_weight * len(threatened_player_pieces) - threat_weight * len(threatened_opponent_pieces)
         evaluation_score = material_score + positional_weight * positional_score + capture_score + threat_score
 
         return evaluation_score
-
-    def _is_threatened(self, piece, opponent_moves):
-        """
-        Checks if a piece is under threat of being captured by looking at opponent moves.
-
-        :param piece: The piece to check.
-        :param opponent_moves: List of moves the opponent can make.
-        :return: True if the piece is threatened, False otherwise.
-        """
-        for move in opponent_moves:
-            if piece in move.get_pieces_eaten():
-                return True
-        return False
 
     def _get_positional_value(self, row, col) -> int:
         """
@@ -187,31 +175,6 @@ class MinimaxPlayer(Player):
             if piece.is_queen():
                 result += 1
         return result
-
-    # This mehtod should be in State class:
-    def generate_successor(self, state: State, move) -> State:
-        # Create a deep copy of the current state
-        state_copy = deepcopy(state)
-
-        piece_to_move = None
-        for piece in state_copy.board.get_pieces(-state_copy.last_player):
-            if piece.get_location() == move.get_piece_moved().get_location():
-                piece_to_move = piece
-                break
-
-        eaten_pieces = []
-        eaten_pieces_locations = [piece.get_location() for piece in move.get_pieces_eaten()]
-
-        for piece in state_copy.board.get_pieces(state_copy.last_player):
-            if piece.get_location() in eaten_pieces_locations:
-                eaten_pieces.append(piece)
-
-        move_copy = Move(piece_to_move, move.get_destination(), eaten_pieces)
-
-        state_copy.board.make_move(move_copy)
-
-        # Return the successor state
-        return State(state_copy.board, -state_copy.last_player)
 
 
 

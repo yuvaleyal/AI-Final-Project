@@ -1,5 +1,4 @@
 abcmeta
 numpy
-random
-tkinter
+tk
 pillow

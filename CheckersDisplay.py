@@ -20,6 +20,8 @@ class CheckersDisplay:
         self.crown_image = Image.open("crown.png")
         self.crown_photos = []
         self.create_player_selection_screen()
+        self.player1_score = 0
+        self.player2_score = 0
 
     def create_player_selection_screen(self):
         if self.player_selection_frame:
@@ -120,7 +122,7 @@ class CheckersDisplay:
                   font=('Verdana', 16),
                   command=self.start_game).grid(row=8, column=0, columnspan=2, pady=20)
 
-    def start_game(self):
+    def start_game(self, play_again=False):
 
         try:
             num_games = self.num_games.get()
@@ -131,6 +133,12 @@ class CheckersDisplay:
         except (tk.TclError, ValueError) as e:
             tk.messagebox.showerror("Invalid Input", str(e))
             return
+
+        if play_again:
+            num_games = 1
+        else:
+            self.player1_score = 0
+            self.player1_score = 0
 
         self.game_manager.set_num_of_games(num_games)
         player1 = self.player1_type.get()
@@ -163,7 +171,9 @@ class CheckersDisplay:
         self.board_frame.pack()
 
         # Player 1 score label
-        self.player1_score_label = tk.Label(self.board_frame, text="Player 1 (BLUE) Score: 0", font=("Verdana", 16))
+        self.player1_score_label = tk.Label(self.board_frame,
+                                            text=f"Player 1 (BLUE) Score: {self.player1_score}",
+                                            font=("Verdana", 16))
         self.player1_score_label.grid(row=0, column=0, padx=20, pady=10)
 
         # Canvas for the board
@@ -171,7 +181,9 @@ class CheckersDisplay:
         self.canvas.grid(row=0, column=1)
 
         # Player 2 score label
-        self.player2_score_label = tk.Label(self.board_frame, text="Player 2 (RED) Score: 0", font=("Verdana", 16))
+        self.player2_score_label = tk.Label(self.board_frame,
+                                            text=f"Player 2 (RED) Score: {self.player2_score}",
+                                            font=("Verdana", 16))
         self.player2_score_label.grid(row=0, column=2, padx=20, pady=10)
 
         self.cell_size = 60  # Size of each cell in pixels
@@ -312,6 +324,9 @@ class CheckersDisplay:
         self.canvas.delete("highlight")
 
     def show_end_result(self, player1_score, player2_score, num_ties):
+        self.player1_score = player1_score
+        self.player2_score = player2_score
+
         # Create a new window for the end result
         end_result_window = tk.Toplevel(self.game_frame)
         end_result_window.title("Game Over")
@@ -327,34 +342,41 @@ class CheckersDisplay:
             f"+{self.game_frame.winfo_y() + window_height // 4}")
 
         # Create labels for the scores
-        tk.Label(end_result_window, text="Game Over!", font=("Arial", 16)).pack(pady=10)
+        tk.Label(end_result_window, text="Game Over!", font=("Verdana", 20, 'bold')).pack(pady=10)
 
         # Create a frame to hold the scores
         score_frame = tk.Frame(end_result_window)
         score_frame.pack(pady=20)
 
         # Player 1 Score
-        player1_label = tk.Label(score_frame, text=f"Red Player Score: {player1_score}", font=("Arial", 14))
-        player1_label.grid(row=0, column=0, padx=(10, 40))
+        player2_label = tk.Label(score_frame,
+                                 text=f"Blue Player Score: {self.player1_score}",
+                                 font=("Verdana", 16),
+                                 fg='blue')
+        player2_label.grid(row=0, column=0, padx=(40, 10))
 
         # Ties
-        ties_label = tk.Label(score_frame, text=f"Ties: {num_ties}", font=("Arial", 14))
+        ties_label = tk.Label(score_frame, text=f"Ties: {num_ties}", font=("Verdana", 16))
         ties_label.grid(row=0, column=1)
 
         # Player 2 Score
-        player2_label = tk.Label(score_frame, text=f"Blue Player Score: {player2_score}", font=("Arial", 14))
-        player2_label.grid(row=0, column=2, padx=(40, 10))
+        player1_label = tk.Label(score_frame,
+                                 text=f"Red Player Score: {self.player2_score}",
+                                 font=("Verdana", 16),
+                                 fg='red')
+        player1_label.grid(row=0, column=2, padx=(10, 40))
+
 
         button_frame = tk.Frame(end_result_window)
         button_frame.pack(pady=10)
 
         # Button to play again
-        play_again_button = tk.Button(button_frame, text="Play Again", font=("Arial", 12),
+        play_again_button = tk.Button(button_frame, text="Play Again", font=("Verdana", 16),
                                       command=lambda: self.play_again(end_result_window))
         play_again_button.grid(row=0, column=0, padx=20)
 
         # Button to return to player selection
-        player_selection_button = tk.Button(button_frame, text="Return to Player Selection", font=("Arial", 12),
+        player_selection_button = tk.Button(button_frame, text="Return to Player Selection", font=("Verdana", 16),
                                             command=lambda: self.return_to_player_selection(end_result_window))
         player_selection_button.grid(row=0, column=1, padx=20)
 
@@ -365,13 +387,15 @@ class CheckersDisplay:
 
         self.num_games.set(1)
 
-        self.start_game()
+        self.start_game(True)
 
     def return_to_player_selection(self, end_result_window):
         # Destroy the end result window
         end_result_window.destroy()
         self.game_frame.destroy()
 
+        self.player1_score = 0
+        self.player2_score = 0
         self.game_manager.reset_scores()
 
         # Return to the player selection screen
@@ -379,8 +403,10 @@ class CheckersDisplay:
         self.create_player_selection_screen()
 
     def update_scores(self, player1_score, player2_score):
-        self.player1_score_label.config(text=f"Player 1 (BLUE) score: {player1_score}")
-        self.player2_score_label.config(text=f"Player 2 (RED) score: {player2_score}")
+        self.player1_score = player1_score
+        self.player2_score = player2_score
+        self.player1_score_label.config(text=f"Player 1 (BLUE) score: {self.player1_score}")
+        self.player2_score_label.config(text=f"Player 2 (RED) score: {self.player2_score}")
 
     def display_message_beneath_board(self, message):
         self.message_label.config(text=message)

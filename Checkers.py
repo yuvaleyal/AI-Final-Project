@@ -54,95 +54,17 @@ def main():
     if args.display == 'yes':
         game_manager = GameManager(args.display)
         game_manager.run()
-    elif args.display == 'no':
+    elif args.display in ['no', 'cmd']:
+        if args.display == 'cmd':
+            CMD = True
         game_manager = GameManager()
-        #     pass
-        # elif args.display == 'cmd':
-        #     CMD = True
+        if args.playerA == HUMAN or args.playerB == HUMAN:
+            raise Exception('The human player is only possible in display mode')
+
         if args.playerA in TYPE_PLAYERS and args.playerB in TYPE_PLAYERS:
             game_manager.init_game(args.playerA, args.playerB)
-
         game_manager.set_num_of_games(args.number_games)
         game_manager.run()
-    #     if args.playerA == 'random':
-    #         playerA = RandomPlayer(BLACK)
-    #     elif args.playerA == 'human':
-    #         playerA = HumanPlayer(BLACK)
-    #     elif args.playerA == 'minimax':
-    #         playerA = MinimaxPlayer(BLACK)
-    #     elif args.playerA == 'rl':
-    #         playerA = ReinforcementPlayer(BLACK)
-    #         playerA.load_object(PLAYER_NAME_A)
-    #     elif args.playerA == 'dnn':
-    #         playerA = DNNPlayer(BLACK)
-    #     elif args.playerA == 'first_choice':
-    #         playerA = FirstChoicePlayer(BLACK)
-    #
-    # if args.playerB in TYPE_PLAYERS:
-    #     if args.playerB == 'random':
-    #         playerB = RandomPlayer(WHITE)
-    #     elif args.playerB == 'human':
-    #         playerB = HumanPlayer(WHITE)
-    #     elif args.playerB == 'minimax':
-    #         playerB = MinimaxPlayer(WHITE)
-    #     elif args.playerB == 'rl':
-    #         playerB = ReinforcementPlayer(WHITE)
-    #         playerB.load_object(PLAYER_NAME_B)
-    #     elif args.playerA == 'dnn':
-    #         playerB = DNNPlayer(WHITE)
-    #     elif args.playerB == 'first_choice':
-    #         playerB = FirstChoicePlayer(WHITE)
-    else:
-        raise Exception('unrecognized options')
-
-    # wins_dict = {BLACK: 0, WHITE: 0, TIE: 0}
-    # the_game_winner = ""
-    # while n_games > 0:
-    #     board = initialize_board()
-    #     current_player = playerA
-    #     state = State(board, WHITE)
-    #     # print("q_table:", playerA.g_agent.q_table)
-    #     # if CMD:
-    #     #     print("q_table num_games:", playerA.q_agent.num_games)
-    #     while state.is_over() == NOT_OVER_YET:
-    #         if CMD:
-    #             print(state)  # Print the current board state
-    #             print(f"{current_player.color}'s turn")
-    #             print(state.find_all_moves())
-    #         state = current_player.make_move(state)
-    #         if state.last_player == BLACK:
-    #             current_player = playerA
-    #         elif state.last_player == WHITE:
-    #             current_player = playerB
-    #         else:
-    #             print("Invalid move, try again.")
-    #
-    #     # Announce the winner
-    #     if (final := state.is_over()) != NOT_OVER_YET:
-    #         if final == BLACK:
-    #             the_game_winner = "Black wins!"
-    #             wins_dict[BLACK] += 1
-    #         elif final == WHITE:
-    #             the_game_winner = "White wins!"
-    #             wins_dict[WHITE] += 1
-    #         elif final == TIE:
-    #             the_game_winner = "Tie!"
-    #             wins_dict[TIE] += 1
-    #     if CMD:
-    #         print(state)
-    #         print(the_game_winner)
-    #
-    #     n_games -= 1
-    #     if args.playerA == 'rl':
-    #         playerA.q_agent.decay_epsilon()
-    #     if args.playerB == 'rl':
-    #         playerB.q_agent.decay_epsilon()
-    #
-    # if args.playerA == 'rl':
-    #     playerA.save_object(PLAYER_NAME_A, args.number_games)
-    # if args.playerB == 'rl':
-    #     playerB.save_object(PLAYER_NAME_B, args.number_games)
-    # print(wins_dict)
 
 
 if __name__ == "__main__":

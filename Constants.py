@@ -11,4 +11,5 @@ CMD = False
 Q_Learning_OB_PATH = lambda player: f'objects/{player}_Q_LearningAgent.pkl'
 PLAYER_NAME_A = "pa"
 PLAYER_NAME_B = "pb"
-TYPE_PLAYERS = ['random', 'human', 'minimax', 'rl', 'dnn', 'first_choice']
+HUMAN = 'human'
+TYPE_PLAYERS = ['random', HUMAN , 'minimax', 'rl', 'dnn', 'first_choice']

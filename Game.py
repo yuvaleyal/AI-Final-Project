@@ -2,7 +2,7 @@ import copy
 import threading
 import time
 from Board import Board
-from Constants import BOARD_SIZE, NOT_OVER_YET, BLACK, WHITE
+from Constants import BOARD_SIZE, NOT_OVER_YET, BLACK, WHITE, CMD
 from Move import Move
 from Pieces import Piece, RegularPiece
 from Player import Player
@@ -40,7 +40,8 @@ class Game:
         self.current_player = self.player1
         while self.current_state.is_over() == NOT_OVER_YET:
             self.current_state = self.current_player.make_move(self.current_state)
-            print(self.current_state)
+            if CMD:
+                print(self.current_state)
             if self.current_state.last_player == BLACK:
                 self.current_player = self.player2
             elif self.current_state.last_player == WHITE:

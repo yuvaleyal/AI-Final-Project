@@ -2,7 +2,7 @@ import copy
 import threading
 import time
 from Board import Board
-from Constants import BOARD_SIZE, NOT_OVER_YET, BLACK
+from Constants import BOARD_SIZE, NOT_OVER_YET, BLACK, WHITE
 from Move import Move
 from Pieces import Piece, RegularPiece
 from Player import Player
@@ -12,47 +12,47 @@ from dash import Output
 
 
 class Game:
-    def __init__(self, player1: Player, player2: Player, display: CheckersDisplay, should_display_board: bool):
+    def __init__(self, player1: Player, player2: Player, display: CheckersDisplay):
         self.current_player: Player = player1
         self.player1 = player1
         self.player2 = player2
         self.display = display
-        self.should_display_board = should_display_board
+        # self.should_display_board = should_display_board
 
-        self.board = self.init_board()
-        self.current_state = State(self.board, self.player2.color)
+        self.board = initialize_board()
+        self.current_state = State(self.board, WHITE)
 
-    def init_board(self):
-        black_pieces = []
-        white_pieces = []
-
-        for row in range(3):
-            for col in range(4):
-                black_col = col * 2 + (row % 2)
-                black_pieces.append(RegularPiece(self.player2.color, (row, black_col)))
-
-                white_col = col * 2 + ((row + 1) % 2)
-                white_pieces.append(RegularPiece(self.player1.color, (BOARD_SIZE - 1 - row, white_col)))
-
-        return Board(black_pieces, white_pieces)
-
-    # def update_board(self):
-    #     self.current_player.make_move(self.current_state)
-    #     self.display.update_board(self)  # Update the display with new board state
+    # def init_board(self):
+    #     black_pieces = []
+    #     white_pieces = []
+    #
+    #     for row in range(3):
+    #         for col in range(4):
+    #             black_col = col * 2 + (row % 2)
+    #             black_pieces.append(RegularPiece(self.player2.color, (row, black_col)))
+    #
+    #             white_col = col * 2 + ((row + 1) % 2)
+    #             white_pieces.append(RegularPiece(self.player1.color, (BOARD_SIZE - 1 - row, white_col)))
+    #
+    #     return Board(black_pieces, white_pieces)
 
     def run(self):
+        self.current_player = self.player1
         while self.current_state.is_over() == NOT_OVER_YET:
-            move = self.current_player.make_move(self.current_state)
-            if move is None:
-                continue
-            move_start = move.get_piece_moved().get_location()
-            self.current_state = self.current_state.next_state(move)
-            # self.current_state = State(self.board, self.current_player.color)
-            self.current_player = self.player1 if self.current_state.last_player == BLACK else self.player2
-            if self.should_display_board:
-                self.display.update_board(move_start,
-                                          move.get_destination(),
-                                          move.get_pieces_eaten(),
-                                          move.get_piece_moved().get_player())
-            # time.sleep(3)
+            self.current_state = self.current_player.make_move(self.current_state)
+            print(self.current_state)
+            if self.current_state.last_player == BLACK:
+                self.current_player = self.player2
+            elif self.current_state.last_player == WHITE:
+                self.current_player = self.player1
+            if self.display:
+                self.display.render_board()
         return self.current_state.is_over()
+
+
+def initialize_board():
+    black_locs = [(0, 0), (0, 2), (0, 4), (0, 6), (1, 1), (1, 3), (1, 5), (1, 7), (2, 0), (2, 2), (2, 4), (2, 6)]
+    black_pieces = [RegularPiece(BLACK, b_loc) for b_loc in black_locs]
+    white_locs = [(5, 1), (5, 3), (5, 5), (5, 7), (6, 0), (6, 2), (6, 4), (6, 6), (7, 1), (7, 3), (7, 5), (7, 7)]
+    white_pieces = [RegularPiece(WHITE, w_loc) for w_loc in white_locs]
+    return Board(black_pieces, white_pieces)

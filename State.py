@@ -22,9 +22,10 @@ class State:
         can_eat = False
         for piece in self.board.get_pieces(-self.last_player):
             piece_moves = self.find_moves_for_piece(piece)
-            #either all of them are eat moves, of none of them
-            if len(piece_moves[0].get_pieces_eaten()) > 0:
-                can_eat = True
+            # either all of them are eat moves, of none of them
+            if len(piece_moves) > 0:
+                if len(piece_moves[0].get_pieces_eaten()) > 0:
+                    can_eat = True
             moves += piece_moves
         if can_eat:
             return [move for move in moves if len(move.get_pieces_eaten()) > 0]
@@ -135,7 +136,7 @@ class State:
     def __repr__(self):
         show_board = self.get_board_list()
         str_ = ""
-        for ind_row in range(len(show_board) -1, -1, -1):
+        for ind_row in range(len(show_board) - 1, -1, -1):
             row = show_board[ind_row]
             str_ += ' '.join(f'{num:3}' for num in row)
             str_ += "\n"
@@ -143,7 +144,7 @@ class State:
 
     def _loc_in_board(self, loc: tuple[int, int]) -> bool:
         return 0 <= loc[0] < BOARD_SIZE and 0 <= loc[1] < BOARD_SIZE
-    
+
     def _make_chain(self, piece: Piece, eat_move: Move) -> list[Move]:
         chain_options = []
         queue = [eat_move]

@@ -376,3 +376,12 @@ class CheckersDisplay:
     def update_scores(self, player1_score, player2_score):
         self.player1_score_label.config(text=f"Player 1 (BLUE) score: {player1_score}")
         self.player2_score_label.config(text=f"Player 2 (RED) score: {player2_score}")
+
+    def display_message_beneath_board(self, message):
+        self.hide_message()
+        self.message_label = tk.Label(self.game_frame, text=message, font=("Verdana", 20, 'bold'), fg='red')
+        self.message_label.pack(side="bottom", pady=10)
+
+    def hide_message(self):
+        if hasattr(self, 'message_label'):
+            self.message_label.pack_forget()

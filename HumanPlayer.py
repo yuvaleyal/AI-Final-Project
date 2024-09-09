@@ -78,12 +78,18 @@ class HumanPlayer(Player):
                 print("Invalid move. Select another valid destination.")
 
         # If a valid piece is clicked, update the selected piece
-        if piece and piece.get_player() == self.color and self.is_movable_piece(piece):
-            self.selected_piece = piece
-            self.previous_piece = self.selected_piece
-            self.legal_piece_moves = self.state.find_moves_for_piece(piece)
-            self.display.highlight_legal_moves(self.selected_piece, self.legal_piece_moves)
-            print(f"Selected piece at {row}, {col}")
+        if piece and piece.get_player() == self.color:
+            if not self.is_movable_piece(piece):
+                self.selected_piece = None
+                self.display.clear_highlights()
+                self.display.display_message_beneath_board("This piece does not have any valid moves.")
+            else:
+                self.display.hide_message()
+                self.selected_piece = piece
+                self.previous_piece = self.selected_piece
+                self.legal_piece_moves = self.state.find_moves_for_piece(piece)
+                self.display.highlight_legal_moves(self.selected_piece, self.legal_piece_moves)
+                print(f"Selected piece at {row}, {col}")
 
         # # If a piece is already selected, check if the clicked cell is a legal move
         # elif self.selected_piece:

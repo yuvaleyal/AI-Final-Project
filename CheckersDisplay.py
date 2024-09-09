@@ -11,6 +11,8 @@ class CheckersDisplay:
         self.root = tk.Tk()
         self.root.title("Checkers Game")
 
+        self.root.attributes('-fullscreen', True)
+
         self.player_selection_frame = None
 
         self.num_games = tk.IntVar(value=1)

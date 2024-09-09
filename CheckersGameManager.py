@@ -48,6 +48,8 @@ class GameManager:
                 self.player1.q_agent.decay_epsilon()
             if isinstance(self.player2, ReinforcementPlayer):
                 self.player2.q_agent.decay_epsilon()
+            if self.display:
+                self.display.update_scores(self.black_score, self.white_score)
         print(f"BLACK: {self.black_score}, WHITE: {self.white_score}, Ties: {self.ties}")
         if self.display:
             self.display.show_end_result(self.white_score, self.black_score, self.ties)

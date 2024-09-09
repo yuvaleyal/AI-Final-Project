@@ -331,43 +331,101 @@ class CheckersDisplay:
     def create_player_selection_screen(self):
         if self.player_selection_frame:
             self.player_selection_frame.destroy()
+
         # Frame for player selection
         self.player_selection_frame = tk.Frame(self.root)
         self.player_selection_frame.pack(padx=20, pady=20)
 
-        tk.Label(self.player_selection_frame, text="Select Player 1").grid(row=0, column=0, padx=10, pady=10)
+        tk.Label(self.player_selection_frame,
+                 text="Select Player 1",
+                 font=('Verdana', 18, 'bold')).grid(row=0, column=0, padx=10, pady=10, sticky='w')
         self.player1_type = tk.StringVar(value='human')
-        tk.Label(self.player_selection_frame, text="Select Player 1").grid(row=0, column=0, padx=10, pady=10)
-        tk.Radiobutton(self.player_selection_frame, text='Human', variable=self.player1_type, value='human').grid(
-            row=1, column=0, padx=10, pady=5)
-        tk.Radiobutton(self.player_selection_frame, text='Random', variable=self.player1_type, value='random').grid(
-            row=2, column=0, padx=10, pady=5)
-        tk.Radiobutton(self.player_selection_frame, text='Minimax', variable=self.player1_type, value='minimax').grid(
-            row=3, column=0, padx=10, pady=5)
+        tk.Radiobutton(self.player_selection_frame,
+                       text='Human',
+                       font=('Verdana', 16),
+                       variable=self.player1_type,
+                       value='human').grid(row=1, column=0, padx=10, pady=5, sticky='w')
+        tk.Radiobutton(self.player_selection_frame,
+                       text='Random',
+                       font=('Verdana', 16),
+                       variable=self.player1_type,
+                       value='random').grid(row=2, column=0, padx=10, pady=5, sticky='w')
+        tk.Radiobutton(self.player_selection_frame,
+                       text='Minimax',
+                       font=('Verdana', 16),
+                       variable=self.player1_type,
+                       value='minimax').grid(row=3, column=0, padx=10, pady=5, sticky='w')
+        tk.Radiobutton(self.player_selection_frame,
+                       text='Reinforced Learning',
+                       font=('Verdana', 16),
+                       variable=self.player1_type,
+                       value='rl').grid(row=4, column=0, padx=10, pady=5, sticky='w')
+        tk.Radiobutton(self.player_selection_frame,
+                       text='DNN',
+                       font=('Verdana', 16),
+                       variable=self.player1_type,
+                       value='dnn').grid(row=5, column=0, padx=10, pady=5, sticky='w')
+        tk.Radiobutton(self.player_selection_frame,
+                       text='First Choice',
+                       font=('Verdana', 16),
+                       variable=self.player1_type,
+                       value='first choice').grid(row=6, column=0, padx=10, pady=5, sticky='w')
 
-        tk.Label(self.player_selection_frame, text="Select Player 2").grid(row=0, column=1, padx=10, pady=10)
+        tk.Label(self.player_selection_frame,
+                 text="Select Player 2",
+                 font=('Verdana', 18, 'bold')).grid(row=0, column=1, padx=10, pady=10)
         self.player2_type = tk.StringVar(value='human')
-        tk.Radiobutton(self.player_selection_frame, text='Human', variable=self.player2_type, value='human').grid(
-            row=1, column=1, padx=10, pady=5)
-        tk.Radiobutton(self.player_selection_frame, text='Random', variable=self.player2_type, value='random').grid(
-            row=2, column=1, padx=10, pady=5)
-        tk.Radiobutton(self.player_selection_frame, text='Minimax', variable=self.player2_type, value='minimax').grid(
-            row=3, column=1, padx=10, pady=5)
+        tk.Radiobutton(self.player_selection_frame,
+                       text='Human',
+                       font=('Verdana', 16),
+                       variable=self.player2_type,
+                       value='human').grid(row=1, column=1, padx=10, pady=5, sticky='w')
+        tk.Radiobutton(self.player_selection_frame,
+                       text='Random',
+                       font=('Verdana', 16),
+                       variable=self.player2_type,
+                       value='random').grid(row=2, column=1, padx=10, pady=5, sticky='w')
+        tk.Radiobutton(self.player_selection_frame,
+                       text='Minimax',
+                       font=('Verdana', 16),
+                       variable=self.player2_type,
+                       value='minimax').grid(row=3, column=1, padx=10, pady=5, sticky='w')
+        tk.Radiobutton(self.player_selection_frame,
+                       text='Reinforced Learning',
+                       font=('Verdana', 16),
+                       variable=self.player2_type,
+                       value='rl').grid(row=4, column=1, padx=10, pady=5, sticky='w')
+        tk.Radiobutton(self.player_selection_frame,
+                       text='DNN',
+                       font=('Verdana', 16),
+                       variable=self.player2_type,
+                       value='dnn').grid(row=5, column=1, padx=10, pady=5, sticky='w')
+        tk.Radiobutton(self.player_selection_frame,
+                       text='First Choice',
+                       font=('Verdana', 16),
+                       variable=self.player2_type,
+                       value='first choice').grid(row=6, column=1, padx=10, pady=5, sticky='w')
 
         # Add label and entry for number of games
-        tk.Label(self.player_selection_frame, text="Number of Games:", font=("Arial", 14)).grid(row=4,
-                                                                                                column=0,
-                                                                                                pady=20)
+        tk.Label(self.player_selection_frame,
+                 text="Number of Games:",
+                 font=("Verdana", 16, 'bold')).grid(row=7, column=0, padx=(0, 10), pady=10, sticky="e")
 
         # Entry field with the default value displayed as "1"
-        num_games_entry = tk.Entry(self.player_selection_frame, textvariable=self.num_games, font=("Arial", 14),
+        num_games_entry = tk.Entry(self.player_selection_frame, textvariable=self.num_games, font=("Verdana", 16),
                                    width=5)
-        num_games_entry.grid(row=4, column=1, pady=20)
+        num_games_entry.grid(row=7, column=1, padx=(10, 0), pady=10, sticky="w")
+
+        # Center the entire grid in the frame
+        self.player_selection_frame.grid_columnconfigure(0, weight=1)
+        self.player_selection_frame.grid_columnconfigure(1, weight=1)
 
         num_games_entry.focus_set()
 
-        tk.Button(self.player_selection_frame, text="Start Game", command=self.start_game).grid(row=6, column=0,
-                                                                                                columnspan=2, pady=20)
+        tk.Button(self.player_selection_frame,
+                  text="Start Game",
+                  font=('Verdana', 16),
+                  command=self.start_game).grid(row=8, column=0, columnspan=2, pady=20)
 
     def start_game(self):
 

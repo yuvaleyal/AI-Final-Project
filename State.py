@@ -34,7 +34,6 @@ class State:
     def find_moves_for_piece(self, piece: Piece) -> list[Move]:
         loc = piece.get_location()
         moves = []
-        can_eat = False
         for option in piece.immediate_move_options():
             steps = self._path_to_location(loc, option)
             if all(self.board.get_piece(step) is None for step in steps):
@@ -47,9 +46,9 @@ class State:
                     after_eating_option_loc = self.next_step(loc, option)
                     if self.board.get_piece(after_eating_option_loc) is None and self._loc_in_board(
                         after_eating_option_loc):
-                        eat_one_move = Move(piece_moved=piece,
-                                            destination=after_eating_option_loc,
-                                            pieces_eaten=[piece_in_dest])
+                        eat_one_move =  Move(piece_moved=piece,
+                                destination=after_eating_option_loc,
+                                pieces_eaten=[piece_in_dest])
                         moves.append(eat_one_move)
                         moves += self._make_chain(piece, eat_one_move)
                         can_eat = True

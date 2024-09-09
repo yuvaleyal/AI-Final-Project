@@ -22,7 +22,7 @@ import tkinter as tk
 class HumanPlayer(Player):
     def __init__(self, color: int, display: CheckersDisplay):
         super().__init__(color)
-        self.legal_piece_moves = None
+        self.legal_piece_moves = []
         self.display = display
         self.selected_piece = None
         self.legal_moves = []

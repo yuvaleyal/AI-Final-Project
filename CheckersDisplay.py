@@ -167,14 +167,14 @@ class CheckersDisplay:
         self.player1_score_label.grid(row=0, column=0, padx=20, pady=10)
 
         # Canvas for the board
-        self.canvas = tk.Canvas(self.board_frame, width=8 * 70, height=8 * 70, bg='white')
+        self.canvas = tk.Canvas(self.board_frame, width=8 * 60, height=8 * 60, bg='white')
         self.canvas.grid(row=0, column=1)
 
         # Player 2 score label
         self.player2_score_label = tk.Label(self.board_frame, text="Player 2 (RED) Score: 0", font=("Verdana", 16))
         self.player2_score_label.grid(row=0, column=2, padx=20, pady=10)
 
-        self.cell_size = 70  # Size of each cell in pixels
+        self.cell_size = 60  # Size of each cell in pixels
 
         # Draw the grid
         self.draw_grid()

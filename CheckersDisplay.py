@@ -32,7 +32,7 @@ class CheckersDisplay:
         self.player_selection_frame.pack(padx=20, pady=20)
 
         tk.Label(self.player_selection_frame,
-                 text="Select Player 1",
+                 text="Select Blue Player",
                  font=('Verdana', 18, 'bold')).grid(row=0, column=0, padx=10, pady=10, sticky='w')
         self.player1_type = tk.StringVar(value='human')
         tk.Radiobutton(self.player_selection_frame,
@@ -67,7 +67,7 @@ class CheckersDisplay:
                        value='first choice').grid(row=6, column=0, padx=10, pady=5, sticky='w')
 
         tk.Label(self.player_selection_frame,
-                 text="Select Player 2",
+                 text="Select Red Player",
                  font=('Verdana', 18, 'bold')).grid(row=0, column=1, padx=10, pady=10)
         self.player2_type = tk.StringVar(value='human')
         tk.Radiobutton(self.player_selection_frame,
@@ -163,7 +163,8 @@ class CheckersDisplay:
         self.timer_label.pack(pady=10)
 
         # Turn label
-        self.turn_label = tk.Label(self.game_frame, text="Turn: Player 1 (Red)", font=("Verdana", 14))
+        self.turn_label = tk.Label(self.game_frame, text=f"Turn: Blue Player ({self.player1_type.get().upper()})",
+                                   font=("Verdana", 14))
         self.turn_label.pack(pady=5)
 
         # Frame to hold the board and scores
@@ -172,7 +173,7 @@ class CheckersDisplay:
 
         # Player 1 score label
         self.player1_score_label = tk.Label(self.board_frame,
-                                            text=f"Player 1 (BLUE) Score: {self.player1_score}",
+                                            text=f"Blue Player ({self.player1_type.get().upper()}) Score: {self.player1_score}",
                                             font=("Verdana", 16))
         self.player1_score_label.grid(row=0, column=0, padx=20, pady=10)
 
@@ -182,7 +183,7 @@ class CheckersDisplay:
 
         # Player 2 score label
         self.player2_score_label = tk.Label(self.board_frame,
-                                            text=f"Player 2 (RED) Score: {self.player2_score}",
+                                            text=f"Red Player ({self.player2_type.get().upper()}) Score: {self.player2_score}",
                                             font=("Verdana", 16))
         self.player2_score_label.grid(row=0, column=2, padx=20, pady=10)
 
@@ -268,9 +269,9 @@ class CheckersDisplay:
 
     def switch_turn(self):
         if self.game_manager.game.current_player.color == BLACK:
-            self.turn_label.config(text="Turn: Player 1 (Blue)")
+            self.turn_label.config(text=f"Turn: Blue Player ({self.player1_type.get().upper()})")
         else:
-            self.turn_label.config(text="Turn: Player 2 (Red)")
+            self.turn_label.config(text=f"Turn: Red Player ({self.player2_type.get().upper()})")
 
     def highlight_legal_moves(self, piece, legal_moves):
         """Highlights the legal moves for the selected piece."""
@@ -331,16 +332,6 @@ class CheckersDisplay:
         end_result_window = tk.Toplevel(self.game_frame)
         end_result_window.title("Game Over")
 
-        # Get the dimensions of the current window
-        window_width = self.game_frame.winfo_width()
-        window_height = self.game_frame.winfo_height()
-
-        # Set the dimensions and position of the end result window relative to the main window
-        end_result_window.geometry(
-            f"{window_width // 2}x{window_height // 2}"
-            f"+{self.game_frame.winfo_x() + window_width // 4}"
-            f"+{self.game_frame.winfo_y() + window_height // 4}")
-
         # Create labels for the scores
         tk.Label(end_result_window, text="Game Over!", font=("Verdana", 20, 'bold')).pack(pady=10)
 
@@ -350,7 +341,7 @@ class CheckersDisplay:
 
         # Player 1 Score
         player2_label = tk.Label(score_frame,
-                                 text=f"Blue Player Score: {self.player1_score}",
+                                 text=f"Blue Player Score ({self.player1_type.get().upper()}): {self.player1_score}",
                                  font=("Verdana", 16),
                                  fg='blue')
         player2_label.grid(row=0, column=0, padx=(40, 10))
@@ -361,11 +352,10 @@ class CheckersDisplay:
 
         # Player 2 Score
         player1_label = tk.Label(score_frame,
-                                 text=f"Red Player Score: {self.player2_score}",
+                                 text=f"Red Player Score ({self.player2_type.get().upper()}): {self.player2_score}",
                                  font=("Verdana", 16),
                                  fg='red')
         player1_label.grid(row=0, column=2, padx=(10, 40))
-
 
         button_frame = tk.Frame(end_result_window)
         button_frame.pack(pady=10)
@@ -405,8 +395,10 @@ class CheckersDisplay:
     def update_scores(self, player1_score, player2_score):
         self.player1_score = player1_score
         self.player2_score = player2_score
-        self.player1_score_label.config(text=f"Player 1 (BLUE) score: {self.player1_score}")
-        self.player2_score_label.config(text=f"Player 2 (RED) score: {self.player2_score}")
+        self.player1_score_label.config(
+            text=f"Blue Player ({self.player1_type.get().upper()}) score: {self.player1_score}")
+        self.player2_score_label.config(
+            text=f"Red Player ({self.player2_type.get().upper()}) score: {self.player2_score}")
 
     def display_message_beneath_board(self, message):
         self.message_label.config(text=message)

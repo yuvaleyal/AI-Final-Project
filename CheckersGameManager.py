@@ -31,7 +31,10 @@ class GameManager:
         game_counter = 0
         while game_counter < self.num_of_games:
             # if self.game:
-            self.game = Game(self.player1, self.player2, self.display)
+            if game_counter % 2 == 0:
+                self.game = Game(self.player1, self.player2, self.display)
+            else:
+                self.game = Game(self.player2, self.player1, self.display)
             if self.display:
                 self.display.render_board()
             winner = self.game.run()
@@ -71,9 +74,5 @@ class GameManager:
         self.white_score = 0
         self.black_score = 0
         self.ties = 0
-
-if __name__ == "__main__":
-    manager = GameManager(True)
-    manager.run()
 
 

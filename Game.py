@@ -20,7 +20,7 @@ class Game:
         # self.should_display_board = should_display_board
 
         self.board = initialize_board()
-        self.current_state = State(self.board, WHITE)
+        self.current_state = State(self.board, self.player2.color)
 
     # def init_board(self):
     #     black_pieces = []
@@ -42,9 +42,9 @@ class Game:
             self.current_state = self.current_player.make_move(self.current_state)
             if CMD:
                 print(self.current_state)
-            if self.current_state.last_player == BLACK:
+            if self.current_state.last_player == self.player1.color:
                 self.current_player = self.player2
-            elif self.current_state.last_player == WHITE:
+            else:
                 self.current_player = self.player1
             if self.display:
                 self.display.render_board()

@@ -13,14 +13,6 @@ from Pieces import *
 import argparse
 
 
-# def initialize_board():
-#     black_locs = [(0, 0), (0, 2), (0, 4), (0, 6), (1, 1), (1, 3), (1, 5), (1, 7), (2, 0), (2, 2), (2, 4), (2, 6)]
-#     black_pieces = [RegularPiece(BLACK, b_loc) for b_loc in black_locs]
-#     white_locs = [(5, 1), (5, 3), (5, 5), (5, 7), (6, 0), (6, 2), (6, 4), (6, 6), (7, 1), (7, 3), (7, 5), (7, 7)]
-#     white_pieces = [RegularPiece(WHITE, w_loc) for w_loc in white_locs]
-#     return Board(black_pieces, white_pieces)
-
-
 def main():
     """
     Processes the command used to run the game from the command line.
@@ -49,8 +41,7 @@ def main():
     args = parser.parse_args()
     global CMD
 
-    # if CMD:
-    print("args:", args)
+    # print("args:", args)
     if args.display == 'yes':
         game_manager = GameManager(args.display)
         game_manager.run()

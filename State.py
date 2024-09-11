@@ -49,9 +49,9 @@ class State:
                     after_eating_option_loc = self.next_step(loc, option)
                     if self.board.get_piece(after_eating_option_loc) is None and self._loc_in_board(
                         after_eating_option_loc):
-                        eat_one_move =  Move(piece_moved=piece,
-                                destination=after_eating_option_loc,
-                                pieces_eaten=[piece_in_dest])
+                        eat_one_move = Move(piece_moved=piece,
+                                            destination=after_eating_option_loc,
+                                            pieces_eaten=[piece_in_dest])
                         moves.append(eat_one_move)
                         moves += self._make_chain(piece, eat_one_move)
                         can_eat = True
@@ -68,6 +68,8 @@ class State:
         Returns:
             State: next state
         """
+        if self.is_over() != NOT_OVER_YET:
+            return State(self.board, self.last_player)
         if move:
             self.board.make_move(move)
         return State(self.board, -self.last_player)
@@ -103,6 +105,8 @@ class State:
         Returns:
             int: BLACK, WHITE, TIE or NOT_OVER_YET
         """
+        if not self.find_all_moves():
+            return -self.last_player
         black_pieces = self.board.get_pieces(BLACK)
         if len(black_pieces) == 0:
             return WHITE

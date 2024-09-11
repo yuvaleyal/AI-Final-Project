@@ -17,6 +17,18 @@ class Piece(ABC):
         self.player = player
         self.loc = loc
         self.board_size = board_size
+        self.queen = False
+
+    def __eq__(self, other):
+        if isinstance(other, Piece):
+            return (self.player == other.player
+                    and self.loc == other.loc
+                    and self.queen == other.queen
+                    and self.board_size == other.board_size)
+        return False
+
+    def __hash__(self):
+        return hash((self.player, self.loc, self.queen, self.board_size))
 
     def get_player(self):
         """returns the player the piece belongs to
@@ -73,7 +85,7 @@ class RegularPiece(Piece):
         return options_to_return
 
     def is_queen(self) -> bool:
-        return False
+        return self.queen
 
 
 """    def get_all_moves(self, board: Board):
@@ -92,6 +104,7 @@ class RegularPiece(Piece):
 class QueenPiece(Piece):
     def __init__(self, player, loc):
         super().__init__(player, loc)
+        self.queen = True
 
     def immediate_move_options(self) -> list[tuple[int, int]]:
         options = [(self.loc[0] + 1, self.loc[1] + 1),
@@ -105,4 +118,4 @@ class QueenPiece(Piece):
         return options_to_return
 
     def is_queen(self) -> bool:
-        return True
+        return self.queen

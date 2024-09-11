@@ -8,8 +8,14 @@ EMPTY = 0
 TIE = 0
 NOT_OVER_YET = 2
 CMD = False
-Q_Learning_OB_PATH = lambda player: f'objects/{player}_Q_LearningAgent.pkl'
+OBJECTS_DIR = 'objects'
+Q_Learning_OB_PATH = lambda player: f'{OBJECTS_DIR}/{player}_Q_LearningAgent.pkl'
+AlphaZeroNET_OB_PATH = lambda player: f'{OBJECTS_DIR}/{player}_AlphaZeroNET.pkl'
+MCTS_OB_PATH = lambda player: f'{OBJECTS_DIR}/{player}_MCTS.pkl'
+
 PLAYER_NAME_A = "pa"
 PLAYER_NAME_B = "pb"
 HUMAN = 'human'
-TYPE_PLAYERS = ['random', HUMAN , 'minimax', 'rl', 'dnn', 'first_choice']
+AlphaZero = 'alphazero'
+TYPE_PLAYERS = ['random', HUMAN, 'minimax', 'rl', 'dnn', 'first_choice', AlphaZero]
+ADVANCED_PLAYERS = []

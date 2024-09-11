@@ -52,8 +52,10 @@ class MCTS:
     def set_model(self, model):
         self.model = model
 
-    def reset_P(self):
+    def reset(self):
         self.P = {}
+        self.N = defaultdict(int)
+        self.Q = defaultdict(float)
 
     def ucb1(self, state: State, a, legal_moves):
         """Upper Confidence Bound calculation."""
@@ -137,6 +139,10 @@ class AlphaZeroPlayer(AdvancedPlayer):
         new_state = state.next_state(move)
         return new_state
 
+    def clean_env(self):
+        self.mcts.reset()
+        self.game_history = []
+
     def update_player(self, winner):
         """Plays multiple games between AlphaZero and a random player."""
         # Prepare training data (states, policies, values)
@@ -161,7 +167,7 @@ class AlphaZeroPlayer(AdvancedPlayer):
             loss.backward()
             self.optimizer.step()
         self.game_history = []
-        # self.mcts.reset_P()
+        self.mcts.reset()
 
     def save_object(self):
         AdvancedPlayer.rename_old_state_file(self.alpha_zero_net_path)
@@ -172,15 +178,16 @@ class AlphaZeroPlayer(AdvancedPlayer):
         #     if any(self.mcts.N[(state, move)] > self.min_visits for move in actions):
         #         to_save_P[state] = actions
         # self.mcts.P = to_save_P
+
         # Save the MCTS fields
-        mcts_fields = {
-            'Q': self.mcts.Q,
-            'N': self.mcts.N,
-            # 'P': self.mcts.P
-        }
-        AdvancedPlayer.rename_old_state_file(self.mcts_path)
-        with open(self.mcts_path, 'wb') as f:
-            pickle.dump(mcts_fields, f)
+        # mcts_fields = {
+        #     'Q': self.mcts.Q,
+        #     'N': self.mcts.N,
+        #     # 'P': self.mcts.P
+        # }
+        # AdvancedPlayer.rename_old_state_file(self.mcts_path)
+        # with open(self.mcts_path, 'wb') as f:
+        #     pickle.dump(mcts_fields, f)
 
     def load_object(self):
         if not os.path.exists(OBJECTS_DIR):

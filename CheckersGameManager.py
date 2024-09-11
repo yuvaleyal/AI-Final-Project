@@ -3,7 +3,7 @@ from CheckersDisplay import CheckersDisplay
 from Constants import WHITE, BLACK, CMD
 from Game import Game
 from PlayerFactory import PlayerFactory
-update_model = False
+update_model = True
 
 
 class GameManager:
@@ -54,9 +54,13 @@ class GameManager:
                 print(game_counter)
 
             if isinstance(self.player1, AdvancedPlayer):
+                print(
+                    f"Episode {game_counter}/{self.num_of_games}, BLACK: {self.black_score}, WHITE: {self.white_score}, Ties: {self.ties}")
                 if update_model:
-                    print(f"Episode {game_counter}/{self.num_of_games}, BLACK: {self.black_score}, WHITE: {self.white_score}, Ties: {self.ties}")
                     self.player1.update_player(winner)
+                else:
+                    self.player1.clean_env()
+
             # print("winner", winner)
             if self.display:
                 self.display.update_scores(self.black_score, self.white_score)

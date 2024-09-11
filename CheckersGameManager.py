@@ -3,7 +3,7 @@ from CheckersDisplay import CheckersDisplay
 from Constants import WHITE, BLACK, CMD
 from Game import Game
 from PlayerFactory import PlayerFactory
-update_model = True
+update_model = False
 
 
 class GameManager:

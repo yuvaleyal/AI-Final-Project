@@ -11,7 +11,7 @@ from AdvancedPlayer import AdvancedPlayer
 from Constants import NOT_OVER_YET, AlphaZeroNET_OB_PATH, MCTS_OB_PATH, OBJECTS_DIR
 from State import State
 
-POLICY_SIZE = 64
+POLICY_SIZE = 70
 
 
 class AlphaZeroNet(nn.Module):
@@ -20,7 +20,7 @@ class AlphaZeroNet(nn.Module):
         self.conv1 = nn.Conv2d(1, 128, kernel_size=3, padding=1)
         self.conv2 = nn.Conv2d(128, 128, kernel_size=3, padding=1)
         self.fc1 = nn.Linear(8 * 8 * 128, 256)
-        self.policy_head = nn.Linear(256, 64)  # Output 32 possible moves
+        self.policy_head = nn.Linear(256, POLICY_SIZE)  # Output POLICY_SIZE possible moves
         self.value_head = nn.Linear(256, 1)
 
     def forward(self, x):
@@ -114,7 +114,7 @@ class AlphaZeroPlayer(AdvancedPlayer):
         self.alpha_zero_net_path = AlphaZeroNET_OB_PATH(color)
         self.mcts_path = MCTS_OB_PATH(color)
         self.optimizer = None
-        self.model = None
+        self.model = AlphaZeroNet()
         self.mcts = MCTS(color, n_simulations, c_puct)
         self.game_history = []
 
@@ -169,8 +169,6 @@ class AlphaZeroPlayer(AdvancedPlayer):
         if os.path.isfile(self.alpha_zero_net_path):
             self.model.load_state_dict(torch.load(self.alpha_zero_net_path))
             self.model.eval()  # Set the model to evaluation mode
-        else:
-            self.model = AlphaZeroNet()
         self.optimizer = optim.Adam(self.model.parameters(), lr=0.001)
 
         # Load the MCTS fields

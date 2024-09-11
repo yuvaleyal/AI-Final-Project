@@ -24,7 +24,10 @@ def main():
                   - starts a game between 2 random agents
                (2) python Checkers.py -a=random -b=random -d=cmd -n=3
     """
-
+    parser.add_argument('-m', '--mode',
+                        choices=PROG_MODE,
+                        help=f'Select mode of game. training, evaluation or test mode {PROG_MODE}',
+                        default='eval')
     parser.add_argument('-a', '--playerA',
                         choices=TYPE_PLAYERS,
                         help='Select player type A, the top player on the board, color white',
@@ -39,15 +42,15 @@ def main():
                         type=int)
 
     args = parser.parse_args()
-    global CMD
 
-    # print("args:", args)
+    MODE[0] = args.mode
+    print("Game Mode:", MODE)
     if args.display == 'yes':
         game_manager = GameManager(args.display)
         game_manager.run()
     elif args.display in ['no', 'cmd']:
         if args.display == 'cmd':
-            CMD = True
+            CMD[0] = True
         game_manager = GameManager()
         if args.playerA == HUMAN or args.playerB == HUMAN:
             raise Exception('The human player is only possible in display mode')

@@ -106,7 +106,7 @@ class State:
             int: BLACK, WHITE, TIE or NOT_OVER_YET
         """
         if not self.find_all_moves():
-            return -self.last_player
+            return self.last_player
         black_pieces = self.board.get_pieces(BLACK)
         if len(black_pieces) == 0:
             return WHITE

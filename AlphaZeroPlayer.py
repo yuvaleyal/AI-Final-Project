@@ -11,6 +11,7 @@ from AdvancedPlayer import AdvancedPlayer
 from Constants import NOT_OVER_YET, AlphaZeroNET_OB_PATH, MCTS_OB_PATH, OBJECTS_DIR, PLAYER_NAME_A, PLAYER_NAME_B, BLACK
 from State import State
 
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 POLICY_SIZE = 70
 
 
@@ -19,7 +20,8 @@ class AlphaZeroNet(nn.Module):
         super(AlphaZeroNet, self).__init__()
         self.conv1 = nn.Conv2d(1, 128, kernel_size=3, padding=1)
         self.conv2 = nn.Conv2d(128, 128, kernel_size=3, padding=1)
-        self.fc1 = nn.Linear(8 * 8 * 128, 256)
+        self.fc1 = nn.Linear(8 * 8 * 128, 8 * 8 * 64)
+        self.fc2 = nn.Linear(8 * 8 * 64, 256)
         self.policy_head = nn.Linear(256, POLICY_SIZE)  # Output POLICY_SIZE possible moves
         self.value_head = nn.Linear(256, 1)
 
@@ -28,6 +30,7 @@ class AlphaZeroNet(nn.Module):
         x = torch.relu(self.conv2(x))
         x = x.view(-1, 8 * 8 * 128)
         x = torch.relu(self.fc1(x))
+        x = torch.relu(self.fc2(x))
 
         # Policy head - probabilities for all legal actions
         policy = torch.softmax(self.policy_head(x), dim=1)
@@ -52,8 +55,10 @@ class MCTS:
     def set_model(self, model):
         self.model = model
 
-    def reset_P(self):
+    def reset(self):
         self.P = {}
+        self.Q = defaultdict(float)
+        self.N = defaultdict(int)
 
     def ucb1(self, state: State, a, legal_moves):
         """Upper Confidence Bound calculation."""
@@ -70,8 +75,9 @@ class MCTS:
 
             # If the state is not expanded, expand using the neural network
             if current_state not in self.P:
-                policy, value = self.model(torch.FloatTensor(current_state.get_board_list()).unsqueeze(0).unsqueeze(0))
-                policy = policy.detach().numpy()[0]
+                policy, value = self.model(
+                    torch.FloatTensor(current_state.get_board_list()).unsqueeze(0).unsqueeze(0).to(device))
+                policy = policy.detach().cpu().numpy()[0]
 
                 # Initialize the prior probabilities for this state
                 self.P[current_state] = {move: policy[i] for i, move in enumerate(legal_moves)}
@@ -81,11 +87,6 @@ class MCTS:
                         self.Q[(current_state, move)] = 0
                         self.N[(current_state, move)] = 0
                 return value
-
-            # best_move = max(legal_moves,
-            #                 key=lambda move: self.Q[(current_state, move)] + self.c_puct * self.P[current_state][move] *
-            #                                  np.sqrt(sum(self.N[(current_state, a)] for a in legal_moves)) / (
-            #                                      1 + self.N[(current_state, move)]))
             best_move = max(legal_moves, key=lambda move: self.ucb1(current_state, move, legal_moves))
 
             path.append((current_state, best_move))
@@ -123,10 +124,11 @@ class AlphaZeroPlayer(AdvancedPlayer):
     def __init__(self, color, n_simulations=800, c_puct=1.0, min_visits=10):
         super().__init__(color)
         player_name = PLAYER_NAME_A if self.color == BLACK else PLAYER_NAME_B
-        self.alpha_zero_net_path = AlphaZeroNET_OB_PATH(player_name)
+        file_name_unique = f"{player_name}_{str(device)}"
+        self.alpha_zero_net_path = AlphaZeroNET_OB_PATH(file_name_unique)
         self.mcts_path = MCTS_OB_PATH(player_name)
         self.optimizer = None
-        self.model = AlphaZeroNet()
+        self.model = AlphaZeroNet().to(device)
         self.mcts = MCTS(color, n_simulations, c_puct)
         self.game_history = []
         self.min_visits = min_visits  # Minimum number of visits to save P(s, a)
@@ -136,6 +138,10 @@ class AlphaZeroPlayer(AdvancedPlayer):
         self.game_history.append((state, move))
         new_state = state.next_state(move)
         return new_state
+
+    def clean_env(self):
+        self.game_history = []
+        self.mcts.reset()
 
     def update_player(self, winner):
         """Plays multiple games between AlphaZero and a random player."""
@@ -147,10 +153,10 @@ class AlphaZeroPlayer(AdvancedPlayer):
 
         # Train the model
         for state, policy, reward in zip(states, policies, rewards):
-            state_tensor = torch.FloatTensor(state.get_board_list()).unsqueeze(0).unsqueeze(0)
+            state_tensor = torch.FloatTensor(state.get_board_list()).unsqueeze(0).unsqueeze(0).to(device)
             policy_vec = convert_moves_dict2vec(policy)
-            policy_tensor = torch.FloatTensor(policy_vec).unsqueeze(0)
-            value_tensor = torch.FloatTensor([reward]).unsqueeze(0)
+            policy_tensor = torch.FloatTensor(policy_vec).unsqueeze(0).to(device)
+            value_tensor = torch.FloatTensor([reward]).unsqueeze(0).to(device)
 
             self.optimizer.zero_grad()
             predicted_policy, predicted_value = self.model(state_tensor)
@@ -160,33 +166,35 @@ class AlphaZeroPlayer(AdvancedPlayer):
             loss = policy_loss + value_loss
             loss.backward()
             self.optimizer.step()
-        self.game_history = []
-        # self.mcts.reset_P()
+        self.clean_env(self)
 
     def save_object(self):
         AdvancedPlayer.rename_old_state_file(self.alpha_zero_net_path)
         # Save the neural network's weights
         torch.save(self.model.state_dict(), self.alpha_zero_net_path)
+        print(f"AZ weights file saved to path: {self.alpha_zero_net_path}")
+
         # to_save_P = {}
         # for state, actions in self.mcts.P.items():
         #     if any(self.mcts.N[(state, move)] > self.min_visits for move in actions):
         #         to_save_P[state] = actions
         # self.mcts.P = to_save_P
         # Save the MCTS fields
-        mcts_fields = {
-            'Q': self.mcts.Q,
-            'N': self.mcts.N,
-            # 'P': self.mcts.P
-        }
-        AdvancedPlayer.rename_old_state_file(self.mcts_path)
-        with open(self.mcts_path, 'wb') as f:
-            pickle.dump(mcts_fields, f)
+        # mcts_fields = {
+        #     'Q': self.mcts.Q,
+        #     'N': self.mcts.N,
+        #     # 'P': self.mcts.P
+        # }
+        # AdvancedPlayer.rename_old_state_file(self.mcts_path)
+        # with open(self.mcts_path, 'wb') as f:
+        #     pickle.dump(mcts_fields, f)
 
     def load_object(self):
         if not os.path.exists(OBJECTS_DIR):
             os.makedirs(OBJECTS_DIR)
+        print(f"AZ weights file load from path: {self.alpha_zero_net_path}")
         if os.path.isfile(self.alpha_zero_net_path):
-            self.model.load_state_dict(torch.load(self.alpha_zero_net_path, weights_only=True))
+            self.model.load_state_dict(torch.load(self.alpha_zero_net_path, weights_only=True, map_location=device))
             self.model.eval()  # Set the model to evaluation mode
         self.optimizer = optim.Adam(self.model.parameters(), lr=0.001)
 

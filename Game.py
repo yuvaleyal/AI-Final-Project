@@ -17,7 +17,6 @@ class Game:
         self.player1 = player1
         self.player2 = player2
         self.display = display
-        # self.should_display_board = should_display_board
 
         self.board = initialize_board()
         self.current_state = State(self.board, self.player2.color)
@@ -26,7 +25,7 @@ class Game:
         self.current_player = self.player1
         while self.current_state.is_over() == NOT_OVER_YET:
             self.current_state = self.current_player.make_move(self.current_state)
-            if CMD:
+            if CMD[0]:
                 print(self.current_state)
             if self.current_state.last_player == self.player1.color:
                 self.current_player = self.player2

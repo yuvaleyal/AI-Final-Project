@@ -1,9 +1,8 @@
 from AdvancedPlayer import AdvancedPlayer
 from CheckersDisplay import CheckersDisplay
-from Constants import WHITE, BLACK, CMD
+from Constants import *
 from Game import Game
 from PlayerFactory import PlayerFactory
-update_model = False
 
 
 class GameManager:
@@ -31,7 +30,7 @@ class GameManager:
         # Start the game loop
         game_counter = 0
         # self.player2.q_agent.increase_game_number()
-        if not update_model:
+        if MODE[0] != TRAINING_MODE:
             self.player1.rl_update = False
 
         while game_counter < self.num_of_games:
@@ -50,24 +49,31 @@ class GameManager:
             else:
                 self.ties += 1
             game_counter += 1
-            if CMD:
+            if CMD[0]:
                 print(game_counter)
 
             if isinstance(self.player1, AdvancedPlayer):
-                if update_model:
-                    print(f"Episode {game_counter}/{self.num_of_games}, BLACK: {self.black_score}, WHITE: {self.white_score}, Ties: {self.ties}")
+                if MODE[0] == TRAINING_MODE or MODE[0] == TESTING_MODE:
+                    print(
+                        f"Episode {game_counter}/{self.num_of_games},"
+                        f" BLACK: {self.black_score}, WHITE: {self.white_score}, Ties: {self.ties}")
+                if MODE[0] == TRAINING_MODE:
                     self.player1.update_player(winner)
-            # print("winner", winner)
+                if game_counter % 10 == 0:
+                    self.player1.save_object()
+                else:
+                    self.player1.clean_env()
+
             if self.display:
                 self.display.update_scores(self.black_score, self.white_score)
         print(f"BLACK: {self.black_score}, WHITE: {self.white_score}, Ties: {self.ties}")
         if self.display:
             self.display.show_end_result(self.black_score, self.white_score, self.ties)
         if isinstance(self.player1, AdvancedPlayer):
-            if update_model:
+            if MODE[0] == TRAINING_MODE:
                 self.player1.save_object()
         if isinstance(self.player2, AdvancedPlayer):
-            if update_model:
+            if MODE[0] == TRAINING_MODE:
                 self.player2.save_object()
 
     def run(self):

@@ -40,7 +40,7 @@ class ReinforcementPlayer(AdvancedPlayer):
         move = self.q_agent.choose_action(state, options)
         new_state = state.next_state(move)
         if ReinforcementPlayer.rl_update:
-            self.q_agent.update_q_value(self, state, move, new_state)
+            self.q_agent.update_q_value(state, move, new_state)
         return new_state
 
     def update_player(self, winner):
@@ -79,7 +79,9 @@ class QLearning:
         if (state, action) not in self.q_table:
             self.q_table[(state, action)] = 0  # Initialize Q-value for state-action pair
 
-        best_future_q = max(self.q_table.get((next_state, action), 0) for action in next_state.find_all_moves())
+        score_moves =[self.q_table.get((next_state, action), 0) for action in next_state.find_all_moves()]
+        score_moves += [0]
+        best_future_q = max(score_moves)
         updated_q_value = (1 - self.alpha) * self.q_table.get((state, action), 0) + self.alpha * (
             reward + self.gamma * best_future_q)
         return updated_q_value
@@ -102,11 +104,11 @@ class QLearning:
             if not the_player_state.find_all_moves():
                 reward -= 15
             else:
-                opponent_pieces = np.sum(np.array(the_player_state.get_board_list().flatten()) == -the_player)
-                player_pieces = np.sum(np.array(the_player_state.get_board_list().flatten()) == the_player)
+                opponent_pieces = np.sum(np.array(the_player_state.get_board_list()).flatten() == -the_player)
+                player_pieces = np.sum(np.array(the_player_state.get_board_list()).flatten() == the_player)
                 opponent_queen_pieces = np.sum(
-                    np.array(the_player_state.get_board_list().flatten()) == (-the_player) * 10)
-                player_queen_pieces = np.sum(np.array(the_player_state.get_board_list().flatten()) == the_player * 10)
+                    np.array(the_player_state.get_board_list()).flatten() == (-the_player) * 10)
+                player_queen_pieces = np.sum(np.array(the_player_state.get_board_list()).flatten() == the_player * 10)
                 reward += (1 * (player_pieces - opponent_pieces) + 3 * (player_queen_pieces - opponent_queen_pieces))
 
         return reward / len(opponent_moves)

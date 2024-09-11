@@ -49,9 +49,9 @@ class State:
                     after_eating_option_loc = self.next_step(loc, option)
                     if self.board.get_piece(after_eating_option_loc) is None and self._loc_in_board(
                         after_eating_option_loc):
-                        eat_one_move =  Move(piece_moved=piece,
-                                destination=after_eating_option_loc,
-                                pieces_eaten=[piece_in_dest])
+                        eat_one_move = Move(piece_moved=piece,
+                                            destination=after_eating_option_loc,
+                                            pieces_eaten=[piece_in_dest])
                         moves.append(eat_one_move)
                         moves += self._make_chain(piece, eat_one_move)
                         can_eat = True
@@ -68,6 +68,8 @@ class State:
         Returns:
             State: next state
         """
+        if self.is_over() != NOT_OVER_YET:
+            return State(self.board, self.last_player)
         if move:
             self.board.make_move(move)
         return State(self.board, -self.last_player)
@@ -96,6 +98,35 @@ class State:
         # Return the successor state
         return State(state_copy.board, -state_copy.last_player)
 
+    def generate_successor2(self, move):
+        # Create a deep copy of the current state
+        state_copy = deepcopy(self)
+
+        piece_to_move = None
+        if move:
+            for piece in state_copy.board.get_pieces(-state_copy.last_player):
+                if piece.get_location() == move.get_piece_moved().get_location():
+                    piece_to_move = piece
+                    break
+
+        eaten_pieces = []
+        eaten_pieces_locations = []
+        if move:
+            eaten_pieces_locations = [piece.get_location() for piece in move.get_pieces_eaten()]
+
+        for piece in state_copy.board.get_pieces(state_copy.last_player):
+            if piece.get_location() in eaten_pieces_locations:
+                eaten_pieces.append(piece)
+        if move:
+            move_copy = Move(piece_to_move, move.get_destination(), eaten_pieces)
+        else:
+            move_copy = None
+        if move:
+            state_copy.board.make_move(move_copy)
+
+        # Return the successor state
+        return State(state_copy.board, -state_copy.last_player)
+
     def is_over(self) -> int:
         """checks the board state and returns whether the game is not over, won by one of the players or a tie.
         a tie is defined by each of the players having a single queen and nothing else
@@ -103,6 +134,8 @@ class State:
         Returns:
             int: BLACK, WHITE, TIE or NOT_OVER_YET
         """
+        if not self.find_all_moves():
+            return -self.last_player
         black_pieces = self.board.get_pieces(BLACK)
         if len(black_pieces) == 0:
             return WHITE

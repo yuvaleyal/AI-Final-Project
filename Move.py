@@ -21,5 +21,15 @@ class Move:
     def get_pieces_eaten(self) -> list[Piece]:
         return self.pieces_eaten
 
+    def __eq__(self, other):
+        if isinstance(other, Move):
+            return (self.piece_moved == other.piece_moved
+                    and self.destination == other.destination
+                    and self.pieces_eaten == other.pieces_eaten)
+        return False
+
+    def __hash__(self):
+        return hash((self.piece_moved, self.destination, hash(tuple(self.pieces_eaten))))
+
     def __repr__(self):
         return f"\n from: {self.piece_moved}, to {self.destination}, eaten: {self.pieces_eaten}"

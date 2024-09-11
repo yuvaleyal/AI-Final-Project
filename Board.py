@@ -60,13 +60,13 @@ class Board:
                 self.get_pieces(piece_moved.get_player()).append(QueenPiece(piece_moved.get_player(), piece_moved.get_location()))
         for piece in move.get_pieces_eaten():
             self._remove_piece(piece)
-            
+
         ##checking for the weird problem:
         if len(self.black_pieces) > cur_black_num or len(self.white_pieces)>cur_white_num:
             #so, somehow pieces where added...
             #place breakpoint here:
             pass
-        
+
 
     # for now, nothing
     def can_eat(self, piece: Piece):

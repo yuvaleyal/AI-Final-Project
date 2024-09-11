@@ -22,20 +22,6 @@ class Game:
         self.board = initialize_board()
         self.current_state = State(self.board, self.player2.color)
 
-    # def init_board(self):
-    #     black_pieces = []
-    #     white_pieces = []
-    #
-    #     for row in range(3):
-    #         for col in range(4):
-    #             black_col = col * 2 + (row % 2)
-    #             black_pieces.append(RegularPiece(self.player2.color, (row, black_col)))
-    #
-    #             white_col = col * 2 + ((row + 1) % 2)
-    #             white_pieces.append(RegularPiece(self.player1.color, (BOARD_SIZE - 1 - row, white_col)))
-    #
-    #     return Board(black_pieces, white_pieces)
-
     def run(self):
         self.current_player = self.player1
         while self.current_state.is_over() == NOT_OVER_YET:
@@ -57,3 +43,18 @@ def initialize_board():
     white_locs = [(5, 1), (5, 3), (5, 5), (5, 7), (6, 0), (6, 2), (6, 4), (6, 6), (7, 1), (7, 3), (7, 5), (7, 7)]
     white_pieces = [RegularPiece(WHITE, w_loc) for w_loc in white_locs]
     return Board(black_pieces, white_pieces)
+
+
+    # def init_board(self):
+    #     black_pieces = []
+    #     white_pieces = []
+    #
+    #     for row in range(3):
+    #         for col in range(4):
+    #             black_col = col * 2 + (row % 2)
+    #             black_pieces.append(RegularPiece(self.player2.color, (row, black_col)))
+    #
+    #             white_col = col * 2 + ((row + 1) % 2)
+    #             white_pieces.append(RegularPiece(self.player1.color, (BOARD_SIZE - 1 - row, white_col)))
+    #
+    #     return Board(black_pieces, white_pieces)

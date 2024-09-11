@@ -1,8 +1,9 @@
+from AdvancedPlayer import AdvancedPlayer
 from CheckersDisplay import CheckersDisplay
-from Constants import WHITE, BLACK, PLAYER_NAME_A, PLAYER_NAME_B, CMD
+from Constants import WHITE, BLACK, CMD
 from Game import Game
 from PlayerFactory import PlayerFactory
-from ReinforcementPlayer import ReinforcementPlayer
+update_model = True
 
 
 class GameManager:
@@ -29,6 +30,10 @@ class GameManager:
     def run_game_loop(self):
         # Start the game loop
         game_counter = 0
+        # self.player2.q_agent.increase_game_number()
+        if not update_model:
+            self.player1.rl_update = False
+
         while game_counter < self.num_of_games:
             # if self.game:
             if game_counter % 2 == 0:
@@ -47,19 +52,23 @@ class GameManager:
             game_counter += 1
             if CMD:
                 print(game_counter)
-            if isinstance(self.player1, ReinforcementPlayer):
-                self.player1.q_agent.decay_epsilon()
-            if isinstance(self.player2, ReinforcementPlayer):
-                self.player2.q_agent.decay_epsilon()
+
+            if isinstance(self.player1, AdvancedPlayer):
+                if update_model:
+                    print(f"Episode {game_counter + 1}/{self.num_of_games}, BLACK: {self.black_score}, WHITE: {self.white_score}, Ties: {self.ties}")
+                    self.player1.update_player(winner)
+            # print("winner", winner)
             if self.display:
                 self.display.update_scores(self.black_score, self.white_score)
         print(f"BLACK: {self.black_score}, WHITE: {self.white_score}, Ties: {self.ties}")
         if self.display:
             self.display.show_end_result(self.black_score, self.white_score, self.ties)
-        if isinstance(self.player1, ReinforcementPlayer):
-            self.player1.save_object(PLAYER_NAME_A, self.num_of_games)
-        if isinstance(self.player2, ReinforcementPlayer):
-            self.player2.save_object(PLAYER_NAME_B, self.num_of_games)
+        if isinstance(self.player1, AdvancedPlayer):
+            if update_model:
+                self.player1.save_object()
+        if isinstance(self.player2, AdvancedPlayer):
+            if update_model:
+                self.player2.save_object()
 
     def run(self):
         if self.display:
@@ -75,4 +84,6 @@ class GameManager:
         self.black_score = 0
         self.ties = 0
 
-
+# if __name__ == "__main__":
+#     manager = GameManager(True)
+#     manager.run()

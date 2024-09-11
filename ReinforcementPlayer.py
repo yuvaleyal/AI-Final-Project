@@ -1,12 +1,13 @@
+import os.path
+import pickle
+import random
+
+import numpy as np
+
 from AdvancedPlayer import AdvancedPlayer
 from Constants import *
 from Move import Move
-from Pieces import RegularPiece, QueenPiece, Piece
 from State import State
-import numpy as np
-import random
-import pickle
-import os.path
 
 choose_random = "choose_random"
 choose_q = "choose_q"

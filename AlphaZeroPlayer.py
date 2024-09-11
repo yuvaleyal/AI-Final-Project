@@ -8,7 +8,7 @@ import numpy as np
 from collections import defaultdict
 
 from AdvancedPlayer import AdvancedPlayer
-from Constants import NOT_OVER_YET, AlphaZeroNET_OB_PATH, MCTS_OB_PATH, OBJECTS_DIR
+from Constants import NOT_OVER_YET, AlphaZeroNET_OB_PATH, MCTS_OB_PATH, OBJECTS_DIR, PLAYER_NAME_A, PLAYER_NAME_B, BLACK
 from State import State
 
 POLICY_SIZE = 70
@@ -47,8 +47,18 @@ class MCTS:
         self.N = defaultdict(int)  # Visit count N(s, a)
         self.P = {}  # Prior probabilities from the policy network
 
+        self.board_size = 8
+
     def set_model(self, model):
         self.model = model
+
+    def reset_P(self):
+        self.P = {}
+
+    def ucb1(self, state: State, a, legal_moves):
+        """Upper Confidence Bound calculation."""
+        return (self.Q[(state, a)] + self.c_puct * self.P[state][a] *
+                np.sqrt(sum(self.N[(state, move)] for move in legal_moves)) / (1 + self.N[(state, a)]))
 
     def simulate(self, state: State):
         """Simulate a single MCTS run."""
@@ -72,10 +82,11 @@ class MCTS:
                         self.N[(current_state, move)] = 0
                 return value
 
-            best_move = max(legal_moves,
-                            key=lambda move: self.Q[(current_state, move)] + self.c_puct * self.P[current_state][move] *
-                                             np.sqrt(sum(self.N[(current_state, a)] for a in legal_moves)) / (
-                                                 1 + self.N[(current_state, move)]))
+            # best_move = max(legal_moves,
+            #                 key=lambda move: self.Q[(current_state, move)] + self.c_puct * self.P[current_state][move] *
+            #                                  np.sqrt(sum(self.N[(current_state, a)] for a in legal_moves)) / (
+            #                                      1 + self.N[(current_state, move)]))
+            best_move = max(legal_moves, key=lambda move: self.ucb1(current_state, move, legal_moves))
 
             path.append((current_state, best_move))
             current_state = current_state.generate_successor(best_move)
@@ -109,14 +120,16 @@ class MCTS:
 
 
 class AlphaZeroPlayer(AdvancedPlayer):
-    def __init__(self, color, n_simulations=800, c_puct=1.0):
+    def __init__(self, color, n_simulations=800, c_puct=1.0, min_visits=10):
         super().__init__(color)
-        self.alpha_zero_net_path = AlphaZeroNET_OB_PATH(color)
-        self.mcts_path = MCTS_OB_PATH(color)
+        player_name = PLAYER_NAME_A if self.color == BLACK else PLAYER_NAME_B
+        self.alpha_zero_net_path = AlphaZeroNET_OB_PATH(player_name)
+        self.mcts_path = MCTS_OB_PATH(player_name)
         self.optimizer = None
         self.model = AlphaZeroNet()
         self.mcts = MCTS(color, n_simulations, c_puct)
         self.game_history = []
+        self.min_visits = min_visits  # Minimum number of visits to save P(s, a)
 
     def make_move(self, state: State) -> State:
         move = self.mcts.search(state)
@@ -147,17 +160,23 @@ class AlphaZeroPlayer(AdvancedPlayer):
             loss = policy_loss + value_loss
             loss.backward()
             self.optimizer.step()
+        self.game_history = []
+        # self.mcts.reset_P()
 
     def save_object(self):
         AdvancedPlayer.rename_old_state_file(self.alpha_zero_net_path)
         # Save the neural network's weights
         torch.save(self.model.state_dict(), self.alpha_zero_net_path)
-
+        # to_save_P = {}
+        # for state, actions in self.mcts.P.items():
+        #     if any(self.mcts.N[(state, move)] > self.min_visits for move in actions):
+        #         to_save_P[state] = actions
+        # self.mcts.P = to_save_P
         # Save the MCTS fields
         mcts_fields = {
             'Q': self.mcts.Q,
             'N': self.mcts.N,
-            'P': self.mcts.P
+            # 'P': self.mcts.P
         }
         AdvancedPlayer.rename_old_state_file(self.mcts_path)
         with open(self.mcts_path, 'wb') as f:
@@ -167,18 +186,18 @@ class AlphaZeroPlayer(AdvancedPlayer):
         if not os.path.exists(OBJECTS_DIR):
             os.makedirs(OBJECTS_DIR)
         if os.path.isfile(self.alpha_zero_net_path):
-            self.model.load_state_dict(torch.load(self.alpha_zero_net_path))
+            self.model.load_state_dict(torch.load(self.alpha_zero_net_path, weights_only=True))
             self.model.eval()  # Set the model to evaluation mode
         self.optimizer = optim.Adam(self.model.parameters(), lr=0.001)
 
-        # Load the MCTS fields
-        if os.path.isfile(self.mcts_path):
-            with open(self.mcts_path, 'rb') as f:
-                loaded_mcts_fields = pickle.load(f)
-            self.mcts.Q = loaded_mcts_fields['Q']
-            self.mcts.N = loaded_mcts_fields['N']
-            self.mcts.P = loaded_mcts_fields['P']
-        self.mcts.set_model(self.model)
+        # # Load the MCTS fields
+        # if os.path.isfile(self.mcts_path):
+        #     with open(self.mcts_path, 'rb') as f:
+        #         loaded_mcts_fields = pickle.load(f)
+        #     self.mcts.Q = loaded_mcts_fields['Q']
+        #     self.mcts.N = loaded_mcts_fields['N']
+        #     self.mcts.P = loaded_mcts_fields['P']
+        # self.mcts.set_model(self.model)
 
 
 def convert_piece2vec(piece):

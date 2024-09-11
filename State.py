@@ -98,35 +98,6 @@ class State:
         # Return the successor state
         return State(state_copy.board, -state_copy.last_player)
 
-    def generate_successor2(self, move):
-        # Create a deep copy of the current state
-        state_copy = deepcopy(self)
-
-        piece_to_move = None
-        if move:
-            for piece in state_copy.board.get_pieces(-state_copy.last_player):
-                if piece.get_location() == move.get_piece_moved().get_location():
-                    piece_to_move = piece
-                    break
-
-        eaten_pieces = []
-        eaten_pieces_locations = []
-        if move:
-            eaten_pieces_locations = [piece.get_location() for piece in move.get_pieces_eaten()]
-
-        for piece in state_copy.board.get_pieces(state_copy.last_player):
-            if piece.get_location() in eaten_pieces_locations:
-                eaten_pieces.append(piece)
-        if move:
-            move_copy = Move(piece_to_move, move.get_destination(), eaten_pieces)
-        else:
-            move_copy = None
-        if move:
-            state_copy.board.make_move(move_copy)
-
-        # Return the successor state
-        return State(state_copy.board, -state_copy.last_player)
-
     def is_over(self) -> int:
         """checks the board state and returns whether the game is not over, won by one of the players or a tie.
         a tie is defined by each of the players having a single queen and nothing else

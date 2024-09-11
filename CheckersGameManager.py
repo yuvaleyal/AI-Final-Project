@@ -55,7 +55,7 @@ class GameManager:
 
             if isinstance(self.player1, AdvancedPlayer):
                 if update_model:
-                    print(f"Episode {game_counter + 1}/{self.num_of_games}, BLACK: {self.black_score}, WHITE: {self.white_score}, Ties: {self.ties}")
+                    print(f"Episode {game_counter}/{self.num_of_games}, BLACK: {self.black_score}, WHITE: {self.white_score}, Ties: {self.ties}")
                     self.player1.update_player(winner)
             # print("winner", winner)
             if self.display:

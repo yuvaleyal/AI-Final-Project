@@ -197,7 +197,7 @@ class AlphaZeroPlayer(AdvancedPlayer):
         #     self.mcts.Q = loaded_mcts_fields['Q']
         #     self.mcts.N = loaded_mcts_fields['N']
         #     self.mcts.P = loaded_mcts_fields['P']
-        # self.mcts.set_model(self.model)
+        self.mcts.set_model(self.model)
 
 
 def convert_piece2vec(piece):

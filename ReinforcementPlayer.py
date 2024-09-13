@@ -24,7 +24,7 @@ class ReinforcementPlayer(AdvancedPlayer):
     def load_object(self):
         if os.path.isfile(self.f_name):
             print(f"RL weights file loads from path: {self.f_name}")
-            with open(Q_Learning_OB_PATH(self.f_name), 'rb') as file:
+            with open(self.f_name, 'rb') as file:
                 self.q_agent = pickle.load(file)
         else:
             self.q_agent = QLearning(alpha=0.1, gamma=0.9, epsilon=1.0, epsilon_decay=0.995, epsilon_min=0.01)

@@ -15,21 +15,25 @@ class ReinforcementPlayer(AdvancedPlayer):
         super().__init__(color)
         self.game_history = []
         self.q_agent = None
+        player_name = PLAYER_NAME_A if self.color == BLACK else PLAYER_NAME_B
+        print(f'Player name: {player_name}')
+        self.f_name = Q_Learning_OB_PATH(player_name)
         self.load_object()
 
+
     def load_object(self):
-        player_name = PLAYER_NAME_A if self.color == BLACK else PLAYER_NAME_B
-        if os.path.isfile(Q_Learning_OB_PATH(player_name)):
-            with open(Q_Learning_OB_PATH(player_name), 'rb') as file:
+        if os.path.isfile(self.f_name):
+            print(f"RL weights file loads from path: {self.f_name}")
+            with open(Q_Learning_OB_PATH(self.f_name), 'rb') as file:
                 self.q_agent = pickle.load(file)
         else:
             self.q_agent = QLearning(alpha=0.1, gamma=0.9, epsilon=1.0, epsilon_decay=0.995, epsilon_min=0.01)
 
     def save_object(self):
-        player_name = PLAYER_NAME_A if self.color == BLACK else PLAYER_NAME_B
-        AdvancedPlayer.rename_old_state_file(Q_Learning_OB_PATH(player_name))
-        with open(Q_Learning_OB_PATH(player_name), 'wb') as file:
+        AdvancedPlayer.rename_old_state_file(self.f_name)
+        with open(self.f_name, 'wb') as file:
             pickle.dump(self.q_agent, file)
+        print(f"RL weights file saved to path: {self.f_name}")
 
     def make_move(self, state: State) -> State:
         options = state.find_all_moves()

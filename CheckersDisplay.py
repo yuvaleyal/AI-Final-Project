@@ -56,10 +56,10 @@ class CheckersDisplay:
                        variable=self.player1_type,
                        value='rl').grid(row=4, column=0, padx=10, pady=5, sticky='w')
         tk.Radiobutton(self.player_selection_frame,
-                       text='DNN',
+                       text='Alpha Zero',
                        font=('Verdana', 16),
                        variable=self.player1_type,
-                       value='dnn').grid(row=5, column=0, padx=10, pady=5, sticky='w')
+                       value='alphazero').grid(row=5, column=0, padx=10, pady=5, sticky='w')
         tk.Radiobutton(self.player_selection_frame,
                        text='First Choice',
                        font=('Verdana', 16),
@@ -91,10 +91,10 @@ class CheckersDisplay:
                        variable=self.player2_type,
                        value='rl').grid(row=4, column=1, padx=10, pady=5, sticky='w')
         tk.Radiobutton(self.player_selection_frame,
-                       text='DNN',
+                       text='Alpha Zero',
                        font=('Verdana', 16),
                        variable=self.player2_type,
-                       value='dnn').grid(row=5, column=1, padx=10, pady=5, sticky='w')
+                       value='alphazero').grid(row=5, column=1, padx=10, pady=5, sticky='w')
         tk.Radiobutton(self.player_selection_frame,
                        text='First Choice',
                        font=('Verdana', 16),

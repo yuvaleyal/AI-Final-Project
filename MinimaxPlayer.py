@@ -2,7 +2,7 @@ from copy import deepcopy
 from typing import List
 
 from Board import Board
-from Constants import WHITE, BOARD_SIZE, BLACK
+from Constants import WHITE, BOARD_SIZE, BLACK, NOT_OVER_YET
 from Move import Move
 from Pieces import Piece, QueenPiece, RegularPiece
 from Player import Player
@@ -30,7 +30,7 @@ class MinimaxPlayer(Player):
         legal_moves = state.find_all_moves()
 
         # Terminal condition or maximum depth reached
-        if current_depth == 3 or not legal_moves:
+        if current_depth == 6 or state.is_over() != NOT_OVER_YET:
             return self.evaluate(state), None
 
         value = float('-inf')
@@ -38,7 +38,7 @@ class MinimaxPlayer(Player):
 
         for move in legal_moves:
             successor_state = state.generate_successor(move)
-            successor_value, _ = self._min_value(successor_state, current_depth, alpha, beta)
+            successor_value, _ = self._min_value(successor_state, current_depth + 1, alpha, beta)
 
             if successor_value > value:
                 value = successor_value
@@ -64,7 +64,7 @@ class MinimaxPlayer(Player):
         legal_moves = state.find_all_moves()
 
         # Terminal condition or maximum depth reached
-        if current_depth == 3 or not legal_moves:
+        if current_depth == 6 or state.is_over() != NOT_OVER_YET:
             return self.evaluate(state), None
 
         value = float('inf')

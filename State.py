@@ -1,5 +1,4 @@
 from copy import deepcopy
-
 from Board import Board
 from Move import Move
 import numpy as np

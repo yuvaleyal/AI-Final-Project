@@ -1,234 +1,86 @@
-import pickle
 import os
-
 import torch
-import torch.nn as nn
-import torch.optim as optim
-import numpy as np
-from collections import defaultdict
-
+from torch import optim
+import torch.nn.functional as F
 from AdvancedPlayer import AdvancedPlayer
-from Constants import NOT_OVER_YET, AlphaZeroNET_OB_PATH, MCTS_OB_PATH, OBJECTS_DIR, PLAYER_NAME_A, PLAYER_NAME_B, BLACK
+from Constants import OBJECTS_DIR, PLAYER_NAME_A, BLACK, PLAYER_NAME_B, AlphaZeroNET_OB_PATH
 from State import State
-
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-POLICY_SIZE = 70
-
-
-class AlphaZeroNet(nn.Module):
-    def __init__(self):
-        super(AlphaZeroNet, self).__init__()
-        self.conv1 = nn.Conv2d(1, 128, kernel_size=3, padding=1)
-        self.conv2 = nn.Conv2d(128, 128, kernel_size=3, padding=1)
-        self.fc1 = nn.Linear(8 * 8 * 128, 8 * 8 * 64)
-        self.fc2 = nn.Linear(8 * 8 * 64, 256)
-        self.policy_head = nn.Linear(256, POLICY_SIZE)  # Output POLICY_SIZE possible moves
-        self.value_head = nn.Linear(256, 1)
-
-    def forward(self, x):
-        x = torch.relu(self.conv1(x))
-        x = torch.relu(self.conv2(x))
-        x = x.view(-1, 8 * 8 * 128)
-        x = torch.relu(self.fc1(x))
-        x = torch.relu(self.fc2(x))
-
-        # Policy head - probabilities for all legal actions
-        policy = torch.softmax(self.policy_head(x), dim=1)
-
-        # Value head - estimated value of the board state
-        value = torch.tanh(self.value_head(x))
-        return policy, value
-
-
-class MCTS:
-    def __init__(self, color, n_simulations=800, c_puct=1.0):
-        self.color = color
-        self.model = None
-        self.n_simulations = n_simulations
-        self.c_puct = c_puct
-        self.Q = defaultdict(float)  # Action value Q(s, a) action-value estimates
-        self.N = defaultdict(int)  # Visit count N(s, a)
-        self.P = {}  # Prior probabilities from the policy network
-
-        self.board_size = 8
-
-    def set_model(self, model):
-        self.model = model
-
-    def reset(self):
-        self.P = {}
-        self.Q = defaultdict(float)
-        self.N = defaultdict(int)
-
-    def ucb1(self, state: State, a, legal_moves):
-        """Upper Confidence Bound calculation."""
-        return (self.Q[(state, a)] + self.c_puct * self.P[state][a] *
-                np.sqrt(sum(self.N[(state, move)] for move in legal_moves)) / (1 + self.N[(state, a)]))
-
-    def simulate(self, state: State):
-        """Simulate a single MCTS run."""
-        path = []
-        current_state = state
-
-        while current_state.is_over() == NOT_OVER_YET:
-            legal_moves = current_state.find_all_moves()
-
-            # If the state is not expanded, expand using the neural network
-            if current_state not in self.P:
-                policy, value = self.model(
-                    torch.FloatTensor(current_state.get_board_list()).unsqueeze(0).unsqueeze(0).to(device))
-                policy = policy.detach().cpu().numpy()[0]
-
-                # Initialize the prior probabilities for this state
-                self.P[current_state] = {move: policy[i] for i, move in enumerate(legal_moves)}
-                # Initialize Q and N values
-                for move in legal_moves:
-                    if (current_state, move) not in self.Q:
-                        self.Q[(current_state, move)] = 0
-                        self.N[(current_state, move)] = 0
-                return value
-            best_move = max(legal_moves, key=lambda move: self.ucb1(current_state, move, legal_moves))
-
-            path.append((current_state, best_move))
-            current_state = current_state.generate_successor(best_move)
-
-        # Backpropagate the result
-        reward = self.get_final_score(current_state)
-        for state, move in path:
-            self.N[(state, move)] += 1
-            self.Q[(state, move)] += (reward - self.Q[(state, move)]) / self.N[(state, move)]
-
-    def get_best_move(self, state: State):
-        """Select the move with the highest visit count."""
-        legal_moves = state.find_all_moves()
-        move_visits = [self.N[(state, move)] for move in legal_moves]
-        return legal_moves[np.argmax(move_visits)]
-
-    def get_final_score(self, cur_state: State):
-        winner = cur_state.is_over()
-        reward_ = 0.0
-        if self.color == winner:
-            reward_ += 10
-        elif self.color == -winner:
-            reward_ -= 10
-        return reward_
-
-    def search(self, state):
-        """Run MCTS and return the best move."""
-        for _ in range(self.n_simulations):
-            self.simulate(state)
-        return self.get_best_move(state)
+from networks_helper.func_helper import state_to_tensor
+from networks_helper.mcts import MCTS
+from networks_helper.nets import PolicyValueNet
 
 
 class AlphaZeroPlayer(AdvancedPlayer):
-    def __init__(self, color, n_simulations=800, c_puct=1.0, min_visits=10):
+    def __init__(self, color):
         super().__init__(color)
+        self.policy_value_net = PolicyValueNet()
+        self.optimizer = optim.Adam(self.policy_value_net.parameters(), lr=0.001)
+        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         player_name = PLAYER_NAME_A if self.color == BLACK else PLAYER_NAME_B
-        file_name_unique = f"{player_name}_{str(device)}"
+        file_name_unique = f"{player_name}_{str(self.device)}"
+        self.num_simulations = 800
+        self.c_puct = 1.0
+        self.mcts = None
+        self.buffer = []  # For storing self-play data
+        self.batch_size = 64
+        self.learning_rate = 0.001
+        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        self.policy_value_net.to(self.device)
         self.alpha_zero_net_path = AlphaZeroNET_OB_PATH(file_name_unique)
-        self.mcts_path = MCTS_OB_PATH(player_name)
-        self.optimizer = None
-        self.model = AlphaZeroNet().to(device)
-        self.mcts = MCTS(color, n_simulations, c_puct)
-        self.game_history = []
-        self.min_visits = min_visits  # Minimum number of visits to save P(s, a)
 
     def make_move(self, state: State) -> State:
-        move = self.mcts.search(state)
-        self.game_history.append((state, move))
-        new_state = state.next_state(move)
-        return new_state
-
-    def clean_env(self):
-        self.game_history = []
-        self.mcts.reset()
+        # Use MCTS to select a move
+        self.mcts = MCTS(self.policy_value_net, self.num_simulations, self.c_puct)
+        move = self.mcts.get_action(state)
+        # Store the data for training
+        self.buffer.append((state, self.mcts.get_policy_distribution(state)))
+        # Apply the move
+        next_state = state.generate_successor(move)
+        return next_state
 
     def update_player(self, winner):
-        """Plays multiple games between AlphaZero and a random player."""
-        # Prepare training data (states, policies, values)
-        self.model.train()
-        states = [state for state, _ in self.game_history]
-        policies = [self.mcts.P[state] for state, _ in self.game_history]
-        rewards = [winner] * len(self.game_history)
+        # Update neural network with self-play data
+        states, mcts_probs, winners = self.prepare_training_data(winner)
+        dataset = list(zip(states, mcts_probs, winners))
+        for i in range(0, len(dataset), self.batch_size):
+            batch = dataset[i:i + self.batch_size]
+            state_batch = torch.stack([state_to_tensor(s) for s, _, _ in batch]).to(self.device)
+            mcts_probs_batch = torch.tensor([mp for _, mp, _ in batch], dtype=torch.float32).to(self.device)
+            winner_batch = torch.tensor([w for _, _, w in batch], dtype=torch.float32).to(self.device)
 
-        # Train the model
-        for state, policy, reward in zip(states, policies, rewards):
-            state_tensor = torch.FloatTensor(state.get_board_list()).unsqueeze(0).unsqueeze(0).to(device)
-            policy_vec = convert_moves_dict2vec(policy)
-            policy_tensor = torch.FloatTensor(policy_vec).unsqueeze(0).to(device)
-            value_tensor = torch.FloatTensor([reward]).unsqueeze(0).to(device)
-
+            # Zero the parameter gradients
             self.optimizer.zero_grad()
-            predicted_policy, predicted_value = self.model(state_tensor)
-
-            policy_loss = torch.nn.functional.mse_loss(predicted_policy, policy_tensor)
-            value_loss = torch.nn.functional.mse_loss(predicted_value, value_tensor)
-            loss = policy_loss + value_loss
+            # Forward + backward + optimize
+            log_probs, values = self.policy_value_net(state_batch)
+            value_loss = F.mse_loss(values.view(-1), winner_batch)
+            policy_loss = -torch.mean(torch.sum(mcts_probs_batch * log_probs, dim=1))
+            loss = value_loss + policy_loss
             loss.backward()
             self.optimizer.step()
-        self.clean_env(self)
+        # Clear the buffer
+        self.buffer = []
+
+    def prepare_training_data(self, winner):
+        # Prepare data from the buffer for training
+        states = []
+        mcts_probs = []
+        winners = []
+        for state, pi in self.buffer:
+            states.append(state)
+            mcts_probs.append(pi)
+            winners.append(winner if state.last_player != self.color else -winner)
+        return states, mcts_probs, winners
 
     def save_object(self):
         AdvancedPlayer.rename_old_state_file(self.alpha_zero_net_path)
         # Save the neural network's weights
-        torch.save(self.model.state_dict(), self.alpha_zero_net_path)
+        torch.save(self.policy_value_net.state_dict(), self.alpha_zero_net_path)
         print(f"AZ weights file saved to path: {self.alpha_zero_net_path}")
-
-        # to_save_P = {}
-        # for state, actions in self.mcts.P.items():
-        #     if any(self.mcts.N[(state, move)] > self.min_visits for move in actions):
-        #         to_save_P[state] = actions
-        # self.mcts.P = to_save_P
-        # Save the MCTS fields
-        # mcts_fields = {
-        #     'Q': self.mcts.Q,
-        #     'N': self.mcts.N,
-        #     # 'P': self.mcts.P
-        # }
-        # AdvancedPlayer.rename_old_state_file(self.mcts_path)
-        # with open(self.mcts_path, 'wb') as f:
-        #     pickle.dump(mcts_fields, f)
 
     def load_object(self):
         if not os.path.exists(OBJECTS_DIR):
             os.makedirs(OBJECTS_DIR)
         print(f"AZ weights file load from path: {self.alpha_zero_net_path}")
         if os.path.isfile(self.alpha_zero_net_path):
-            self.model.load_state_dict(torch.load(self.alpha_zero_net_path, weights_only=True, map_location=device))
-            self.model.eval()  # Set the model to evaluation mode
-        self.optimizer = optim.Adam(self.model.parameters(), lr=0.001)
-
-        # # Load the MCTS fields
-        # if os.path.isfile(self.mcts_path):
-        #     with open(self.mcts_path, 'rb') as f:
-        #         loaded_mcts_fields = pickle.load(f)
-        #     self.mcts.Q = loaded_mcts_fields['Q']
-        #     self.mcts.N = loaded_mcts_fields['N']
-        #     self.mcts.P = loaded_mcts_fields['P']
-        self.mcts.set_model(self.model)
-
-
-def convert_piece2vec(piece):
-    type_p = 10 if piece.queen else 1
-    policy = [piece.player, type_p, piece.loc[0], piece.loc[1]]
-    return policy
-
-
-def convert_moves_dict2vec(policy_dict: dict):
-    list_policies = []
-    for k, v in policy_dict.items():
-        policy = []
-        policy += convert_piece2vec(k.piece_moved)
-        policy += k.destination
-        policy += [v]
-        # for pic in k.pieces_eaten:
-        #     policy += convert_piece2vec(pic)
-        list_policies += policy
-    if len(list_policies) > POLICY_SIZE:
-        print("len(list_policies)", len(list_policies))
-    vec_size = len(list_policies)
-    if vec_size < POLICY_SIZE:
-        list_policies += [0] * (POLICY_SIZE - vec_size)
-    else:
-        list_policies = list_policies[:POLICY_SIZE]
-    return list_policies
+            self.policy_value_net.load_state_dict(
+                torch.load(self.alpha_zero_net_path, weights_only=True, map_location=self.device))

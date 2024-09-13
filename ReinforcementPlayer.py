@@ -1,17 +1,11 @@
-import os.path
+import os
 import pickle
 import random
-
 import numpy as np
-
 from AdvancedPlayer import AdvancedPlayer
 from Constants import *
 from Move import Move
 from State import State
-
-choose_random = "choose_random"
-choose_q = "choose_q"
-max_next = "max_next"
 
 
 class ReinforcementPlayer(AdvancedPlayer):
@@ -21,6 +15,7 @@ class ReinforcementPlayer(AdvancedPlayer):
         super().__init__(color)
         self.game_history = []
         self.q_agent = None
+        self.load_object()
 
     def load_object(self):
         player_name = PLAYER_NAME_A if self.color == BLACK else PLAYER_NAME_B
@@ -28,7 +23,7 @@ class ReinforcementPlayer(AdvancedPlayer):
             with open(Q_Learning_OB_PATH(player_name), 'rb') as file:
                 self.q_agent = pickle.load(file)
         else:
-            self.q_agent = QLearning(8 * 8)
+            self.q_agent = QLearning(alpha=0.1, gamma=0.9, epsilon=1.0, epsilon_decay=0.995, epsilon_min=0.01)
 
     def save_object(self):
         player_name = PLAYER_NAME_A if self.color == BLACK else PLAYER_NAME_B
@@ -38,78 +33,94 @@ class ReinforcementPlayer(AdvancedPlayer):
 
     def make_move(self, state: State) -> State:
         options = state.find_all_moves()
-        move = self.q_agent.choose_action(state, options)
-        new_state = state.next_state(move)
+        move = self.q_agent.choose_action(state, options, self.color)
+        # Store the experience for learning
         if ReinforcementPlayer.rl_update:
-            self.q_agent.update_q_value(state, move, new_state)
+            self.q_agent.store_experience(state, move)
+        new_state = state.next_state(move)
         return new_state
 
     def update_player(self, winner):
-        self.q_agent.epsilon = max(self.q_agent.epsilon_min, self.q_agent.epsilon * self.q_agent.epsilon_decay)
+        if ReinforcementPlayer.rl_update:
+            self.q_agent.learn(winner)
+            # Decay epsilon
+            self.q_agent.epsilon = max(self.q_agent.epsilon_min, self.q_agent.epsilon * self.q_agent.epsilon_decay)
+
+
+# QLearning.py
+
+def move_to_key(move: Move):
+    """ Convert move to a hashable key."""
+    piece_loc = move.get_piece_moved().get_location()
+    dest = move.get_destination()
+    return piece_loc, dest
+
+
+def get_possible_action_keys(state: State):
+    moves = state.find_all_moves()
+    return [move_to_key(move) for move in moves]
+
+
+def state_to_key(state: State):
+    """ Convert state to a hashable key."""
+    board_list = state.get_board_list()
+    # Flatten the board to a tuple
+    return tuple(item for row in board_list for item in row)
 
 
 class QLearning:
-
-    def __init__(self, alpha=0.5, gamma=0.9, epsilon=0.1, epsilon_decay=0.995, epsilon_min=0.01) -> None:
-
+    def __init__(self, alpha=0.1, gamma=0.9, epsilon=1.0, epsilon_decay=0.995, epsilon_min=0.01) -> None:
         self.q_table = dict()
         self.epsilon = epsilon
         self.alpha = alpha
         self.gamma = gamma
         self.epsilon_min = epsilon_min
         self.epsilon_decay = epsilon_decay
+        self.experiences = []  # To store state, action, reward, next_state transitions
 
-    def choose_action(self, state: State, options: list[Move]) -> Move:
+    def choose_action(self, state: State, options: list[Move], player_color: int) -> Move:
         """ Epsilon-greedy action selection."""
         if np.random.rand() <= self.epsilon:
             return random.choice(options)  # Explore
         else:
-            return max(options, key=lambda move: self.q_table.get((state, move), 0))  # Exploit
+            q_values = [self.q_table.get((state_to_key(state), move_to_key(move)), 0) for move in options]
+            max_q = max(q_values)
+            # In case multiple actions have the same max Q-value
+            best_actions = [move for move, q in zip(options, q_values) if q == max_q]
+            return random.choice(best_actions)  # Exploit
 
-    def best_possible_operator(self, state, action, reward, next_state):
-        """
-        Best Possible Operator (BPO) for updating Q-values more optimally.
-        This function implements the BPO approach, which considers both current action
-        and future expected reward to update Q-values in a more stable manner.
-        """
-        # If next_state or current state-action pair does not exist, initialize it
-        next_moves = next_state.find_all_moves()
-        for move in next_moves:
-            if (next_state, move) not in self.q_table:
-                self.q_table[(next_state, move)] = 0  # Initialize future state
-        if (state, action) not in self.q_table:
-            self.q_table[(state, action)] = 0  # Initialize Q-value for state-action pair
+    def store_experience(self, state: State, action: Move):
+        self.experiences.append((state, action))
 
-        score_moves =[self.q_table.get((next_state, action), 0) for action in next_state.find_all_moves()]
-        score_moves += [0]
-        best_future_q = max(score_moves)
-        updated_q_value = (1 - self.alpha) * self.q_table.get((state, action), 0) + self.alpha * (
-            reward + self.gamma * best_future_q)
-        return updated_q_value
-
-    def update_q_value(self, state, action, next_state):
-        """ Update Q-value using Best Possible Operator (BPO)."""
-        current_player = -state.last_player
-        reward = QLearning.calculate_reward(next_state, current_player)
-        self.q_table[state, action] = self.best_possible_operator(state, action, reward, next_state)
-
-    @staticmethod
-    def calculate_reward(opponent_state: State, the_player: int):
-        if not opponent_state.find_all_moves():
-            # the_player win
-            return 15
-        opponent_moves = opponent_state.find_all_moves()
-        reward = 0
-        for opponent_move in opponent_moves:
-            the_player_state = opponent_state.generate_successor(opponent_move)
-            if not the_player_state.find_all_moves():
-                reward -= 15
+    def learn(self, winner):
+        """ Update Q-values at the end of the game."""
+        reward = self.get_final_reward(winner)
+        for idx in reversed(range(len(self.experiences))):
+            state, action = self.experiences[idx]
+            state_key = state_to_key(state)
+            action_key = move_to_key(action)
+            if idx < len(self.experiences) - 1:
+                next_state, _ = self.experiences[idx + 1]
+                next_state_key = state_to_key(next_state)
+                next_q_values = [self.q_table.get((next_state_key, a_key), 0) for a_key in
+                                 get_possible_action_keys(next_state)]
+                max_next_q = max(next_q_values) if next_q_values else 0
             else:
-                opponent_pieces = np.sum(np.array(the_player_state.get_board_list()).flatten() == -the_player)
-                player_pieces = np.sum(np.array(the_player_state.get_board_list()).flatten() == the_player)
-                opponent_queen_pieces = np.sum(
-                    np.array(the_player_state.get_board_list()).flatten() == (-the_player) * 10)
-                player_queen_pieces = np.sum(np.array(the_player_state.get_board_list()).flatten() == the_player * 10)
-                reward += (1 * (player_pieces - opponent_pieces) + 3 * (player_queen_pieces - opponent_queen_pieces))
+                max_next_q = 0  # Terminal state
 
-        return reward / len(opponent_moves)
+            # Q-learning update
+            current_q = self.q_table.get((state_key, action_key), 0)
+            updated_q = current_q + self.alpha * (reward + self.gamma * max_next_q - current_q)
+            self.q_table[(state_key, action_key)] = updated_q
+            reward = 0
+
+        self.experiences = []
+
+    def get_final_reward(self, winner):
+        """ Returns the final reward based on the game outcome."""
+        if winner == TIE:
+            return 0  # Neutral reward for a tie
+        elif winner == self.experiences[-1][0].last_player:
+            return -1  # The last player is the opponent; we lost
+        else:
+            return 1  # We won

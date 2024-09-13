@@ -1,14 +1,9 @@
-import copy
-import threading
-import time
 from Board import Board
-from Constants import BOARD_SIZE, NOT_OVER_YET, BLACK, WHITE, CMD
-from Move import Move
-from Pieces import Piece, RegularPiece
+from CheckersDisplay import CheckersDisplay
+from Constants import NOT_OVER_YET, BLACK, WHITE, CMD
+from Pieces import RegularPiece
 from Player import Player
 from State import State
-from CheckersDisplay import CheckersDisplay
-from dash import Output
 
 
 class Game:

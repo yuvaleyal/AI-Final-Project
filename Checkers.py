@@ -1,16 +1,7 @@
-from Board import Board
-from CheckersGameManager import GameManager
-from DNNPlayer import DNNPlayer
-from FirstChoicePlayer import FirstChoicePlayer
-from HumanPlayer import HumanPlayer
-from MinimaxPlayer import MinimaxPlayer
-from Player import Player
-from RandomPlayer import RandomPlayer
-from ReinforcementPlayer import ReinforcementPlayer
-from State import State
-from Constants import *
-from Pieces import *
 import argparse
+
+from CheckersGameManager import GameManager
+from Pieces import *
 
 
 def main():

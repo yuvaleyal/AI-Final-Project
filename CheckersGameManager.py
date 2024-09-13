@@ -29,12 +29,10 @@ class GameManager:
     def run_game_loop(self):
         # Start the game loop
         game_counter = 0
-        # self.player2.q_agent.increase_game_number()
         if MODE[0] != TRAINING_MODE:
             self.player1.rl_update = False
 
         while game_counter < self.num_of_games:
-            # if self.game:
             if game_counter % 2 == 0:
                 self.game = Game(self.player1, self.player2, self.display)
             else:
@@ -51,36 +49,37 @@ class GameManager:
             game_counter += 1
             if CMD[0]:
                 print(game_counter)
-
-            if isinstance(self.player1, AdvancedPlayer):
-                if MODE[0] == TRAINING_MODE or MODE[0] == TESTING_MODE:
-                    print(
-                        f"Episode {game_counter}/{self.num_of_games},"
-                        f" BLACK: {self.black_score}, WHITE: {self.white_score}, Ties: {self.ties}")
-                if MODE[0] == TRAINING_MODE:
-                    self.player1.update_player(winner)
-                if game_counter % 10 == 0:
-                    self.player1.save_object()
-                else:
-                    self.player1.clean_env()
-
+            if MODE[0] == TRAINING_MODE or MODE[0] == TESTING_MODE:
+                self.update_loop_game(game_counter, winner)
             if self.display:
                 self.display.update_scores(self.black_score, self.white_score)
         print(f"BLACK: {self.black_score}, WHITE: {self.white_score}, Ties: {self.ties}")
         if self.display:
             self.display.show_end_result(self.black_score, self.white_score, self.ties)
-        if isinstance(self.player1, AdvancedPlayer):
-            if MODE[0] == TRAINING_MODE:
-                self.player1.save_object()
-        if isinstance(self.player2, AdvancedPlayer):
-            if MODE[0] == TRAINING_MODE:
-                self.player2.save_object()
+        if MODE[0] == TRAINING_MODE:
+            self.save_game()
 
     def run(self):
         if self.display:
             self.display.root.mainloop()
         else:
             self.run_game_loop()
+
+    def update_loop_game(self, game_counter, winner):
+        print(
+            f"Episode {game_counter}/{self.num_of_games},"
+            f" BLACK: {self.black_score}, WHITE: {self.white_score}, Ties: {self.ties}")
+        if MODE[0] == TRAINING_MODE:
+            if isinstance(self.player1, AdvancedPlayer):
+                self.player1.update_player(winner)
+            if isinstance(self.player2, AdvancedPlayer):
+                self.player2.update_player(winner)
+
+    def save_game(self):
+        if isinstance(self.player1, AdvancedPlayer):
+            self.player1.save_object()
+        if isinstance(self.player2, AdvancedPlayer):
+            self.player2.save_object()
 
     def set_num_of_games(self, new_num_of_games):
         self.num_of_games = new_num_of_games
@@ -89,7 +88,3 @@ class GameManager:
         self.white_score = 0
         self.black_score = 0
         self.ties = 0
-
-# if __name__ == "__main__":
-#     manager = GameManager(True)
-#     manager.run()

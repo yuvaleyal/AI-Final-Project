@@ -43,6 +43,3 @@ class AdvancedPlayer(Player):
             file_path_arr[0] = f"{file_path_arr[0]}_{datetime.now().timestamp()}"
             file_path_new = ".".join(file_path_arr)
             os.rename(file_path, file_path_new)
-
-    def clean_env(self):
-        pass

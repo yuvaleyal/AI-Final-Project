@@ -4,7 +4,6 @@
 /tmp.py
 objects/pa_Q_LearningAgent.pkl
 objects/pb-1725878466.963661_Q_LearningAgent.pkl
-objects/pa_Q_LearningAgent.pkl
 objects/pa-1725876621.354868_Q_LearningAgent.pkl
 objects/pb-1725877936.099667_Q_LearningAgent.pkl
 objects/pb-1725878120.38667_Q_LearningAgent.pkl
@@ -12,3 +11,4 @@ objects/pb_Q_LearningAgent.pkl
 objects/pa-1725876576.51626_Q_LearningAgent.pkl
 objects/pa_Q_LearningAgent.pkl
 /ReinforcementPlayer version2.py
+/cert/

@@ -4,13 +4,16 @@ from Move import Move
 import numpy as np
 from Constants import *
 from Pieces import Piece, RegularPiece, QueenPiece
+from collections import Counter
 
 
 class State:
-    def __init__(self, cur_state: Board, last_player: int) -> None:
+    def __init__(self, cur_state: Board, last_player: int, game_history: list=[]) -> None:
         self.board = cur_state
         self.last_player = last_player
         self.next_moves = []
+        self.game_history = game_history
+        self.counter = 0
 
     def find_all_moves(self) -> list[Move]:
         """returns a list of all the possible moves for the next player
@@ -68,15 +71,16 @@ class State:
             State: next state
         """
         if self.is_over() != NOT_OVER_YET:
-            return State(self.board, self.last_player)
+            return State(self.board, self.last_player, self.game_history)
         if move:
             self.board.make_move(move)
-        return State(self.board, -self.last_player)
+        self.game_history.append((-self.last_player, str(self)))
+        return State(self.board, -self.last_player, self.game_history)
 
     def generate_successor(self, move):
         # Create a deep copy of the current state
         state_copy = deepcopy(self)
-
+        copy_game_history = deepcopy(self.game_history)
         piece_to_move = None
         for piece in state_copy.board.get_pieces(-state_copy.last_player):
             if piece.get_location() == move.get_piece_moved().get_location():
@@ -95,7 +99,7 @@ class State:
         state_copy.board.make_move(move_copy)
 
         # Return the successor state
-        return State(state_copy.board, -state_copy.last_player)
+        return State(state_copy.board, -state_copy.last_player, copy_game_history)
 
     def is_over(self) -> int:
         """checks the board state and returns whether the game is not over, won by one of the players or a tie.
@@ -104,6 +108,8 @@ class State:
         Returns:
             int: BLACK, WHITE, TIE or NOT_OVER_YET
         """
+        if has_3_identical_arrays_in_game(self.game_history):
+            return TIE
         if not self.find_all_moves():
             return self.last_player
         black_pieces = self.board.get_pieces(BLACK)
@@ -193,3 +199,12 @@ class State:
                         chain_options.append(new_move)
                         queue.append(new_move)
         return chain_options
+
+
+def has_3_identical_arrays_in_game(outer_array):
+    element_counts = Counter(outer_array)
+    for str_state, count in element_counts.items():
+        if count >= 3:
+            print("has last 3 identical moves")
+            return True
+    return False

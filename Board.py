@@ -57,16 +57,16 @@ class Board:
         if move.get_destination()[0] == self._get_other_end(piece_moved.get_player()):
             if not piece_moved.is_queen():
                 self.get_pieces(piece_moved.get_player()).remove(piece_moved)
-                self.get_pieces(piece_moved.get_player()).append(QueenPiece(piece_moved.get_player(), piece_moved.get_location()))
+                self.get_pieces(piece_moved.get_player()).append(
+                    QueenPiece(piece_moved.get_player(), piece_moved.get_location()))
         for piece in move.get_pieces_eaten():
             self._remove_piece(piece)
 
         ##checking for the weird problem:
-        if len(self.black_pieces) > cur_black_num or len(self.white_pieces)>cur_white_num:
+        if len(self.black_pieces) > cur_black_num or len(self.white_pieces) > cur_white_num:
             #so, somehow pieces where added...
             #place breakpoint here:
             pass
-
 
     # for now, nothing
     def can_eat(self, piece: Piece):
@@ -108,5 +108,5 @@ class Board:
 
     def _get_other_end(self, player: int) -> int:
         if player == BLACK:
-            return BOARD_SIZE-1
+            return BOARD_SIZE - 1
         return 0

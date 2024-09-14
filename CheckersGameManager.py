@@ -1,4 +1,5 @@
 from AdvancedPlayer import AdvancedPlayer
+from AlphaZeroPlayer import AlphaZeroPlayer
 from CheckersDisplay import CheckersDisplay
 from Constants import *
 from Game import Game
@@ -72,6 +73,8 @@ class GameManager:
         if MODE[0] == TRAINING_MODE:
             if isinstance(self.player1, AdvancedPlayer):
                 self.player1.update_player(winner)
+                if isinstance(self.player1, AlphaZeroPlayer) and game_counter % 10 == 0:
+                    self.player1.save_object()
             if isinstance(self.player2, AdvancedPlayer):
                 self.player2.update_player(winner)
 

@@ -1,7 +1,7 @@
 import Player
 from AlphaZeroPlayer import AlphaZeroPlayer
 from Constants import AlphaZero, HUMAN
-from DNNPlayer import RLDNNPlayer
+from DQNPlayer import DQN_Player
 from FirstChoicePlayer import FirstChoicePlayer
 from HumanPlayer import HumanPlayer
 from MinimaxPlayer import MinimaxPlayer
@@ -27,8 +27,8 @@ class PlayerFactory:
             player = AlphaZeroPlayer(color)
             player.load_object()
             return player
-        elif player_type == 'dnn':
-            player = RLDNNPlayer(color)
+        elif player_type == 'dqn':
+            player = DQN_Player(color)
             player.load_object()
             return player
         elif player_type == 'first_choice':

@@ -1,3 +1,4 @@
+# AlphaZeroPlayer.py
 import os
 import torch
 from torch import optim
@@ -5,71 +6,78 @@ import torch.nn.functional as F
 from AdvancedPlayer import AdvancedPlayer
 from Constants import OBJECTS_DIR, PLAYER_NAME_A, BLACK, PLAYER_NAME_B, AlphaZeroNET_OB_PATH
 from State import State
-from networks_helper.func_helper import state_to_tensor
+from networks_helper.func_helper import state_to_tensor, augment_data
 from networks_helper.mcts import MCTS
 from networks_helper.nets import PolicyValueNet
+from collections import deque
+import random
 
 
 class AlphaZeroPlayer(AdvancedPlayer):
     def __init__(self, color):
         super().__init__(color)
-        self.policy_value_net = PolicyValueNet()
-        self.optimizer = optim.Adam(self.policy_value_net.parameters(), lr=0.001)
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        self.policy_value_net = PolicyValueNet().to(self.device)
+        self.optimizer = optim.AdamW(self.policy_value_net.parameters(), lr=0.0003, weight_decay=1e-4)
         player_name = PLAYER_NAME_A if self.color == BLACK else PLAYER_NAME_B
         file_name_unique = f"{player_name}_{str(self.device)}"
-        self.num_simulations = 800
+        self.num_simulations = 1600
         self.c_puct = 1.0
-        self.mcts = None
-        self.buffer = []  # For storing self-play data
+        self.mcts = MCTS(self.policy_value_net, self.num_simulations, self.c_puct, self.device)
+        self.buffer = deque(maxlen=100000)
         self.batch_size = 64
-        self.learning_rate = 0.001
-        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-        self.policy_value_net.to(self.device)
         self.alpha_zero_net_path = AlphaZeroNET_OB_PATH(file_name_unique)
+        self.lr_scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(self.optimizer, T_max=1000)
+        self.elo_rating = 1000
+        self.game_length = 0
+
+        self.load_object()
 
     def make_move(self, state: State) -> State:
         # Use MCTS to select a move
-        self.mcts = MCTS(self.policy_value_net, self.num_simulations, self.c_puct)
-        move = self.mcts.get_action(state)
-        # Store the data for training
-        self.buffer.append((state, self.mcts.get_policy_distribution(state)))
-        # Apply the move
-        next_state = state.generate_successor(move)
+        # self.mcts = MCTS(self.policy_value_net, self.num_simulations, self.c_puct, self.device)
+        move, pi = self.mcts.get_action(state, temp=1e-3)
+        self.buffer.append((state_to_tensor(state), pi, None))  # Winner will be updated later
+        self.game_length += 1
+        next_state = state.next_state(move)
         return next_state
 
     def update_player(self, winner):
+        # Update the winner information in the buffer
+        reward = 1 if winner == self.color else -1 if winner == -self.color else 0
+        # Update the last game entries with the reward
+        num_entries = len(self.buffer)
+        for idx in range(num_entries - self.game_length, num_entries):
+            state_tensor, pi, _ = self.buffer[idx]
+            self.buffer[idx] = (state_tensor, pi, reward)
+        self.game_length = 0
         # Update neural network with self-play data
-        states, mcts_probs, winners = self.prepare_training_data(winner)
-        dataset = list(zip(states, mcts_probs, winners))
-        for i in range(0, len(dataset), self.batch_size):
-            batch = dataset[i:i + self.batch_size]
-            state_batch = torch.stack([state_to_tensor(s) for s, _, _ in batch]).to(self.device)
-            mcts_probs_batch = torch.tensor([mp for _, mp, _ in batch], dtype=torch.float32).to(self.device)
-            winner_batch = torch.tensor([w for _, _, w in batch], dtype=torch.float32).to(self.device)
+        if len(self.buffer) >= self.batch_size:
+            self.train_network()
 
-            # Zero the parameter gradients
-            self.optimizer.zero_grad()
-            # Forward + backward + optimize
-            log_probs, values = self.policy_value_net(state_batch)
-            value_loss = F.mse_loss(values.view(-1), winner_batch)
-            policy_loss = -torch.mean(torch.sum(mcts_probs_batch * log_probs, dim=1))
-            loss = value_loss + policy_loss
-            loss.backward()
-            self.optimizer.step()
-        # Clear the buffer
-        self.buffer = []
+        # Save the network weights periodically
+        if len(self.buffer) % (self.batch_size * 10) == 0:
+            self.save_object()
+        self.mcts = MCTS(self.policy_value_net, self.num_simulations, self.c_puct, self.device)
 
-    def prepare_training_data(self, winner):
-        # Prepare data from the buffer for training
-        states = []
-        mcts_probs = []
-        winners = []
-        for state, pi in self.buffer:
-            states.append(state)
-            mcts_probs.append(pi)
-            winners.append(winner if state.last_player != self.color else -winner)
-        return states, mcts_probs, winners
+    def train_network(self):
+        mini_batch = random.sample(self.buffer, self.batch_size)
+        state_batch = torch.stack([s for s, _, _ in mini_batch]).to(self.device)
+        mcts_probs_batch = torch.stack([mp for _, mp, _ in mini_batch]).to(self.device)
+        winner_batch = torch.tensor([w for _, _, w in mini_batch], dtype=torch.float32).to(self.device)
+
+        # Zero the parameter gradients
+        self.optimizer.zero_grad()
+        # Forward + backward + optimize
+        log_probs, values = self.policy_value_net(state_batch)
+        value_loss = F.mse_loss(values.view(-1), winner_batch)
+        policy_loss = -torch.mean(torch.sum(mcts_probs_batch * log_probs, dim=1))
+        loss = value_loss + policy_loss
+        loss.backward()
+        # Gradient clipping
+        torch.nn.utils.clip_grad_norm_(self.policy_value_net.parameters(), max_norm=5.0)
+        self.optimizer.step()
+        self.lr_scheduler.step()
 
     def save_object(self):
         AdvancedPlayer.rename_old_state_file(self.alpha_zero_net_path)
@@ -83,4 +91,6 @@ class AlphaZeroPlayer(AdvancedPlayer):
         print(f"AZ weights file load from path: {self.alpha_zero_net_path}")
         if os.path.isfile(self.alpha_zero_net_path):
             self.policy_value_net.load_state_dict(
-                torch.load(self.alpha_zero_net_path, weights_only=True, map_location=self.device))
+                torch.load(self.alpha_zero_net_path, map_location=self.device, weights_only=True))
+        else:
+            print("No existing model found. Starting from scratch.")

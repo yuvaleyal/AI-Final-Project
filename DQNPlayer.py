@@ -1,16 +1,15 @@
 import os
 import random
-
 import numpy as np
 import torch
 import torch.nn as nn
 import torch.optim as optim
-
 from AdvancedPlayer import AdvancedPlayer
 from Constants import PLAYER_NAME_A, BLACK, PLAYER_NAME_B, QUEEN_MULTIPLIER, NOT_OVER_YET, DQN_OB_PATH
 from Move import Move
 from State import State
 from networks_helper.func_helper import index_to_square, square_to_index
+from collections import deque
 
 
 class DQN_Model(nn.Module):
@@ -74,19 +73,19 @@ def get_valid_action_indices(state: State):
     return action_indices
 
 
-class RLDNNPlayer(AdvancedPlayer):
+class DQN_Player(AdvancedPlayer):
     rl_update = True
 
     def __init__(self, color: int) -> None:
         super().__init__(color)
         self.action_size = 32 * 32  # Total possible moves
-        self.game_history = []
+        self.game_history = deque(maxlen=10000)  # Fixed-size replay buffer
         self.gamma = 0.99
         self.epsilon = 1.0
         self.epsilon_min = 0.01
         self.epsilon_decay = 0.9995
         self.learning_rate = 0.0005
-        self.batch_size = 10
+        self.batch_size = 64  # Increased batch size for better learning
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.model = DQN_Model(self.action_size).to(self.device)
         self.target_model = DQN_Model(self.action_size).to(self.device)
@@ -96,6 +95,7 @@ class RLDNNPlayer(AdvancedPlayer):
         self.target_update_freq = 1000  # Update target network every 1000 steps
         player_name = PLAYER_NAME_A if self.color == BLACK else PLAYER_NAME_B
         self.f_name = DQN_OB_PATH(f"{player_name}_{self.device}")
+        self.load_object()
 
     def preprocess_state(self, state):
         # Convert the state to a 4-channel 8x8 tensor
@@ -110,25 +110,27 @@ class RLDNNPlayer(AdvancedPlayer):
         return torch.FloatTensor(processed_state).unsqueeze(0)
 
     def act(self, state: State) -> int:
-        self.model.eval()  # Set model to evaluation mode
-        state_tensor = self.preprocess_state(state).to(self.device)
-        with torch.no_grad():
-            q_values = self.model(state_tensor).squeeze()
-        self.model.train()  # Set model back to training mode
         valid_action_indices = get_valid_action_indices(state)
         if not valid_action_indices:
             return None  # No valid actions
-        # Create an action mask
-        action_mask = torch.zeros(self.action_size, device=self.device)
-        action_mask[valid_action_indices] = 1
-        masked_q_values = q_values * action_mask + (1 - action_mask) * (-1e10)
+
         if np.random.rand() <= self.epsilon:
             action_index = random.choice(valid_action_indices)
         else:
+            self.model.eval()  # Set model to evaluation mode
+            state_tensor = self.preprocess_state(state).to(self.device)
+            with torch.no_grad():
+                q_values = self.model(state_tensor).squeeze()
+            self.model.train()  # Set model back to training mode
+            # Create an action mask
+            action_mask = torch.full((self.action_size,), -float('inf'), device=self.device)
+            action_mask[valid_action_indices] = 0
+            masked_q_values = q_values + action_mask
             action_index = torch.argmax(masked_q_values).item()
         return action_index
 
     def update_player(self, winner):
+        # Implement any end-of-game updates if necessary
         pass
 
     def make_move(self, state: State) -> State:
@@ -150,106 +152,40 @@ class RLDNNPlayer(AdvancedPlayer):
         if len(self.game_history) > self.batch_size:
             self.replay(self.batch_size)
 
+        # Update epsilon
+        if self.epsilon > self.epsilon_min:
+            self.epsilon *= self.epsilon_decay
+
         return next_state
 
     def _remember(self, state, action, reward, next_state, done):
         self.game_history.append((state, action, reward, next_state, done))
 
-    # def replay(self, batch_size):
-    #     minibatch = random.sample(self.game_history, batch_size)
-    #     states, actions, rewards, next_states, dones = zip(*minibatch)
-    #
-    #     states = torch.cat([self.preprocess_state(s) for s in states]).to(self.device)
-    #     next_states = torch.cat([self.preprocess_state(s) for s in next_states]).to(self.device)
-    #     actions = torch.LongTensor(actions).to(self.device)
-    #     rewards = torch.FloatTensor(rewards).to(self.device)
-    #     dones = torch.FloatTensor(dones).to(self.device)
-    #
-    #     current_q_values = self.model(states)
-    #     next_q_values = self.target_model(next_states).detach()
-    #
-    #     # Mask invalid actions in next states
-    #     max_next_q_values = []
-    #     for i in range(len(next_states)):
-    #         valid_actions = self.get_valid_action_indices_from_state_tensor(next_states[i])
-    #         if len(valid_actions) > 0:
-    #             max_q = torch.max(next_q_values[i][valid_actions])
-    #         else:
-    #             max_q = torch.tensor(0.0).to(self.device)
-    #         max_next_q_values.append(max_q)
-    #     max_next_q_values = torch.stack(max_next_q_values)
-    #
-    #     # Compute targets
-    #     targets = rewards + self.gamma * max_next_q_values * (1 - dones)
-    #
-    #     # Gather the Q-values for the actions taken
-    #     predicted_q_values = current_q_values.gather(1, actions.unsqueeze(1)).squeeze()
-    #
-    #     # Compute loss
-    #     loss = self.mse_loss(predicted_q_values, targets)
-    #
-    #     # Optimize the model
-    #     self.optimizer.zero_grad()
-    #     loss.backward()
-    #     torch.nn.utils.clip_grad_norm_(self.model.parameters(), 1.0)
-    #     self.optimizer.step()
-    #
-    #     # Update epsilon
-    #     if self.epsilon > self.epsilon_min:
-    #         self.epsilon *= self.epsilon_decay
-    #
-    #     # Update target network periodically
-    #     self.update_counter += 1
-    #     if self.update_counter % self.target_update_freq == 0:
-    #         self.target_model.load_state_dict(self.model.state_dict())
     def replay(self, batch_size):
         minibatch = random.sample(self.game_history, batch_size)
         states, actions, rewards, next_states, dones = zip(*minibatch)
-
         states = torch.cat([self.preprocess_state(s) for s in states]).to(self.device)
         next_states_tensors = torch.cat([self.preprocess_state(s) for s in next_states]).to(self.device)
         actions = torch.LongTensor(actions).to(self.device)
         rewards = torch.FloatTensor(rewards).to(self.device)
         dones = torch.FloatTensor(dones).to(self.device)
-
         current_q_values = self.model(states)
         next_q_values = self.target_model(next_states_tensors).detach()
-
-        # Create a batch action mask
         batch_size = len(next_states)
-        action_mask = torch.zeros(batch_size, self.action_size, device=self.device)
+        action_mask = torch.full((batch_size, self.action_size), -float('inf'), device=self.device)
         for i in range(batch_size):
             valid_actions = get_valid_action_indices(next_states[i])
             if valid_actions:
-                action_mask[i, valid_actions] = 1
-            else:
-                # If there are no valid actions, set the mask to zeros
-                action_mask[i] = 0
-
-        # Apply the mask to next_q_values
-        masked_next_q_values = next_q_values * action_mask + (1 - action_mask) * (-1e10)
+                action_mask[i, valid_actions] = 0
+        masked_next_q_values = next_q_values + action_mask
         max_next_q_values, _ = masked_next_q_values.max(dim=1)
-
-        # Compute targets
         targets = rewards + self.gamma * max_next_q_values * (1 - dones)
-
-        # Gather the Q-values for the actions taken
         predicted_q_values = current_q_values.gather(1, actions.unsqueeze(1)).squeeze()
-
-        # Compute loss
         loss = self.mse_loss(predicted_q_values, targets)
-
-        # Optimize the model
         self.optimizer.zero_grad()
         loss.backward()
         torch.nn.utils.clip_grad_norm_(self.model.parameters(), 1.0)
         self.optimizer.step()
-
-        # Update epsilon
-        if self.epsilon > self.epsilon_min:
-            self.epsilon *= self.epsilon_decay
-
-        # Update target network periodically
         self.update_counter += 1
         if self.update_counter % self.target_update_freq == 0:
             self.target_model.load_state_dict(self.model.state_dict())
@@ -282,15 +218,13 @@ class RLDNNPlayer(AdvancedPlayer):
     def load_object(self):
         if os.path.isfile(self.f_name):
             print(f"DQN weights file loads from path: {self.f_name}")
-            self.model.load_state_dict(torch.load(self.f_name, weights_only=True))
+            self.model.load_state_dict(torch.load(self.f_name))
+            self.target_model.load_state_dict(self.model.state_dict())
+        else:
+            print("No existing model found. Starting from scratch.")
             self.target_model.load_state_dict(self.model.state_dict())
 
     def save_object(self):
         print(f"DQN weights file saved to path: {self.f_name}")
         AdvancedPlayer.rename_old_state_file(self.f_name)
         torch.save(self.model.state_dict(), self.f_name)
-
-    # Helper methods
-
-    def get_valid_action_indices_from_state_tensor(self, state_tensor):
-        return list(range(self.action_size))

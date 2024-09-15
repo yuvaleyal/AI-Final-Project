@@ -31,7 +31,7 @@ class ReinforcementPlayer(AdvancedPlayer):
             with open(self.f_name, 'rb') as file:
                 self.q_agent = pickle.load(file)
         else:
-            self.q_agent = QLearning(alpha=self.alpha, gamma=self.gamma, epsilon=self.epsilon,
+            self.q_agent = QLearning(color=self.color, alpha=self.alpha, gamma=self.gamma, epsilon=self.epsilon,
                                      epsilon_decay=self.epsilon_decay, epsilon_min=self.epsilon_min)
 
     def save_object(self):
@@ -120,7 +120,9 @@ def state_to_key(state: State):
 
 
 class QLearning:
-    def __init__(self, alpha=0.1, gamma=0.9, epsilon=1.0, epsilon_decay=0.995, epsilon_min=0.01) -> None:
+    def __init__(self, color, alpha=0.1, gamma=0.9, epsilon=1.0, epsilon_decay=0.995, epsilon_min=0.01) -> None:
+        self.color = color
+        print(self.color)
         self.q_table = dict()
         self.epsilon = epsilon
         self.alpha = alpha
@@ -172,7 +174,7 @@ class QLearning:
         """ Returns the final reward based on the game outcome."""
         if winner == TIE:
             return 0  # Neutral reward for a tie
-        elif winner == self.experiences[-1][0].last_player:
-            return -1  # The last player is the opponent; we lost
+        elif winner == (-self.color):
+            return -50  # The last player is the opponent; we lost
         else:
-            return 1  # We won
+            return 50  # We won

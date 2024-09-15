@@ -1,17 +1,18 @@
-from copy import deepcopy
 from typing import List
 
-from Board import Board
-from Constants import WHITE, BOARD_SIZE, BLACK, NOT_OVER_YET
-from Move import Move
-from Pieces import Piece, QueenPiece, RegularPiece
+from Constants import WHITE, BOARD_SIZE, NOT_OVER_YET
+from Pieces import Piece
 from Player import Player
 from State import State
 
 
 class MinimaxPlayer(Player):
-    def __init__(self, color: int) -> None:
+    def __init__(self, color: int, depth=6) -> None:
         super().__init__(color)
+        self.depth = depth
+
+    def set_depth(self, new_depth):
+        self.depth = new_depth
 
     def make_move(self, state: State) -> State:
         """Makes a move using the Minimax algorithm with alpha-beta pruning."""
@@ -29,8 +30,7 @@ class MinimaxPlayer(Player):
         """
         legal_moves = state.find_all_moves()
 
-        # Terminal condition or maximum depth reached
-        if current_depth == 6 or state.is_over() != NOT_OVER_YET:
+        if current_depth == self.depth or state.is_over() != NOT_OVER_YET:
             return self.evaluate(state), None
 
         value = float('-inf')
@@ -46,7 +46,6 @@ class MinimaxPlayer(Player):
 
             alpha = max(alpha, value)
 
-            # Prune the remaining branches
             if value >= beta:
                 break
 
@@ -63,8 +62,7 @@ class MinimaxPlayer(Player):
         """
         legal_moves = state.find_all_moves()
 
-        # Terminal condition or maximum depth reached
-        if current_depth == 6 or state.is_over() != NOT_OVER_YET:
+        if current_depth == self.depth or state.is_over() != NOT_OVER_YET:
             return self.evaluate(state), None
 
         value = float('inf')
@@ -80,7 +78,6 @@ class MinimaxPlayer(Player):
 
             beta = min(beta, value)
 
-            # Prune the remaining branches
             if value <= alpha:
                 break
 
@@ -95,19 +92,16 @@ class MinimaxPlayer(Player):
         :param state: The current state of the game.
         :return: A score representing the evaluation of the board.
         """
-        # Weights for different factors
-        piece_weight = 10  # Regular piece weight
-        king_weight = 15  # Queen piece weight
-        positional_weight = 1  # Weight for positional value
-        capture_weight = 20  # Weight for possible capture moves
-        threat_weight = -12  # Penalty for pieces at risk of being captured
+        piece_weight = 10
+        king_weight = 15
+        positional_weight = 1
+        capture_weight = 20
+        threat_weight = -12
 
-        # Get the current board and pieces
         board = state.board
         player_pieces = board.get_pieces(self.color)
         opponent_pieces = board.get_pieces(-self.color)
 
-        # Material score (difference in pieces and queens)
         player_queens = self._num_of_queens(player_pieces)
         opponent_queens = self._num_of_queens(opponent_pieces)
         material_score = (
@@ -115,7 +109,6 @@ class MinimaxPlayer(Player):
             king_weight * (player_queens - opponent_queens)
         )
 
-        # Positional score (favoring central and advanced pieces)
         positional_score = 0
         for piece in player_pieces:
             row, col = piece.get_location()
@@ -125,20 +118,18 @@ class MinimaxPlayer(Player):
             row, col = piece.get_location()
             positional_score -= self._get_positional_value(row, col)
 
-        # Capture score (number of capture opportunities for both players)
         capture_score = 0
         player_moves = state.find_all_moves()
         opponent_moves = State(state.board, -self.color).find_all_moves()
 
         for move in player_moves:
-            if len(move.get_pieces_eaten()) > 0:  # Capture move for player
+            if len(move.get_pieces_eaten()) > 0:
                 capture_score += capture_weight
 
         for move in opponent_moves:
-            if len(move.get_pieces_eaten()) > 0:  # Capture move for opponent
+            if len(move.get_pieces_eaten()) > 0:
                 capture_score -= capture_weight
 
-        # Threat score (penalizing pieces that are at risk of being captured)
         threatened_player_pieces = set()
         for move in opponent_moves:
             for piece in move.get_pieces_eaten():
@@ -161,13 +152,10 @@ class MinimaxPlayer(Player):
         :param col: The column of the piece.
         :return: A score representing the positional value.
         """
-        # Favor central positions and advanced rows
-        # These values can be fine-tuned for better performance.
-        # Pieces closer to promotion (top rows for white, bottom rows for black) get higher scores
-        if self.color == WHITE:  # White pieces
-            return BOARD_SIZE - 1 - row  # More advanced rows (higher row index) get higher scores
-        else:  # Black pieces
-            return row  # More advanced rows (lower row index) get higher scores
+        if self.color == WHITE:
+            return BOARD_SIZE - 1 - row
+        else:
+            return row
 
     def _num_of_queens(self, pieces: List[Piece]) -> int:
         result = 0

@@ -12,3 +12,10 @@ Rules:
 	•	Capturing is always mandatory.
 	•	A king can move one square in any direction.
 	•	A regular piece can capture moving forward and can retreat backward for multiple captures.
+ 
+How To Run The Program:
+ 	•	-a specifies the black player ['random', 'minimax', 'rl', 'alphazero', 'first_choice']
+  	•	-b specifies the white player ['random', 'minimax', 'rl', 'alphazero', 'first_choice']
+   	•	-d specifies if the display is on ['yes', 'no']. if display is yes, the other arguments dont matter.
+    	•	-m
+  

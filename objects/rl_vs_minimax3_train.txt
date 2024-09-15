@@ -1,0 +1,1463 @@
+/Users/shmuel/VENVs/AI-Final-Project/bin/python /Users/shmuel/PycharmProjects/AI-Final-Project/Checkers.py -a=rl -b=minimax -d=no -n=1000 -m=train
+Game Mode: ['train']
+Player name: pa
+RL weights file loads from path: objects/pa_Q_LearningAgent.pkl
+RL weights file loads from path: objects/pa_Q_LearningAgent.pkl
+Episode 1/1000, BLACK: 0, WHITE: 1, Ties: 0
+Episode 2/1000, BLACK: 1, WHITE: 1, Ties: 0
+Episode 3/1000, BLACK: 1, WHITE: 2, Ties: 0
+has 3 identical moves
+has 3 identical moves
+Episode 4/1000, BLACK: 1, WHITE: 2, Ties: 1
+Episode 5/1000, BLACK: 2, WHITE: 2, Ties: 1
+Episode 6/1000, BLACK: 3, WHITE: 2, Ties: 1
+has 3 identical moves
+has 3 identical moves
+Episode 7/1000, BLACK: 3, WHITE: 2, Ties: 2
+Episode 8/1000, BLACK: 3, WHITE: 3, Ties: 2
+Episode 9/1000, BLACK: 3, WHITE: 3, Ties: 3
+Episode 10/1000, BLACK: 4, WHITE: 3, Ties: 3
+Episode 11/1000, BLACK: 4, WHITE: 4, Ties: 3
+Episode 12/1000, BLACK: 5, WHITE: 4, Ties: 3
+Episode 13/1000, BLACK: 6, WHITE: 4, Ties: 3
+Episode 14/1000, BLACK: 6, WHITE: 5, Ties: 3
+has 3 identical moves
+has 3 identical moves
+Episode 15/1000, BLACK: 6, WHITE: 5, Ties: 4
+has 3 identical moves
+has 3 identical moves
+Episode 16/1000, BLACK: 6, WHITE: 5, Ties: 5
+Episode 17/1000, BLACK: 7, WHITE: 5, Ties: 5
+has 3 identical moves
+has 3 identical moves
+Episode 18/1000, BLACK: 7, WHITE: 5, Ties: 6
+Episode 19/1000, BLACK: 8, WHITE: 5, Ties: 6
+has 3 identical moves
+has 3 identical moves
+Episode 20/1000, BLACK: 8, WHITE: 5, Ties: 7
+Episode 21/1000, BLACK: 9, WHITE: 5, Ties: 7
+Episode 22/1000, BLACK: 10, WHITE: 5, Ties: 7
+Episode 23/1000, BLACK: 11, WHITE: 5, Ties: 7
+Episode 24/1000, BLACK: 11, WHITE: 6, Ties: 7
+Episode 25/1000, BLACK: 12, WHITE: 6, Ties: 7
+Episode 26/1000, BLACK: 12, WHITE: 7, Ties: 7
+Episode 27/1000, BLACK: 13, WHITE: 7, Ties: 7
+has 3 identical moves
+has 3 identical moves
+Episode 28/1000, BLACK: 13, WHITE: 7, Ties: 8
+Episode 29/1000, BLACK: 14, WHITE: 7, Ties: 8
+Episode 30/1000, BLACK: 15, WHITE: 7, Ties: 8
+Episode 31/1000, BLACK: 16, WHITE: 7, Ties: 8
+Episode 32/1000, BLACK: 17, WHITE: 7, Ties: 8
+Episode 33/1000, BLACK: 18, WHITE: 7, Ties: 8
+Episode 34/1000, BLACK: 19, WHITE: 7, Ties: 8
+Episode 35/1000, BLACK: 19, WHITE: 8, Ties: 8
+Episode 36/1000, BLACK: 20, WHITE: 8, Ties: 8
+Episode 37/1000, BLACK: 20, WHITE: 9, Ties: 8
+has 3 identical moves
+has 3 identical moves
+Episode 38/1000, BLACK: 20, WHITE: 9, Ties: 9
+has 3 identical moves
+has 3 identical moves
+Episode 39/1000, BLACK: 20, WHITE: 9, Ties: 10
+Episode 40/1000, BLACK: 20, WHITE: 10, Ties: 10
+Episode 41/1000, BLACK: 20, WHITE: 11, Ties: 10
+Episode 42/1000, BLACK: 20, WHITE: 12, Ties: 10
+has 3 identical moves
+has 3 identical moves
+Episode 43/1000, BLACK: 20, WHITE: 12, Ties: 11
+Episode 44/1000, BLACK: 21, WHITE: 12, Ties: 11
+Episode 45/1000, BLACK: 22, WHITE: 12, Ties: 11
+Episode 46/1000, BLACK: 23, WHITE: 12, Ties: 11
+has 3 identical moves
+has 3 identical moves
+Episode 47/1000, BLACK: 23, WHITE: 12, Ties: 12
+has 3 identical moves
+has 3 identical moves
+Episode 48/1000, BLACK: 23, WHITE: 12, Ties: 13
+Episode 49/1000, BLACK: 23, WHITE: 13, Ties: 13
+Episode 50/1000, BLACK: 24, WHITE: 13, Ties: 13
+Episode 51/1000, BLACK: 24, WHITE: 13, Ties: 14
+Episode 52/1000, BLACK: 24, WHITE: 14, Ties: 14
+has 3 identical moves
+has 3 identical moves
+Episode 53/1000, BLACK: 24, WHITE: 14, Ties: 15
+Episode 54/1000, BLACK: 24, WHITE: 15, Ties: 15
+Episode 55/1000, BLACK: 24, WHITE: 16, Ties: 15
+Episode 56/1000, BLACK: 25, WHITE: 16, Ties: 15
+Episode 57/1000, BLACK: 25, WHITE: 17, Ties: 15
+Episode 58/1000, BLACK: 25, WHITE: 17, Ties: 16
+Episode 59/1000, BLACK: 26, WHITE: 17, Ties: 16
+has 3 identical moves
+has 3 identical moves
+Episode 60/1000, BLACK: 26, WHITE: 17, Ties: 17
+Episode 61/1000, BLACK: 26, WHITE: 18, Ties: 17
+Episode 62/1000, BLACK: 27, WHITE: 18, Ties: 17
+has 3 identical moves
+has 3 identical moves
+Episode 63/1000, BLACK: 27, WHITE: 18, Ties: 18
+Episode 64/1000, BLACK: 28, WHITE: 18, Ties: 18
+Episode 65/1000, BLACK: 28, WHITE: 19, Ties: 18
+has 3 identical moves
+has 3 identical moves
+Episode 66/1000, BLACK: 28, WHITE: 19, Ties: 19
+Episode 67/1000, BLACK: 29, WHITE: 19, Ties: 19
+Episode 68/1000, BLACK: 30, WHITE: 19, Ties: 19
+has 3 identical moves
+has 3 identical moves
+Episode 69/1000, BLACK: 30, WHITE: 19, Ties: 20
+has 3 identical moves
+has 3 identical moves
+Episode 70/1000, BLACK: 30, WHITE: 19, Ties: 21
+Episode 71/1000, BLACK: 31, WHITE: 19, Ties: 21
+has 3 identical moves
+has 3 identical moves
+Episode 72/1000, BLACK: 31, WHITE: 19, Ties: 22
+has 3 identical moves
+has 3 identical moves
+Episode 73/1000, BLACK: 31, WHITE: 19, Ties: 23
+Episode 74/1000, BLACK: 32, WHITE: 19, Ties: 23
+Episode 75/1000, BLACK: 33, WHITE: 19, Ties: 23
+Episode 76/1000, BLACK: 34, WHITE: 19, Ties: 23
+Episode 77/1000, BLACK: 35, WHITE: 19, Ties: 23
+Episode 78/1000, BLACK: 36, WHITE: 19, Ties: 23
+Episode 79/1000, BLACK: 37, WHITE: 19, Ties: 23
+Episode 80/1000, BLACK: 38, WHITE: 19, Ties: 23
+Episode 81/1000, BLACK: 39, WHITE: 19, Ties: 23
+Episode 82/1000, BLACK: 40, WHITE: 19, Ties: 23
+has 3 identical moves
+has 3 identical moves
+Episode 83/1000, BLACK: 40, WHITE: 19, Ties: 24
+Episode 84/1000, BLACK: 41, WHITE: 19, Ties: 24
+Episode 85/1000, BLACK: 42, WHITE: 19, Ties: 24
+Episode 86/1000, BLACK: 42, WHITE: 20, Ties: 24
+has 3 identical moves
+has 3 identical moves
+Episode 87/1000, BLACK: 42, WHITE: 20, Ties: 25
+Episode 88/1000, BLACK: 43, WHITE: 20, Ties: 25
+Episode 89/1000, BLACK: 43, WHITE: 20, Ties: 26
+Episode 90/1000, BLACK: 44, WHITE: 20, Ties: 26
+Episode 91/1000, BLACK: 45, WHITE: 20, Ties: 26
+Episode 92/1000, BLACK: 45, WHITE: 20, Ties: 27
+has 3 identical moves
+has 3 identical moves
+Episode 93/1000, BLACK: 45, WHITE: 20, Ties: 28
+has 3 identical moves
+has 3 identical moves
+Episode 94/1000, BLACK: 45, WHITE: 20, Ties: 29
+Episode 95/1000, BLACK: 46, WHITE: 20, Ties: 29
+has 3 identical moves
+has 3 identical moves
+Episode 96/1000, BLACK: 46, WHITE: 20, Ties: 30
+Episode 97/1000, BLACK: 47, WHITE: 20, Ties: 30
+Episode 98/1000, BLACK: 47, WHITE: 20, Ties: 31
+has 3 identical moves
+has 3 identical moves
+Episode 99/1000, BLACK: 47, WHITE: 20, Ties: 32
+Episode 100/1000, BLACK: 47, WHITE: 20, Ties: 33
+Episode 101/1000, BLACK: 48, WHITE: 20, Ties: 33
+Episode 102/1000, BLACK: 49, WHITE: 20, Ties: 33
+Episode 103/1000, BLACK: 50, WHITE: 20, Ties: 33
+Episode 104/1000, BLACK: 51, WHITE: 20, Ties: 33
+Episode 105/1000, BLACK: 52, WHITE: 20, Ties: 33
+Episode 106/1000, BLACK: 52, WHITE: 21, Ties: 33
+Episode 107/1000, BLACK: 53, WHITE: 21, Ties: 33
+Episode 108/1000, BLACK: 54, WHITE: 21, Ties: 33
+Episode 109/1000, BLACK: 55, WHITE: 21, Ties: 33
+Episode 110/1000, BLACK: 56, WHITE: 21, Ties: 33
+Episode 111/1000, BLACK: 57, WHITE: 21, Ties: 33
+Episode 112/1000, BLACK: 58, WHITE: 21, Ties: 33
+Episode 113/1000, BLACK: 58, WHITE: 21, Ties: 34
+Episode 114/1000, BLACK: 59, WHITE: 21, Ties: 34
+Episode 115/1000, BLACK: 60, WHITE: 21, Ties: 34
+has 3 identical moves
+has 3 identical moves
+Episode 116/1000, BLACK: 60, WHITE: 21, Ties: 35
+Episode 117/1000, BLACK: 61, WHITE: 21, Ties: 35
+Episode 118/1000, BLACK: 62, WHITE: 21, Ties: 35
+has 3 identical moves
+has 3 identical moves
+Episode 119/1000, BLACK: 62, WHITE: 21, Ties: 36
+has 3 identical moves
+has 3 identical moves
+Episode 120/1000, BLACK: 62, WHITE: 21, Ties: 37
+Episode 121/1000, BLACK: 63, WHITE: 21, Ties: 37
+Episode 122/1000, BLACK: 64, WHITE: 21, Ties: 37
+has 3 identical moves
+has 3 identical moves
+Episode 123/1000, BLACK: 64, WHITE: 21, Ties: 38
+Episode 124/1000, BLACK: 65, WHITE: 21, Ties: 38
+has 3 identical moves
+has 3 identical moves
+Episode 125/1000, BLACK: 65, WHITE: 21, Ties: 39
+Episode 126/1000, BLACK: 65, WHITE: 21, Ties: 40
+Episode 127/1000, BLACK: 65, WHITE: 21, Ties: 41
+Episode 128/1000, BLACK: 65, WHITE: 22, Ties: 41
+Episode 129/1000, BLACK: 65, WHITE: 23, Ties: 41
+Episode 130/1000, BLACK: 66, WHITE: 23, Ties: 41
+Episode 131/1000, BLACK: 66, WHITE: 24, Ties: 41
+Episode 132/1000, BLACK: 67, WHITE: 24, Ties: 41
+Episode 133/1000, BLACK: 68, WHITE: 24, Ties: 41
+Episode 134/1000, BLACK: 69, WHITE: 24, Ties: 41
+Episode 135/1000, BLACK: 70, WHITE: 24, Ties: 41
+Episode 136/1000, BLACK: 71, WHITE: 24, Ties: 41
+Episode 137/1000, BLACK: 72, WHITE: 24, Ties: 41
+Episode 138/1000, BLACK: 73, WHITE: 24, Ties: 41
+Episode 139/1000, BLACK: 74, WHITE: 24, Ties: 41
+Episode 140/1000, BLACK: 74, WHITE: 25, Ties: 41
+Episode 141/1000, BLACK: 74, WHITE: 26, Ties: 41
+Episode 142/1000, BLACK: 75, WHITE: 26, Ties: 41
+Episode 143/1000, BLACK: 75, WHITE: 27, Ties: 41
+Episode 144/1000, BLACK: 76, WHITE: 27, Ties: 41
+Episode 145/1000, BLACK: 77, WHITE: 27, Ties: 41
+Episode 146/1000, BLACK: 77, WHITE: 28, Ties: 41
+has 3 identical moves
+has 3 identical moves
+Episode 147/1000, BLACK: 77, WHITE: 28, Ties: 42
+Episode 148/1000, BLACK: 77, WHITE: 28, Ties: 43
+Episode 149/1000, BLACK: 78, WHITE: 28, Ties: 43
+Episode 150/1000, BLACK: 79, WHITE: 28, Ties: 43
+has 3 identical moves
+has 3 identical moves
+Episode 151/1000, BLACK: 79, WHITE: 28, Ties: 44
+Episode 152/1000, BLACK: 80, WHITE: 28, Ties: 44
+Episode 153/1000, BLACK: 80, WHITE: 29, Ties: 44
+Episode 154/1000, BLACK: 81, WHITE: 29, Ties: 44
+has 3 identical moves
+has 3 identical moves
+Episode 155/1000, BLACK: 81, WHITE: 29, Ties: 45
+Episode 156/1000, BLACK: 81, WHITE: 29, Ties: 46
+Episode 157/1000, BLACK: 82, WHITE: 29, Ties: 46
+has 3 identical moves
+has 3 identical moves
+Episode 158/1000, BLACK: 82, WHITE: 29, Ties: 47
+has 3 identical moves
+has 3 identical moves
+Episode 159/1000, BLACK: 82, WHITE: 29, Ties: 48
+Episode 160/1000, BLACK: 83, WHITE: 29, Ties: 48
+Episode 161/1000, BLACK: 83, WHITE: 29, Ties: 49
+Episode 162/1000, BLACK: 84, WHITE: 29, Ties: 49
+Episode 163/1000, BLACK: 85, WHITE: 29, Ties: 49
+Episode 164/1000, BLACK: 85, WHITE: 30, Ties: 49
+Episode 165/1000, BLACK: 85, WHITE: 31, Ties: 49
+Episode 166/1000, BLACK: 85, WHITE: 32, Ties: 49
+has 3 identical moves
+has 3 identical moves
+Episode 167/1000, BLACK: 85, WHITE: 32, Ties: 50
+Episode 168/1000, BLACK: 85, WHITE: 33, Ties: 50
+Episode 169/1000, BLACK: 86, WHITE: 33, Ties: 50
+Episode 170/1000, BLACK: 86, WHITE: 34, Ties: 50
+Episode 171/1000, BLACK: 87, WHITE: 34, Ties: 50
+has 3 identical moves
+has 3 identical moves
+Episode 172/1000, BLACK: 87, WHITE: 34, Ties: 51
+has 3 identical moves
+has 3 identical moves
+Episode 173/1000, BLACK: 87, WHITE: 34, Ties: 52
+Episode 174/1000, BLACK: 87, WHITE: 35, Ties: 52
+Episode 175/1000, BLACK: 88, WHITE: 35, Ties: 52
+Episode 176/1000, BLACK: 89, WHITE: 35, Ties: 52
+Episode 177/1000, BLACK: 89, WHITE: 36, Ties: 52
+Episode 178/1000, BLACK: 90, WHITE: 36, Ties: 52
+Episode 179/1000, BLACK: 91, WHITE: 36, Ties: 52
+Episode 180/1000, BLACK: 92, WHITE: 36, Ties: 52
+Episode 181/1000, BLACK: 93, WHITE: 36, Ties: 52
+Episode 182/1000, BLACK: 93, WHITE: 37, Ties: 52
+Episode 183/1000, BLACK: 94, WHITE: 37, Ties: 52
+Episode 184/1000, BLACK: 95, WHITE: 37, Ties: 52
+Episode 185/1000, BLACK: 96, WHITE: 37, Ties: 52
+Episode 186/1000, BLACK: 97, WHITE: 37, Ties: 52
+has 3 identical moves
+has 3 identical moves
+Episode 187/1000, BLACK: 97, WHITE: 37, Ties: 53
+Episode 188/1000, BLACK: 97, WHITE: 37, Ties: 54
+Episode 189/1000, BLACK: 98, WHITE: 37, Ties: 54
+Episode 190/1000, BLACK: 98, WHITE: 37, Ties: 55
+Episode 191/1000, BLACK: 99, WHITE: 37, Ties: 55
+Episode 192/1000, BLACK: 99, WHITE: 38, Ties: 55
+Episode 193/1000, BLACK: 100, WHITE: 38, Ties: 55
+has 3 identical moves
+has 3 identical moves
+Episode 194/1000, BLACK: 100, WHITE: 38, Ties: 56
+has 3 identical moves
+has 3 identical moves
+Episode 195/1000, BLACK: 100, WHITE: 38, Ties: 57
+Episode 196/1000, BLACK: 101, WHITE: 38, Ties: 57
+Episode 197/1000, BLACK: 101, WHITE: 39, Ties: 57
+Episode 198/1000, BLACK: 102, WHITE: 39, Ties: 57
+Episode 199/1000, BLACK: 103, WHITE: 39, Ties: 57
+Episode 200/1000, BLACK: 104, WHITE: 39, Ties: 57
+Episode 201/1000, BLACK: 104, WHITE: 40, Ties: 57
+has 3 identical moves
+has 3 identical moves
+Episode 202/1000, BLACK: 104, WHITE: 40, Ties: 58
+has 3 identical moves
+has 3 identical moves
+Episode 203/1000, BLACK: 104, WHITE: 40, Ties: 59
+Episode 204/1000, BLACK: 105, WHITE: 40, Ties: 59
+Episode 205/1000, BLACK: 106, WHITE: 40, Ties: 59
+Episode 206/1000, BLACK: 106, WHITE: 41, Ties: 59
+Episode 207/1000, BLACK: 106, WHITE: 42, Ties: 59
+Episode 208/1000, BLACK: 106, WHITE: 43, Ties: 59
+Episode 209/1000, BLACK: 106, WHITE: 44, Ties: 59
+Episode 210/1000, BLACK: 106, WHITE: 44, Ties: 60
+Episode 211/1000, BLACK: 107, WHITE: 44, Ties: 60
+Episode 212/1000, BLACK: 107, WHITE: 45, Ties: 60
+Episode 213/1000, BLACK: 107, WHITE: 46, Ties: 60
+Episode 214/1000, BLACK: 107, WHITE: 47, Ties: 60
+Episode 215/1000, BLACK: 108, WHITE: 47, Ties: 60
+has 3 identical moves
+has 3 identical moves
+Episode 216/1000, BLACK: 108, WHITE: 47, Ties: 61
+Episode 217/1000, BLACK: 108, WHITE: 47, Ties: 62
+Episode 218/1000, BLACK: 108, WHITE: 47, Ties: 63
+Episode 219/1000, BLACK: 109, WHITE: 47, Ties: 63
+has 3 identical moves
+has 3 identical moves
+Episode 220/1000, BLACK: 109, WHITE: 47, Ties: 64
+Episode 221/1000, BLACK: 110, WHITE: 47, Ties: 64
+Episode 222/1000, BLACK: 110, WHITE: 47, Ties: 65
+Episode 223/1000, BLACK: 111, WHITE: 47, Ties: 65
+Episode 224/1000, BLACK: 111, WHITE: 48, Ties: 65
+Episode 225/1000, BLACK: 112, WHITE: 48, Ties: 65
+Episode 226/1000, BLACK: 113, WHITE: 48, Ties: 65
+Episode 227/1000, BLACK: 113, WHITE: 49, Ties: 65
+Episode 228/1000, BLACK: 113, WHITE: 50, Ties: 65
+has 3 identical moves
+has 3 identical moves
+Episode 229/1000, BLACK: 113, WHITE: 50, Ties: 66
+has 3 identical moves
+has 3 identical moves
+Episode 230/1000, BLACK: 113, WHITE: 50, Ties: 67
+has 3 identical moves
+has 3 identical moves
+Episode 231/1000, BLACK: 113, WHITE: 50, Ties: 68
+Episode 232/1000, BLACK: 114, WHITE: 50, Ties: 68
+Episode 233/1000, BLACK: 114, WHITE: 51, Ties: 68
+Episode 234/1000, BLACK: 115, WHITE: 51, Ties: 68
+Episode 235/1000, BLACK: 115, WHITE: 52, Ties: 68
+Episode 236/1000, BLACK: 116, WHITE: 52, Ties: 68
+Episode 237/1000, BLACK: 116, WHITE: 53, Ties: 68
+Episode 238/1000, BLACK: 117, WHITE: 53, Ties: 68
+Episode 239/1000, BLACK: 117, WHITE: 53, Ties: 69
+Episode 240/1000, BLACK: 117, WHITE: 53, Ties: 70
+Episode 241/1000, BLACK: 118, WHITE: 53, Ties: 70
+Episode 242/1000, BLACK: 119, WHITE: 53, Ties: 70
+Episode 243/1000, BLACK: 119, WHITE: 54, Ties: 70
+Episode 244/1000, BLACK: 119, WHITE: 55, Ties: 70
+Episode 245/1000, BLACK: 120, WHITE: 55, Ties: 70
+Episode 246/1000, BLACK: 120, WHITE: 55, Ties: 71
+Episode 247/1000, BLACK: 121, WHITE: 55, Ties: 71
+Episode 248/1000, BLACK: 122, WHITE: 55, Ties: 71
+Episode 249/1000, BLACK: 122, WHITE: 56, Ties: 71
+Episode 250/1000, BLACK: 123, WHITE: 56, Ties: 71
+has 3 identical moves
+has 3 identical moves
+Episode 251/1000, BLACK: 123, WHITE: 56, Ties: 72
+Episode 252/1000, BLACK: 124, WHITE: 56, Ties: 72
+has 3 identical moves
+has 3 identical moves
+Episode 253/1000, BLACK: 124, WHITE: 56, Ties: 73
+Episode 254/1000, BLACK: 125, WHITE: 56, Ties: 73
+Episode 255/1000, BLACK: 126, WHITE: 56, Ties: 73
+Episode 256/1000, BLACK: 127, WHITE: 56, Ties: 73
+Episode 257/1000, BLACK: 128, WHITE: 56, Ties: 73
+Episode 258/1000, BLACK: 129, WHITE: 56, Ties: 73
+has 3 identical moves
+has 3 identical moves
+Episode 259/1000, BLACK: 129, WHITE: 56, Ties: 74
+has 3 identical moves
+has 3 identical moves
+Episode 260/1000, BLACK: 129, WHITE: 56, Ties: 75
+Episode 261/1000, BLACK: 129, WHITE: 57, Ties: 75
+Episode 262/1000, BLACK: 130, WHITE: 57, Ties: 75
+Episode 263/1000, BLACK: 131, WHITE: 57, Ties: 75
+Episode 264/1000, BLACK: 132, WHITE: 57, Ties: 75
+has 3 identical moves
+has 3 identical moves
+Episode 265/1000, BLACK: 132, WHITE: 57, Ties: 76
+Episode 266/1000, BLACK: 132, WHITE: 58, Ties: 76
+Episode 267/1000, BLACK: 133, WHITE: 58, Ties: 76
+has 3 identical moves
+has 3 identical moves
+Episode 268/1000, BLACK: 133, WHITE: 58, Ties: 77
+has 3 identical moves
+has 3 identical moves
+Episode 269/1000, BLACK: 133, WHITE: 58, Ties: 78
+has 3 identical moves
+has 3 identical moves
+Episode 270/1000, BLACK: 133, WHITE: 58, Ties: 79
+Episode 271/1000, BLACK: 134, WHITE: 58, Ties: 79
+Episode 272/1000, BLACK: 135, WHITE: 58, Ties: 79
+Episode 273/1000, BLACK: 135, WHITE: 58, Ties: 80
+has 3 identical moves
+has 3 identical moves
+Episode 274/1000, BLACK: 135, WHITE: 58, Ties: 81
+has 3 identical moves
+has 3 identical moves
+Episode 275/1000, BLACK: 135, WHITE: 58, Ties: 82
+Episode 276/1000, BLACK: 135, WHITE: 59, Ties: 82
+Episode 277/1000, BLACK: 136, WHITE: 59, Ties: 82
+Episode 278/1000, BLACK: 137, WHITE: 59, Ties: 82
+Episode 279/1000, BLACK: 137, WHITE: 60, Ties: 82
+Episode 280/1000, BLACK: 138, WHITE: 60, Ties: 82
+Episode 281/1000, BLACK: 139, WHITE: 60, Ties: 82
+Episode 282/1000, BLACK: 140, WHITE: 60, Ties: 82
+Episode 283/1000, BLACK: 141, WHITE: 60, Ties: 82
+Episode 284/1000, BLACK: 141, WHITE: 61, Ties: 82
+Episode 285/1000, BLACK: 141, WHITE: 62, Ties: 82
+Episode 286/1000, BLACK: 142, WHITE: 62, Ties: 82
+Episode 287/1000, BLACK: 143, WHITE: 62, Ties: 82
+Episode 288/1000, BLACK: 144, WHITE: 62, Ties: 82
+Episode 289/1000, BLACK: 145, WHITE: 62, Ties: 82
+Episode 290/1000, BLACK: 146, WHITE: 62, Ties: 82
+Episode 291/1000, BLACK: 147, WHITE: 62, Ties: 82
+has 3 identical moves
+has 3 identical moves
+Episode 292/1000, BLACK: 147, WHITE: 62, Ties: 83
+Episode 293/1000, BLACK: 148, WHITE: 62, Ties: 83
+Episode 294/1000, BLACK: 149, WHITE: 62, Ties: 83
+has 3 identical moves
+has 3 identical moves
+Episode 295/1000, BLACK: 149, WHITE: 62, Ties: 84
+Episode 296/1000, BLACK: 149, WHITE: 63, Ties: 84
+Episode 297/1000, BLACK: 150, WHITE: 63, Ties: 84
+has 3 identical moves
+has 3 identical moves
+Episode 298/1000, BLACK: 150, WHITE: 63, Ties: 85
+Episode 299/1000, BLACK: 150, WHITE: 63, Ties: 86
+Episode 300/1000, BLACK: 150, WHITE: 63, Ties: 87
+Episode 301/1000, BLACK: 151, WHITE: 63, Ties: 87
+Episode 302/1000, BLACK: 152, WHITE: 63, Ties: 87
+Episode 303/1000, BLACK: 152, WHITE: 63, Ties: 88
+Episode 304/1000, BLACK: 153, WHITE: 63, Ties: 88
+has 3 identical moves
+has 3 identical moves
+Episode 305/1000, BLACK: 153, WHITE: 63, Ties: 89
+has 3 identical moves
+has 3 identical moves
+Episode 306/1000, BLACK: 153, WHITE: 63, Ties: 90
+has 3 identical moves
+has 3 identical moves
+Episode 307/1000, BLACK: 153, WHITE: 63, Ties: 91
+Episode 308/1000, BLACK: 153, WHITE: 64, Ties: 91
+Episode 309/1000, BLACK: 154, WHITE: 64, Ties: 91
+Episode 310/1000, BLACK: 154, WHITE: 65, Ties: 91
+Episode 311/1000, BLACK: 155, WHITE: 65, Ties: 91
+has 3 identical moves
+has 3 identical moves
+Episode 312/1000, BLACK: 155, WHITE: 65, Ties: 92
+has 3 identical moves
+has 3 identical moves
+Episode 313/1000, BLACK: 155, WHITE: 65, Ties: 93
+Episode 314/1000, BLACK: 155, WHITE: 65, Ties: 94
+has 3 identical moves
+has 3 identical moves
+Episode 315/1000, BLACK: 155, WHITE: 65, Ties: 95
+Episode 316/1000, BLACK: 156, WHITE: 65, Ties: 95
+Episode 317/1000, BLACK: 157, WHITE: 65, Ties: 95
+Episode 318/1000, BLACK: 158, WHITE: 65, Ties: 95
+Episode 319/1000, BLACK: 159, WHITE: 65, Ties: 95
+Episode 320/1000, BLACK: 160, WHITE: 65, Ties: 95
+has 3 identical moves
+has 3 identical moves
+Episode 321/1000, BLACK: 160, WHITE: 65, Ties: 96
+Episode 322/1000, BLACK: 160, WHITE: 66, Ties: 96
+Episode 323/1000, BLACK: 160, WHITE: 66, Ties: 97
+Episode 324/1000, BLACK: 161, WHITE: 66, Ties: 97
+has 3 identical moves
+has 3 identical moves
+Episode 325/1000, BLACK: 161, WHITE: 66, Ties: 98
+has 3 identical moves
+has 3 identical moves
+Episode 326/1000, BLACK: 161, WHITE: 66, Ties: 99
+Episode 327/1000, BLACK: 162, WHITE: 66, Ties: 99
+Episode 328/1000, BLACK: 162, WHITE: 67, Ties: 99
+Episode 329/1000, BLACK: 163, WHITE: 67, Ties: 99
+Episode 330/1000, BLACK: 163, WHITE: 67, Ties: 100
+Episode 331/1000, BLACK: 164, WHITE: 67, Ties: 100
+Episode 332/1000, BLACK: 165, WHITE: 67, Ties: 100
+Episode 333/1000, BLACK: 166, WHITE: 67, Ties: 100
+Episode 334/1000, BLACK: 167, WHITE: 67, Ties: 100
+Episode 335/1000, BLACK: 167, WHITE: 68, Ties: 100
+has 3 identical moves
+has 3 identical moves
+Episode 336/1000, BLACK: 167, WHITE: 68, Ties: 101
+Episode 337/1000, BLACK: 168, WHITE: 68, Ties: 101
+has 3 identical moves
+has 3 identical moves
+Episode 338/1000, BLACK: 168, WHITE: 68, Ties: 102
+Episode 339/1000, BLACK: 169, WHITE: 68, Ties: 102
+Episode 340/1000, BLACK: 170, WHITE: 68, Ties: 102
+Episode 341/1000, BLACK: 170, WHITE: 69, Ties: 102
+Episode 342/1000, BLACK: 171, WHITE: 69, Ties: 102
+Episode 343/1000, BLACK: 171, WHITE: 69, Ties: 103
+Episode 344/1000, BLACK: 172, WHITE: 69, Ties: 103
+has 3 identical moves
+has 3 identical moves
+Episode 345/1000, BLACK: 172, WHITE: 69, Ties: 104
+has 3 identical moves
+has 3 identical moves
+Episode 346/1000, BLACK: 172, WHITE: 69, Ties: 105
+Episode 347/1000, BLACK: 173, WHITE: 69, Ties: 105
+Episode 348/1000, BLACK: 174, WHITE: 69, Ties: 105
+Episode 349/1000, BLACK: 175, WHITE: 69, Ties: 105
+Episode 350/1000, BLACK: 175, WHITE: 70, Ties: 105
+Episode 351/1000, BLACK: 176, WHITE: 70, Ties: 105
+Episode 352/1000, BLACK: 176, WHITE: 71, Ties: 105
+Episode 353/1000, BLACK: 176, WHITE: 72, Ties: 105
+Episode 354/1000, BLACK: 176, WHITE: 73, Ties: 105
+Episode 355/1000, BLACK: 176, WHITE: 74, Ties: 105
+Episode 356/1000, BLACK: 176, WHITE: 75, Ties: 105
+Episode 357/1000, BLACK: 176, WHITE: 75, Ties: 106
+has 3 identical moves
+has 3 identical moves
+Episode 358/1000, BLACK: 176, WHITE: 75, Ties: 107
+Episode 359/1000, BLACK: 176, WHITE: 76, Ties: 107
+Episode 360/1000, BLACK: 176, WHITE: 77, Ties: 107
+Episode 361/1000, BLACK: 177, WHITE: 77, Ties: 107
+Episode 362/1000, BLACK: 177, WHITE: 78, Ties: 107
+Episode 363/1000, BLACK: 178, WHITE: 78, Ties: 107
+Episode 364/1000, BLACK: 178, WHITE: 79, Ties: 107
+has 3 identical moves
+has 3 identical moves
+Episode 365/1000, BLACK: 178, WHITE: 79, Ties: 108
+Episode 366/1000, BLACK: 179, WHITE: 79, Ties: 108
+Episode 367/1000, BLACK: 180, WHITE: 79, Ties: 108
+Episode 368/1000, BLACK: 181, WHITE: 79, Ties: 108
+has 3 identical moves
+has 3 identical moves
+Episode 369/1000, BLACK: 181, WHITE: 79, Ties: 109
+Episode 370/1000, BLACK: 182, WHITE: 79, Ties: 109
+Episode 371/1000, BLACK: 183, WHITE: 79, Ties: 109
+Episode 372/1000, BLACK: 183, WHITE: 80, Ties: 109
+Episode 373/1000, BLACK: 183, WHITE: 81, Ties: 109
+Episode 374/1000, BLACK: 184, WHITE: 81, Ties: 109
+Episode 375/1000, BLACK: 184, WHITE: 82, Ties: 109
+Episode 376/1000, BLACK: 185, WHITE: 82, Ties: 109
+has 3 identical moves
+has 3 identical moves
+Episode 377/1000, BLACK: 185, WHITE: 82, Ties: 110
+Episode 378/1000, BLACK: 186, WHITE: 82, Ties: 110
+Episode 379/1000, BLACK: 186, WHITE: 83, Ties: 110
+Episode 380/1000, BLACK: 187, WHITE: 83, Ties: 110
+Episode 381/1000, BLACK: 188, WHITE: 83, Ties: 110
+Episode 382/1000, BLACK: 189, WHITE: 83, Ties: 110
+Episode 383/1000, BLACK: 189, WHITE: 84, Ties: 110
+has 3 identical moves
+has 3 identical moves
+Episode 384/1000, BLACK: 189, WHITE: 84, Ties: 111
+Episode 385/1000, BLACK: 189, WHITE: 85, Ties: 111
+has 3 identical moves
+has 3 identical moves
+Episode 386/1000, BLACK: 189, WHITE: 85, Ties: 112
+Episode 387/1000, BLACK: 190, WHITE: 85, Ties: 112
+Episode 388/1000, BLACK: 190, WHITE: 86, Ties: 112
+Episode 389/1000, BLACK: 191, WHITE: 86, Ties: 112
+has 3 identical moves
+has 3 identical moves
+Episode 390/1000, BLACK: 191, WHITE: 86, Ties: 113
+Episode 391/1000, BLACK: 192, WHITE: 86, Ties: 113
+has 3 identical moves
+has 3 identical moves
+Episode 392/1000, BLACK: 192, WHITE: 86, Ties: 114
+Episode 393/1000, BLACK: 193, WHITE: 86, Ties: 114
+has 3 identical moves
+has 3 identical moves
+Episode 394/1000, BLACK: 193, WHITE: 86, Ties: 115
+has 3 identical moves
+has 3 identical moves
+Episode 395/1000, BLACK: 193, WHITE: 86, Ties: 116
+Episode 396/1000, BLACK: 193, WHITE: 86, Ties: 117
+Episode 397/1000, BLACK: 194, WHITE: 86, Ties: 117
+has 3 identical moves
+has 3 identical moves
+Episode 398/1000, BLACK: 194, WHITE: 86, Ties: 118
+Episode 399/1000, BLACK: 195, WHITE: 86, Ties: 118
+Episode 400/1000, BLACK: 196, WHITE: 86, Ties: 118
+Episode 401/1000, BLACK: 196, WHITE: 86, Ties: 119
+Episode 402/1000, BLACK: 196, WHITE: 87, Ties: 119
+Episode 403/1000, BLACK: 196, WHITE: 88, Ties: 119
+has 3 identical moves
+has 3 identical moves
+Episode 404/1000, BLACK: 196, WHITE: 88, Ties: 120
+has 3 identical moves
+has 3 identical moves
+Episode 405/1000, BLACK: 196, WHITE: 88, Ties: 121
+Episode 406/1000, BLACK: 197, WHITE: 88, Ties: 121
+Episode 407/1000, BLACK: 198, WHITE: 88, Ties: 121
+has 3 identical moves
+has 3 identical moves
+Episode 408/1000, BLACK: 198, WHITE: 88, Ties: 122
+has 3 identical moves
+has 3 identical moves
+Episode 409/1000, BLACK: 198, WHITE: 88, Ties: 123
+Episode 410/1000, BLACK: 198, WHITE: 89, Ties: 123
+has 3 identical moves
+has 3 identical moves
+Episode 411/1000, BLACK: 198, WHITE: 89, Ties: 124
+Episode 412/1000, BLACK: 199, WHITE: 89, Ties: 124
+has 3 identical moves
+has 3 identical moves
+Episode 413/1000, BLACK: 199, WHITE: 89, Ties: 125
+Episode 414/1000, BLACK: 200, WHITE: 89, Ties: 125
+has 3 identical moves
+has 3 identical moves
+Episode 415/1000, BLACK: 200, WHITE: 89, Ties: 126
+Episode 416/1000, BLACK: 200, WHITE: 90, Ties: 126
+Episode 417/1000, BLACK: 200, WHITE: 91, Ties: 126
+Episode 418/1000, BLACK: 200, WHITE: 91, Ties: 127
+Episode 419/1000, BLACK: 201, WHITE: 91, Ties: 127
+Episode 420/1000, BLACK: 201, WHITE: 91, Ties: 128
+Episode 421/1000, BLACK: 202, WHITE: 91, Ties: 128
+Episode 422/1000, BLACK: 203, WHITE: 91, Ties: 128
+Episode 423/1000, BLACK: 204, WHITE: 91, Ties: 128
+Episode 424/1000, BLACK: 204, WHITE: 92, Ties: 128
+Episode 425/1000, BLACK: 205, WHITE: 92, Ties: 128
+Episode 426/1000, BLACK: 206, WHITE: 92, Ties: 128
+Episode 427/1000, BLACK: 206, WHITE: 92, Ties: 129
+Episode 428/1000, BLACK: 207, WHITE: 92, Ties: 129
+has 3 identical moves
+has 3 identical moves
+Episode 429/1000, BLACK: 207, WHITE: 92, Ties: 130
+Episode 430/1000, BLACK: 208, WHITE: 92, Ties: 130
+Episode 431/1000, BLACK: 209, WHITE: 92, Ties: 130
+Episode 432/1000, BLACK: 210, WHITE: 92, Ties: 130
+Episode 433/1000, BLACK: 210, WHITE: 93, Ties: 130
+Episode 434/1000, BLACK: 211, WHITE: 93, Ties: 130
+Episode 435/1000, BLACK: 211, WHITE: 94, Ties: 130
+has 3 identical moves
+has 3 identical moves
+Episode 436/1000, BLACK: 211, WHITE: 94, Ties: 131
+Episode 437/1000, BLACK: 211, WHITE: 95, Ties: 131
+Episode 438/1000, BLACK: 211, WHITE: 96, Ties: 131
+has 3 identical moves
+has 3 identical moves
+Episode 439/1000, BLACK: 211, WHITE: 96, Ties: 132
+has 3 identical moves
+has 3 identical moves
+Episode 440/1000, BLACK: 211, WHITE: 96, Ties: 133
+has 3 identical moves
+has 3 identical moves
+Episode 441/1000, BLACK: 211, WHITE: 96, Ties: 134
+Episode 442/1000, BLACK: 211, WHITE: 96, Ties: 135
+Episode 443/1000, BLACK: 212, WHITE: 96, Ties: 135
+Episode 444/1000, BLACK: 213, WHITE: 96, Ties: 135
+Episode 445/1000, BLACK: 214, WHITE: 96, Ties: 135
+Episode 446/1000, BLACK: 215, WHITE: 96, Ties: 135
+Episode 447/1000, BLACK: 215, WHITE: 97, Ties: 135
+Episode 448/1000, BLACK: 216, WHITE: 97, Ties: 135
+Episode 449/1000, BLACK: 217, WHITE: 97, Ties: 135
+Episode 450/1000, BLACK: 218, WHITE: 97, Ties: 135
+Episode 451/1000, BLACK: 219, WHITE: 97, Ties: 135
+Episode 452/1000, BLACK: 220, WHITE: 97, Ties: 135
+Episode 453/1000, BLACK: 221, WHITE: 97, Ties: 135
+has 3 identical moves
+has 3 identical moves
+Episode 454/1000, BLACK: 221, WHITE: 97, Ties: 136
+Episode 455/1000, BLACK: 221, WHITE: 98, Ties: 136
+Episode 456/1000, BLACK: 222, WHITE: 98, Ties: 136
+Episode 457/1000, BLACK: 223, WHITE: 98, Ties: 136
+Episode 458/1000, BLACK: 224, WHITE: 98, Ties: 136
+Episode 459/1000, BLACK: 225, WHITE: 98, Ties: 136
+Episode 460/1000, BLACK: 226, WHITE: 98, Ties: 136
+Episode 461/1000, BLACK: 226, WHITE: 99, Ties: 136
+Episode 462/1000, BLACK: 226, WHITE: 100, Ties: 136
+Episode 463/1000, BLACK: 227, WHITE: 100, Ties: 136
+Episode 464/1000, BLACK: 228, WHITE: 100, Ties: 136
+Episode 465/1000, BLACK: 229, WHITE: 100, Ties: 136
+Episode 466/1000, BLACK: 230, WHITE: 100, Ties: 136
+Episode 467/1000, BLACK: 231, WHITE: 100, Ties: 136
+Episode 468/1000, BLACK: 232, WHITE: 100, Ties: 136
+Episode 469/1000, BLACK: 233, WHITE: 100, Ties: 136
+Episode 470/1000, BLACK: 233, WHITE: 101, Ties: 136
+Episode 471/1000, BLACK: 234, WHITE: 101, Ties: 136
+Episode 472/1000, BLACK: 235, WHITE: 101, Ties: 136
+Episode 473/1000, BLACK: 236, WHITE: 101, Ties: 136
+Episode 474/1000, BLACK: 237, WHITE: 101, Ties: 136
+Episode 475/1000, BLACK: 237, WHITE: 101, Ties: 137
+Episode 476/1000, BLACK: 238, WHITE: 101, Ties: 137
+Episode 477/1000, BLACK: 239, WHITE: 101, Ties: 137
+Episode 478/1000, BLACK: 239, WHITE: 102, Ties: 137
+Episode 479/1000, BLACK: 240, WHITE: 102, Ties: 137
+has 3 identical moves
+has 3 identical moves
+Episode 480/1000, BLACK: 240, WHITE: 102, Ties: 138
+has 3 identical moves
+has 3 identical moves
+Episode 481/1000, BLACK: 240, WHITE: 102, Ties: 139
+has 3 identical moves
+has 3 identical moves
+Episode 482/1000, BLACK: 240, WHITE: 102, Ties: 140
+Episode 483/1000, BLACK: 241, WHITE: 102, Ties: 140
+Episode 484/1000, BLACK: 241, WHITE: 103, Ties: 140
+has 3 identical moves
+has 3 identical moves
+Episode 485/1000, BLACK: 241, WHITE: 103, Ties: 141
+Episode 486/1000, BLACK: 241, WHITE: 103, Ties: 142
+Episode 487/1000, BLACK: 242, WHITE: 103, Ties: 142
+Episode 488/1000, BLACK: 242, WHITE: 104, Ties: 142
+has 3 identical moves
+has 3 identical moves
+Episode 489/1000, BLACK: 242, WHITE: 104, Ties: 143
+has 3 identical moves
+has 3 identical moves
+Episode 490/1000, BLACK: 242, WHITE: 104, Ties: 144
+Episode 491/1000, BLACK: 243, WHITE: 104, Ties: 144
+has 3 identical moves
+has 3 identical moves
+Episode 492/1000, BLACK: 243, WHITE: 104, Ties: 145
+has 3 identical moves
+has 3 identical moves
+Episode 493/1000, BLACK: 243, WHITE: 104, Ties: 146
+has 3 identical moves
+has 3 identical moves
+Episode 494/1000, BLACK: 243, WHITE: 104, Ties: 147
+Episode 495/1000, BLACK: 244, WHITE: 104, Ties: 147
+Episode 496/1000, BLACK: 244, WHITE: 105, Ties: 147
+has 3 identical moves
+has 3 identical moves
+Episode 497/1000, BLACK: 244, WHITE: 105, Ties: 148
+has 3 identical moves
+has 3 identical moves
+Episode 498/1000, BLACK: 244, WHITE: 105, Ties: 149
+Episode 499/1000, BLACK: 245, WHITE: 105, Ties: 149
+Episode 500/1000, BLACK: 246, WHITE: 105, Ties: 149
+Episode 501/1000, BLACK: 247, WHITE: 105, Ties: 149
+Episode 502/1000, BLACK: 247, WHITE: 106, Ties: 149
+Episode 503/1000, BLACK: 248, WHITE: 106, Ties: 149
+Episode 504/1000, BLACK: 249, WHITE: 106, Ties: 149
+Episode 505/1000, BLACK: 250, WHITE: 106, Ties: 149
+has 3 identical moves
+has 3 identical moves
+Episode 506/1000, BLACK: 250, WHITE: 106, Ties: 150
+Episode 507/1000, BLACK: 251, WHITE: 106, Ties: 150
+Episode 508/1000, BLACK: 252, WHITE: 106, Ties: 150
+Episode 509/1000, BLACK: 252, WHITE: 107, Ties: 150
+Episode 510/1000, BLACK: 253, WHITE: 107, Ties: 150
+Episode 511/1000, BLACK: 254, WHITE: 107, Ties: 150
+Episode 512/1000, BLACK: 255, WHITE: 107, Ties: 150
+Episode 513/1000, BLACK: 256, WHITE: 107, Ties: 150
+has 3 identical moves
+has 3 identical moves
+Episode 514/1000, BLACK: 256, WHITE: 107, Ties: 151
+Episode 515/1000, BLACK: 257, WHITE: 107, Ties: 151
+has 3 identical moves
+has 3 identical moves
+Episode 516/1000, BLACK: 257, WHITE: 107, Ties: 152
+Episode 517/1000, BLACK: 258, WHITE: 107, Ties: 152
+Episode 518/1000, BLACK: 259, WHITE: 107, Ties: 152
+has 3 identical moves
+has 3 identical moves
+Episode 519/1000, BLACK: 259, WHITE: 107, Ties: 153
+Episode 520/1000, BLACK: 259, WHITE: 108, Ties: 153
+Episode 521/1000, BLACK: 259, WHITE: 108, Ties: 154
+Episode 522/1000, BLACK: 260, WHITE: 108, Ties: 154
+Episode 523/1000, BLACK: 260, WHITE: 108, Ties: 155
+Episode 524/1000, BLACK: 261, WHITE: 108, Ties: 155
+Episode 525/1000, BLACK: 262, WHITE: 108, Ties: 155
+Episode 526/1000, BLACK: 263, WHITE: 108, Ties: 155
+Episode 527/1000, BLACK: 263, WHITE: 109, Ties: 155
+Episode 528/1000, BLACK: 263, WHITE: 110, Ties: 155
+Episode 529/1000, BLACK: 264, WHITE: 110, Ties: 155
+Episode 530/1000, BLACK: 264, WHITE: 111, Ties: 155
+Episode 531/1000, BLACK: 265, WHITE: 111, Ties: 155
+Episode 532/1000, BLACK: 266, WHITE: 111, Ties: 155
+Episode 533/1000, BLACK: 267, WHITE: 111, Ties: 155
+has 3 identical moves
+has 3 identical moves
+Episode 534/1000, BLACK: 267, WHITE: 111, Ties: 156
+has 3 identical moves
+has 3 identical moves
+Episode 535/1000, BLACK: 267, WHITE: 111, Ties: 157
+has 3 identical moves
+has 3 identical moves
+Episode 536/1000, BLACK: 267, WHITE: 111, Ties: 158
+Episode 537/1000, BLACK: 267, WHITE: 112, Ties: 158
+Episode 538/1000, BLACK: 267, WHITE: 113, Ties: 158
+Episode 539/1000, BLACK: 268, WHITE: 113, Ties: 158
+Episode 540/1000, BLACK: 269, WHITE: 113, Ties: 158
+Episode 541/1000, BLACK: 269, WHITE: 113, Ties: 159
+Episode 542/1000, BLACK: 270, WHITE: 113, Ties: 159
+Episode 543/1000, BLACK: 270, WHITE: 114, Ties: 159
+Episode 544/1000, BLACK: 271, WHITE: 114, Ties: 159
+Episode 545/1000, BLACK: 272, WHITE: 114, Ties: 159
+Episode 546/1000, BLACK: 273, WHITE: 114, Ties: 159
+has 3 identical moves
+has 3 identical moves
+Episode 547/1000, BLACK: 273, WHITE: 114, Ties: 160
+Episode 548/1000, BLACK: 274, WHITE: 114, Ties: 160
+Episode 549/1000, BLACK: 275, WHITE: 114, Ties: 160
+has 3 identical moves
+has 3 identical moves
+Episode 550/1000, BLACK: 275, WHITE: 114, Ties: 161
+has 3 identical moves
+has 3 identical moves
+Episode 551/1000, BLACK: 275, WHITE: 114, Ties: 162
+Episode 552/1000, BLACK: 276, WHITE: 114, Ties: 162
+Episode 553/1000, BLACK: 277, WHITE: 114, Ties: 162
+Episode 554/1000, BLACK: 277, WHITE: 114, Ties: 163
+Episode 555/1000, BLACK: 277, WHITE: 115, Ties: 163
+Episode 556/1000, BLACK: 278, WHITE: 115, Ties: 163
+Episode 557/1000, BLACK: 278, WHITE: 115, Ties: 164
+Episode 558/1000, BLACK: 279, WHITE: 115, Ties: 164
+Episode 559/1000, BLACK: 279, WHITE: 116, Ties: 164
+Episode 560/1000, BLACK: 279, WHITE: 117, Ties: 164
+Episode 561/1000, BLACK: 280, WHITE: 117, Ties: 164
+Episode 562/1000, BLACK: 281, WHITE: 117, Ties: 164
+Episode 563/1000, BLACK: 281, WHITE: 117, Ties: 165
+Episode 564/1000, BLACK: 281, WHITE: 118, Ties: 165
+Episode 565/1000, BLACK: 281, WHITE: 118, Ties: 166
+Episode 566/1000, BLACK: 281, WHITE: 118, Ties: 167
+has 3 identical moves
+has 3 identical moves
+Episode 567/1000, BLACK: 281, WHITE: 118, Ties: 168
+has 3 identical moves
+has 3 identical moves
+Episode 568/1000, BLACK: 281, WHITE: 118, Ties: 169
+Episode 569/1000, BLACK: 281, WHITE: 119, Ties: 169
+Episode 570/1000, BLACK: 282, WHITE: 119, Ties: 169
+Episode 571/1000, BLACK: 282, WHITE: 120, Ties: 169
+Episode 572/1000, BLACK: 283, WHITE: 120, Ties: 169
+Episode 573/1000, BLACK: 284, WHITE: 120, Ties: 169
+has 3 identical moves
+has 3 identical moves
+Episode 574/1000, BLACK: 284, WHITE: 120, Ties: 170
+Episode 575/1000, BLACK: 285, WHITE: 120, Ties: 170
+Episode 576/1000, BLACK: 285, WHITE: 121, Ties: 170
+Episode 577/1000, BLACK: 285, WHITE: 122, Ties: 170
+Episode 578/1000, BLACK: 286, WHITE: 122, Ties: 170
+Episode 579/1000, BLACK: 286, WHITE: 122, Ties: 171
+Episode 580/1000, BLACK: 287, WHITE: 122, Ties: 171
+has 3 identical moves
+has 3 identical moves
+Episode 581/1000, BLACK: 287, WHITE: 122, Ties: 172
+has 3 identical moves
+has 3 identical moves
+Episode 582/1000, BLACK: 287, WHITE: 122, Ties: 173
+Episode 583/1000, BLACK: 288, WHITE: 122, Ties: 173
+Episode 584/1000, BLACK: 289, WHITE: 122, Ties: 173
+Episode 585/1000, BLACK: 289, WHITE: 123, Ties: 173
+Episode 586/1000, BLACK: 290, WHITE: 123, Ties: 173
+Episode 587/1000, BLACK: 290, WHITE: 124, Ties: 173
+Episode 588/1000, BLACK: 291, WHITE: 124, Ties: 173
+Episode 589/1000, BLACK: 292, WHITE: 124, Ties: 173
+Episode 590/1000, BLACK: 292, WHITE: 125, Ties: 173
+has 3 identical moves
+has 3 identical moves
+Episode 591/1000, BLACK: 292, WHITE: 125, Ties: 174
+has 3 identical moves
+has 3 identical moves
+Episode 592/1000, BLACK: 292, WHITE: 125, Ties: 175
+has 3 identical moves
+has 3 identical moves
+Episode 593/1000, BLACK: 292, WHITE: 125, Ties: 176
+Episode 594/1000, BLACK: 293, WHITE: 125, Ties: 176
+Episode 595/1000, BLACK: 294, WHITE: 125, Ties: 176
+Episode 596/1000, BLACK: 295, WHITE: 125, Ties: 176
+Episode 597/1000, BLACK: 295, WHITE: 125, Ties: 177
+Episode 598/1000, BLACK: 296, WHITE: 125, Ties: 177
+Episode 599/1000, BLACK: 297, WHITE: 125, Ties: 177
+Episode 600/1000, BLACK: 297, WHITE: 126, Ties: 177
+Episode 601/1000, BLACK: 297, WHITE: 127, Ties: 177
+has 3 identical moves
+has 3 identical moves
+Episode 602/1000, BLACK: 297, WHITE: 127, Ties: 178
+Episode 603/1000, BLACK: 298, WHITE: 127, Ties: 178
+Episode 604/1000, BLACK: 298, WHITE: 128, Ties: 178
+Episode 605/1000, BLACK: 298, WHITE: 129, Ties: 178
+has 3 identical moves
+has 3 identical moves
+Episode 606/1000, BLACK: 298, WHITE: 129, Ties: 179
+Episode 607/1000, BLACK: 298, WHITE: 130, Ties: 179
+has 3 identical moves
+has 3 identical moves
+Episode 608/1000, BLACK: 298, WHITE: 130, Ties: 180
+Episode 609/1000, BLACK: 299, WHITE: 130, Ties: 180
+Episode 610/1000, BLACK: 299, WHITE: 131, Ties: 180
+Episode 611/1000, BLACK: 299, WHITE: 131, Ties: 181
+Episode 612/1000, BLACK: 299, WHITE: 132, Ties: 181
+has 3 identical moves
+has 3 identical moves
+Episode 613/1000, BLACK: 299, WHITE: 132, Ties: 182
+Episode 614/1000, BLACK: 300, WHITE: 132, Ties: 182
+has 3 identical moves
+has 3 identical moves
+Episode 615/1000, BLACK: 300, WHITE: 132, Ties: 183
+Episode 616/1000, BLACK: 301, WHITE: 132, Ties: 183
+has 3 identical moves
+has 3 identical moves
+Episode 617/1000, BLACK: 301, WHITE: 132, Ties: 184
+Episode 618/1000, BLACK: 302, WHITE: 132, Ties: 184
+Episode 619/1000, BLACK: 302, WHITE: 132, Ties: 185
+Episode 620/1000, BLACK: 303, WHITE: 132, Ties: 185
+Episode 621/1000, BLACK: 304, WHITE: 132, Ties: 185
+Episode 622/1000, BLACK: 305, WHITE: 132, Ties: 185
+Episode 623/1000, BLACK: 305, WHITE: 133, Ties: 185
+Episode 624/1000, BLACK: 305, WHITE: 134, Ties: 185
+has 3 identical moves
+has 3 identical moves
+Episode 625/1000, BLACK: 305, WHITE: 134, Ties: 186
+has 3 identical moves
+has 3 identical moves
+Episode 626/1000, BLACK: 305, WHITE: 134, Ties: 187
+has 3 identical moves
+has 3 identical moves
+Episode 627/1000, BLACK: 305, WHITE: 134, Ties: 188
+Episode 628/1000, BLACK: 305, WHITE: 135, Ties: 188
+Episode 629/1000, BLACK: 306, WHITE: 135, Ties: 188
+Episode 630/1000, BLACK: 307, WHITE: 135, Ties: 188
+has 3 identical moves
+has 3 identical moves
+Episode 631/1000, BLACK: 307, WHITE: 135, Ties: 189
+Episode 632/1000, BLACK: 308, WHITE: 135, Ties: 189
+Episode 633/1000, BLACK: 309, WHITE: 135, Ties: 189
+Episode 634/1000, BLACK: 310, WHITE: 135, Ties: 189
+Episode 635/1000, BLACK: 310, WHITE: 136, Ties: 189
+Episode 636/1000, BLACK: 311, WHITE: 136, Ties: 189
+Episode 637/1000, BLACK: 312, WHITE: 136, Ties: 189
+has 3 identical moves
+has 3 identical moves
+Episode 638/1000, BLACK: 312, WHITE: 136, Ties: 190
+Episode 639/1000, BLACK: 313, WHITE: 136, Ties: 190
+Episode 640/1000, BLACK: 314, WHITE: 136, Ties: 190
+Episode 641/1000, BLACK: 314, WHITE: 136, Ties: 191
+Episode 642/1000, BLACK: 315, WHITE: 136, Ties: 191
+Episode 643/1000, BLACK: 316, WHITE: 136, Ties: 191
+Episode 644/1000, BLACK: 316, WHITE: 136, Ties: 192
+Episode 645/1000, BLACK: 317, WHITE: 136, Ties: 192
+has 3 identical moves
+has 3 identical moves
+Episode 646/1000, BLACK: 317, WHITE: 136, Ties: 193
+has 3 identical moves
+has 3 identical moves
+Episode 647/1000, BLACK: 317, WHITE: 136, Ties: 194
+has 3 identical moves
+has 3 identical moves
+Episode 648/1000, BLACK: 317, WHITE: 136, Ties: 195
+has 3 identical moves
+has 3 identical moves
+Episode 649/1000, BLACK: 317, WHITE: 136, Ties: 196
+Episode 650/1000, BLACK: 318, WHITE: 136, Ties: 196
+Episode 651/1000, BLACK: 318, WHITE: 137, Ties: 196
+Episode 652/1000, BLACK: 319, WHITE: 137, Ties: 196
+Episode 653/1000, BLACK: 320, WHITE: 137, Ties: 196
+Episode 654/1000, BLACK: 321, WHITE: 137, Ties: 196
+Episode 655/1000, BLACK: 321, WHITE: 137, Ties: 197
+Episode 656/1000, BLACK: 321, WHITE: 138, Ties: 197
+has 3 identical moves
+has 3 identical moves
+Episode 657/1000, BLACK: 321, WHITE: 138, Ties: 198
+has 3 identical moves
+has 3 identical moves
+Episode 658/1000, BLACK: 321, WHITE: 138, Ties: 199
+has 3 identical moves
+has 3 identical moves
+Episode 659/1000, BLACK: 321, WHITE: 138, Ties: 200
+has 3 identical moves
+has 3 identical moves
+Episode 660/1000, BLACK: 321, WHITE: 138, Ties: 201
+Episode 661/1000, BLACK: 321, WHITE: 138, Ties: 202
+Episode 662/1000, BLACK: 322, WHITE: 138, Ties: 202
+has 3 identical moves
+has 3 identical moves
+Episode 663/1000, BLACK: 322, WHITE: 138, Ties: 203
+Episode 664/1000, BLACK: 323, WHITE: 138, Ties: 203
+Episode 665/1000, BLACK: 324, WHITE: 138, Ties: 203
+Episode 666/1000, BLACK: 325, WHITE: 138, Ties: 203
+Episode 667/1000, BLACK: 326, WHITE: 138, Ties: 203
+has 3 identical moves
+has 3 identical moves
+Episode 668/1000, BLACK: 326, WHITE: 138, Ties: 204
+has 3 identical moves
+has 3 identical moves
+Episode 669/1000, BLACK: 326, WHITE: 138, Ties: 205
+Episode 670/1000, BLACK: 327, WHITE: 138, Ties: 205
+Episode 671/1000, BLACK: 327, WHITE: 139, Ties: 205
+Episode 672/1000, BLACK: 328, WHITE: 139, Ties: 205
+Episode 673/1000, BLACK: 329, WHITE: 139, Ties: 205
+Episode 674/1000, BLACK: 329, WHITE: 139, Ties: 206
+has 3 identical moves
+has 3 identical moves
+Episode 675/1000, BLACK: 329, WHITE: 139, Ties: 207
+Episode 676/1000, BLACK: 329, WHITE: 140, Ties: 207
+Episode 677/1000, BLACK: 329, WHITE: 141, Ties: 207
+Episode 678/1000, BLACK: 330, WHITE: 141, Ties: 207
+Episode 679/1000, BLACK: 330, WHITE: 142, Ties: 207
+has 3 identical moves
+has 3 identical moves
+Episode 680/1000, BLACK: 330, WHITE: 142, Ties: 208
+Episode 681/1000, BLACK: 331, WHITE: 142, Ties: 208
+Episode 682/1000, BLACK: 332, WHITE: 142, Ties: 208
+Episode 683/1000, BLACK: 332, WHITE: 143, Ties: 208
+Episode 684/1000, BLACK: 332, WHITE: 144, Ties: 208
+Episode 685/1000, BLACK: 332, WHITE: 145, Ties: 208
+Episode 686/1000, BLACK: 333, WHITE: 145, Ties: 208
+Episode 687/1000, BLACK: 334, WHITE: 145, Ties: 208
+has 3 identical moves
+has 3 identical moves
+Episode 688/1000, BLACK: 334, WHITE: 145, Ties: 209
+Episode 689/1000, BLACK: 335, WHITE: 145, Ties: 209
+Episode 690/1000, BLACK: 336, WHITE: 145, Ties: 209
+Episode 691/1000, BLACK: 337, WHITE: 145, Ties: 209
+Episode 692/1000, BLACK: 338, WHITE: 145, Ties: 209
+Episode 693/1000, BLACK: 339, WHITE: 145, Ties: 209
+Episode 694/1000, BLACK: 340, WHITE: 145, Ties: 209
+Episode 695/1000, BLACK: 341, WHITE: 145, Ties: 209
+Episode 696/1000, BLACK: 341, WHITE: 145, Ties: 210
+Episode 697/1000, BLACK: 342, WHITE: 145, Ties: 210
+Episode 698/1000, BLACK: 343, WHITE: 145, Ties: 210
+Episode 699/1000, BLACK: 343, WHITE: 146, Ties: 210
+Episode 700/1000, BLACK: 343, WHITE: 147, Ties: 210
+has 3 identical moves
+has 3 identical moves
+Episode 701/1000, BLACK: 343, WHITE: 147, Ties: 211
+Episode 702/1000, BLACK: 343, WHITE: 148, Ties: 211
+Episode 703/1000, BLACK: 344, WHITE: 148, Ties: 211
+has 3 identical moves
+has 3 identical moves
+Episode 704/1000, BLACK: 344, WHITE: 148, Ties: 212
+Episode 705/1000, BLACK: 345, WHITE: 148, Ties: 212
+has 3 identical moves
+has 3 identical moves
+Episode 706/1000, BLACK: 345, WHITE: 148, Ties: 213
+Episode 707/1000, BLACK: 345, WHITE: 148, Ties: 214
+Episode 708/1000, BLACK: 345, WHITE: 149, Ties: 214
+Episode 709/1000, BLACK: 346, WHITE: 149, Ties: 214
+Episode 710/1000, BLACK: 346, WHITE: 150, Ties: 214
+Episode 711/1000, BLACK: 347, WHITE: 150, Ties: 214
+Episode 712/1000, BLACK: 347, WHITE: 151, Ties: 214
+Episode 713/1000, BLACK: 347, WHITE: 152, Ties: 214
+Episode 714/1000, BLACK: 347, WHITE: 152, Ties: 215
+Episode 715/1000, BLACK: 348, WHITE: 152, Ties: 215
+Episode 716/1000, BLACK: 349, WHITE: 152, Ties: 215
+Episode 717/1000, BLACK: 350, WHITE: 152, Ties: 215
+Episode 718/1000, BLACK: 351, WHITE: 152, Ties: 215
+has 3 identical moves
+has 3 identical moves
+Episode 719/1000, BLACK: 351, WHITE: 152, Ties: 216
+Episode 720/1000, BLACK: 352, WHITE: 152, Ties: 216
+has 3 identical moves
+has 3 identical moves
+Episode 721/1000, BLACK: 352, WHITE: 152, Ties: 217
+Episode 722/1000, BLACK: 352, WHITE: 153, Ties: 217
+Episode 723/1000, BLACK: 353, WHITE: 153, Ties: 217
+has 3 identical moves
+has 3 identical moves
+Episode 724/1000, BLACK: 353, WHITE: 153, Ties: 218
+Episode 725/1000, BLACK: 354, WHITE: 153, Ties: 218
+Episode 726/1000, BLACK: 355, WHITE: 153, Ties: 218
+Episode 727/1000, BLACK: 356, WHITE: 153, Ties: 218
+Episode 728/1000, BLACK: 356, WHITE: 154, Ties: 218
+Episode 729/1000, BLACK: 357, WHITE: 154, Ties: 218
+Episode 730/1000, BLACK: 357, WHITE: 155, Ties: 218
+Episode 731/1000, BLACK: 358, WHITE: 155, Ties: 218
+has 3 identical moves
+has 3 identical moves
+Episode 732/1000, BLACK: 358, WHITE: 155, Ties: 219
+has 3 identical moves
+has 3 identical moves
+Episode 733/1000, BLACK: 358, WHITE: 155, Ties: 220
+has 3 identical moves
+has 3 identical moves
+Episode 734/1000, BLACK: 358, WHITE: 155, Ties: 221
+Episode 735/1000, BLACK: 358, WHITE: 155, Ties: 222
+Episode 736/1000, BLACK: 359, WHITE: 155, Ties: 222
+has 3 identical moves
+has 3 identical moves
+Episode 737/1000, BLACK: 359, WHITE: 155, Ties: 223
+has 3 identical moves
+has 3 identical moves
+Episode 738/1000, BLACK: 359, WHITE: 155, Ties: 224
+Episode 739/1000, BLACK: 360, WHITE: 155, Ties: 224
+Episode 740/1000, BLACK: 361, WHITE: 155, Ties: 224
+Episode 741/1000, BLACK: 362, WHITE: 155, Ties: 224
+has 3 identical moves
+has 3 identical moves
+Episode 742/1000, BLACK: 362, WHITE: 155, Ties: 225
+Episode 743/1000, BLACK: 363, WHITE: 155, Ties: 225
+Episode 744/1000, BLACK: 364, WHITE: 155, Ties: 225
+Episode 745/1000, BLACK: 365, WHITE: 155, Ties: 225
+Episode 746/1000, BLACK: 366, WHITE: 155, Ties: 225
+Episode 747/1000, BLACK: 367, WHITE: 155, Ties: 225
+has 3 identical moves
+has 3 identical moves
+Episode 748/1000, BLACK: 367, WHITE: 155, Ties: 226
+Episode 749/1000, BLACK: 368, WHITE: 155, Ties: 226
+Episode 750/1000, BLACK: 368, WHITE: 156, Ties: 226
+has 3 identical moves
+has 3 identical moves
+Episode 751/1000, BLACK: 368, WHITE: 156, Ties: 227
+Episode 752/1000, BLACK: 368, WHITE: 157, Ties: 227
+Episode 753/1000, BLACK: 369, WHITE: 157, Ties: 227
+has 3 identical moves
+has 3 identical moves
+Episode 754/1000, BLACK: 369, WHITE: 157, Ties: 228
+Episode 755/1000, BLACK: 370, WHITE: 157, Ties: 228
+Episode 756/1000, BLACK: 371, WHITE: 157, Ties: 228
+Episode 757/1000, BLACK: 371, WHITE: 158, Ties: 228
+has 3 identical moves
+has 3 identical moves
+Episode 758/1000, BLACK: 371, WHITE: 158, Ties: 229
+Episode 759/1000, BLACK: 371, WHITE: 159, Ties: 229
+Episode 760/1000, BLACK: 371, WHITE: 160, Ties: 229
+Episode 761/1000, BLACK: 372, WHITE: 160, Ties: 229
+Episode 762/1000, BLACK: 372, WHITE: 161, Ties: 229
+Episode 763/1000, BLACK: 373, WHITE: 161, Ties: 229
+Episode 764/1000, BLACK: 374, WHITE: 161, Ties: 229
+Episode 765/1000, BLACK: 375, WHITE: 161, Ties: 229
+has 3 identical moves
+has 3 identical moves
+Episode 766/1000, BLACK: 375, WHITE: 161, Ties: 230
+Episode 767/1000, BLACK: 375, WHITE: 161, Ties: 231
+Episode 768/1000, BLACK: 375, WHITE: 162, Ties: 231
+Episode 769/1000, BLACK: 376, WHITE: 162, Ties: 231
+Episode 770/1000, BLACK: 377, WHITE: 162, Ties: 231
+Episode 771/1000, BLACK: 378, WHITE: 162, Ties: 231
+Episode 772/1000, BLACK: 379, WHITE: 162, Ties: 231
+Episode 773/1000, BLACK: 380, WHITE: 162, Ties: 231
+Episode 774/1000, BLACK: 381, WHITE: 162, Ties: 231
+Episode 775/1000, BLACK: 381, WHITE: 163, Ties: 231
+Episode 776/1000, BLACK: 382, WHITE: 163, Ties: 231
+Episode 777/1000, BLACK: 383, WHITE: 163, Ties: 231
+Episode 778/1000, BLACK: 384, WHITE: 163, Ties: 231
+Episode 779/1000, BLACK: 385, WHITE: 163, Ties: 231
+has 3 identical moves
+has 3 identical moves
+Episode 780/1000, BLACK: 385, WHITE: 163, Ties: 232
+has 3 identical moves
+has 3 identical moves
+Episode 781/1000, BLACK: 385, WHITE: 163, Ties: 233
+Episode 782/1000, BLACK: 386, WHITE: 163, Ties: 233
+Episode 783/1000, BLACK: 387, WHITE: 163, Ties: 233
+has 3 identical moves
+has 3 identical moves
+Episode 784/1000, BLACK: 387, WHITE: 163, Ties: 234
+has 3 identical moves
+has 3 identical moves
+Episode 785/1000, BLACK: 387, WHITE: 163, Ties: 235
+has 3 identical moves
+has 3 identical moves
+Episode 786/1000, BLACK: 387, WHITE: 163, Ties: 236
+Episode 787/1000, BLACK: 388, WHITE: 163, Ties: 236
+Episode 788/1000, BLACK: 389, WHITE: 163, Ties: 236
+has 3 identical moves
+has 3 identical moves
+Episode 789/1000, BLACK: 389, WHITE: 163, Ties: 237
+Episode 790/1000, BLACK: 389, WHITE: 164, Ties: 237
+Episode 791/1000, BLACK: 389, WHITE: 165, Ties: 237
+Episode 792/1000, BLACK: 390, WHITE: 165, Ties: 237
+has 3 identical moves
+has 3 identical moves
+Episode 793/1000, BLACK: 390, WHITE: 165, Ties: 238
+Episode 794/1000, BLACK: 390, WHITE: 166, Ties: 238
+has 3 identical moves
+has 3 identical moves
+Episode 795/1000, BLACK: 390, WHITE: 166, Ties: 239
+has 3 identical moves
+has 3 identical moves
+Episode 796/1000, BLACK: 390, WHITE: 166, Ties: 240
+Episode 797/1000, BLACK: 390, WHITE: 167, Ties: 240
+has 3 identical moves
+has 3 identical moves
+Episode 798/1000, BLACK: 390, WHITE: 167, Ties: 241
+Episode 799/1000, BLACK: 390, WHITE: 167, Ties: 242
+Episode 800/1000, BLACK: 390, WHITE: 168, Ties: 242
+Episode 801/1000, BLACK: 391, WHITE: 168, Ties: 242
+has 3 identical moves
+has 3 identical moves
+Episode 802/1000, BLACK: 391, WHITE: 168, Ties: 243
+Episode 803/1000, BLACK: 391, WHITE: 169, Ties: 243
+has 3 identical moves
+has 3 identical moves
+Episode 804/1000, BLACK: 391, WHITE: 169, Ties: 244
+has 3 identical moves
+has 3 identical moves
+Episode 805/1000, BLACK: 391, WHITE: 169, Ties: 245
+has 3 identical moves
+has 3 identical moves
+Episode 806/1000, BLACK: 391, WHITE: 169, Ties: 246
+Episode 807/1000, BLACK: 392, WHITE: 169, Ties: 246
+Episode 808/1000, BLACK: 392, WHITE: 170, Ties: 246
+Episode 809/1000, BLACK: 392, WHITE: 170, Ties: 247
+Episode 810/1000, BLACK: 393, WHITE: 170, Ties: 247
+Episode 811/1000, BLACK: 393, WHITE: 170, Ties: 248
+Episode 812/1000, BLACK: 394, WHITE: 170, Ties: 248
+Episode 813/1000, BLACK: 395, WHITE: 170, Ties: 248
+has 3 identical moves
+has 3 identical moves
+Episode 814/1000, BLACK: 395, WHITE: 170, Ties: 249
+Episode 815/1000, BLACK: 396, WHITE: 170, Ties: 249
+Episode 816/1000, BLACK: 397, WHITE: 170, Ties: 249
+Episode 817/1000, BLACK: 398, WHITE: 170, Ties: 249
+Episode 818/1000, BLACK: 399, WHITE: 170, Ties: 249
+Episode 819/1000, BLACK: 400, WHITE: 170, Ties: 249
+Episode 820/1000, BLACK: 401, WHITE: 170, Ties: 249
+has 3 identical moves
+has 3 identical moves
+Episode 821/1000, BLACK: 401, WHITE: 170, Ties: 250
+Episode 822/1000, BLACK: 402, WHITE: 170, Ties: 250
+Episode 823/1000, BLACK: 403, WHITE: 170, Ties: 250
+Episode 824/1000, BLACK: 403, WHITE: 171, Ties: 250
+Episode 825/1000, BLACK: 404, WHITE: 171, Ties: 250
+Episode 826/1000, BLACK: 405, WHITE: 171, Ties: 250
+Episode 827/1000, BLACK: 405, WHITE: 171, Ties: 251
+Episode 828/1000, BLACK: 406, WHITE: 171, Ties: 251
+Episode 829/1000, BLACK: 407, WHITE: 171, Ties: 251
+has 3 identical moves
+has 3 identical moves
+Episode 830/1000, BLACK: 407, WHITE: 171, Ties: 252
+Episode 831/1000, BLACK: 408, WHITE: 171, Ties: 252
+Episode 832/1000, BLACK: 409, WHITE: 171, Ties: 252
+Episode 833/1000, BLACK: 410, WHITE: 171, Ties: 252
+has 3 identical moves
+has 3 identical moves
+Episode 834/1000, BLACK: 410, WHITE: 171, Ties: 253
+Episode 835/1000, BLACK: 410, WHITE: 172, Ties: 253
+has 3 identical moves
+has 3 identical moves
+Episode 836/1000, BLACK: 410, WHITE: 172, Ties: 254
+has 3 identical moves
+has 3 identical moves
+Episode 837/1000, BLACK: 410, WHITE: 172, Ties: 255
+has 3 identical moves
+has 3 identical moves
+Episode 838/1000, BLACK: 410, WHITE: 172, Ties: 256
+Episode 839/1000, BLACK: 410, WHITE: 172, Ties: 257
+Episode 840/1000, BLACK: 411, WHITE: 172, Ties: 257
+Episode 841/1000, BLACK: 411, WHITE: 172, Ties: 258
+Episode 842/1000, BLACK: 412, WHITE: 172, Ties: 258
+Episode 843/1000, BLACK: 413, WHITE: 172, Ties: 258
+Episode 844/1000, BLACK: 414, WHITE: 172, Ties: 258
+Episode 845/1000, BLACK: 415, WHITE: 172, Ties: 258
+has 3 identical moves
+has 3 identical moves
+Episode 846/1000, BLACK: 415, WHITE: 172, Ties: 259
+has 3 identical moves
+has 3 identical moves
+Episode 847/1000, BLACK: 415, WHITE: 172, Ties: 260
+Episode 848/1000, BLACK: 416, WHITE: 172, Ties: 260
+Episode 849/1000, BLACK: 417, WHITE: 172, Ties: 260
+Episode 850/1000, BLACK: 418, WHITE: 172, Ties: 260
+Episode 851/1000, BLACK: 419, WHITE: 172, Ties: 260
+Episode 852/1000, BLACK: 420, WHITE: 172, Ties: 260
+Episode 853/1000, BLACK: 420, WHITE: 173, Ties: 260
+Episode 854/1000, BLACK: 421, WHITE: 173, Ties: 260
+has 3 identical moves
+has 3 identical moves
+Episode 855/1000, BLACK: 421, WHITE: 173, Ties: 261
+Episode 856/1000, BLACK: 422, WHITE: 173, Ties: 261
+Episode 857/1000, BLACK: 423, WHITE: 173, Ties: 261
+Episode 858/1000, BLACK: 423, WHITE: 174, Ties: 261
+Episode 859/1000, BLACK: 423, WHITE: 175, Ties: 261
+Episode 860/1000, BLACK: 423, WHITE: 175, Ties: 262
+has 3 identical moves
+has 3 identical moves
+Episode 861/1000, BLACK: 423, WHITE: 175, Ties: 263
+Episode 862/1000, BLACK: 424, WHITE: 175, Ties: 263
+Episode 863/1000, BLACK: 425, WHITE: 175, Ties: 263
+Episode 864/1000, BLACK: 425, WHITE: 175, Ties: 264
+Episode 865/1000, BLACK: 426, WHITE: 175, Ties: 264
+has 3 identical moves
+has 3 identical moves
+Episode 866/1000, BLACK: 426, WHITE: 175, Ties: 265
+Episode 867/1000, BLACK: 427, WHITE: 175, Ties: 265
+Episode 868/1000, BLACK: 427, WHITE: 176, Ties: 265
+Episode 869/1000, BLACK: 428, WHITE: 176, Ties: 265
+Episode 870/1000, BLACK: 428, WHITE: 176, Ties: 266
+Episode 871/1000, BLACK: 428, WHITE: 177, Ties: 266
+Episode 872/1000, BLACK: 428, WHITE: 178, Ties: 266
+Episode 873/1000, BLACK: 429, WHITE: 178, Ties: 266
+Episode 874/1000, BLACK: 430, WHITE: 178, Ties: 266
+Episode 875/1000, BLACK: 431, WHITE: 178, Ties: 266
+has 3 identical moves
+has 3 identical moves
+Episode 876/1000, BLACK: 431, WHITE: 178, Ties: 267
+Episode 877/1000, BLACK: 432, WHITE: 178, Ties: 267
+has 3 identical moves
+has 3 identical moves
+Episode 878/1000, BLACK: 432, WHITE: 178, Ties: 268
+Episode 879/1000, BLACK: 432, WHITE: 179, Ties: 268
+Episode 880/1000, BLACK: 433, WHITE: 179, Ties: 268
+Episode 881/1000, BLACK: 434, WHITE: 179, Ties: 268
+Episode 882/1000, BLACK: 435, WHITE: 179, Ties: 268
+Episode 883/1000, BLACK: 435, WHITE: 180, Ties: 268
+Episode 884/1000, BLACK: 436, WHITE: 180, Ties: 268
+Episode 885/1000, BLACK: 437, WHITE: 180, Ties: 268
+has 3 identical moves
+has 3 identical moves
+Episode 886/1000, BLACK: 437, WHITE: 180, Ties: 269
+Episode 887/1000, BLACK: 437, WHITE: 180, Ties: 270
+has 3 identical moves
+has 3 identical moves
+Episode 888/1000, BLACK: 437, WHITE: 180, Ties: 271
+Episode 889/1000, BLACK: 438, WHITE: 180, Ties: 271
+Episode 890/1000, BLACK: 439, WHITE: 180, Ties: 271
+Episode 891/1000, BLACK: 440, WHITE: 180, Ties: 271
+has 3 identical moves
+has 3 identical moves
+Episode 892/1000, BLACK: 440, WHITE: 180, Ties: 272
+Episode 893/1000, BLACK: 441, WHITE: 180, Ties: 272
+Episode 894/1000, BLACK: 442, WHITE: 180, Ties: 272
+Episode 895/1000, BLACK: 443, WHITE: 180, Ties: 272
+Episode 896/1000, BLACK: 444, WHITE: 180, Ties: 272
+Episode 897/1000, BLACK: 444, WHITE: 181, Ties: 272
+Episode 898/1000, BLACK: 445, WHITE: 181, Ties: 272
+Episode 899/1000, BLACK: 446, WHITE: 181, Ties: 272
+Episode 900/1000, BLACK: 447, WHITE: 181, Ties: 272
+Episode 901/1000, BLACK: 448, WHITE: 181, Ties: 272
+Episode 902/1000, BLACK: 449, WHITE: 181, Ties: 272
+Episode 903/1000, BLACK: 450, WHITE: 181, Ties: 272
+has 3 identical moves
+has 3 identical moves
+Episode 904/1000, BLACK: 450, WHITE: 181, Ties: 273
+Episode 905/1000, BLACK: 450, WHITE: 181, Ties: 274
+Episode 906/1000, BLACK: 451, WHITE: 181, Ties: 274
+Episode 907/1000, BLACK: 452, WHITE: 181, Ties: 274
+has 3 identical moves
+has 3 identical moves
+Episode 908/1000, BLACK: 452, WHITE: 181, Ties: 275
+Episode 909/1000, BLACK: 453, WHITE: 181, Ties: 275
+Episode 910/1000, BLACK: 453, WHITE: 182, Ties: 275
+Episode 911/1000, BLACK: 453, WHITE: 182, Ties: 276
+has 3 identical moves
+has 3 identical moves
+Episode 912/1000, BLACK: 453, WHITE: 182, Ties: 277
+has 3 identical moves
+has 3 identical moves
+Episode 913/1000, BLACK: 453, WHITE: 182, Ties: 278
+Episode 914/1000, BLACK: 453, WHITE: 183, Ties: 278
+Episode 915/1000, BLACK: 454, WHITE: 183, Ties: 278
+Episode 916/1000, BLACK: 454, WHITE: 184, Ties: 278
+Episode 917/1000, BLACK: 455, WHITE: 184, Ties: 278
+Episode 918/1000, BLACK: 456, WHITE: 184, Ties: 278
+Episode 919/1000, BLACK: 456, WHITE: 185, Ties: 278
+Episode 920/1000, BLACK: 457, WHITE: 185, Ties: 278
+Episode 921/1000, BLACK: 458, WHITE: 185, Ties: 278
+has 3 identical moves
+has 3 identical moves
+Episode 922/1000, BLACK: 458, WHITE: 185, Ties: 279
+Episode 923/1000, BLACK: 458, WHITE: 186, Ties: 279
+Episode 924/1000, BLACK: 458, WHITE: 187, Ties: 279
+has 3 identical moves
+has 3 identical moves
+Episode 925/1000, BLACK: 458, WHITE: 187, Ties: 280
+Episode 926/1000, BLACK: 459, WHITE: 187, Ties: 280
+has 3 identical moves
+has 3 identical moves
+Episode 927/1000, BLACK: 459, WHITE: 187, Ties: 281
+Episode 928/1000, BLACK: 460, WHITE: 187, Ties: 281
+Episode 929/1000, BLACK: 460, WHITE: 188, Ties: 281
+Episode 930/1000, BLACK: 460, WHITE: 189, Ties: 281
+Episode 931/1000, BLACK: 461, WHITE: 189, Ties: 281
+Episode 932/1000, BLACK: 462, WHITE: 189, Ties: 281
+has 3 identical moves
+has 3 identical moves
+Episode 933/1000, BLACK: 462, WHITE: 189, Ties: 282
+Episode 934/1000, BLACK: 463, WHITE: 189, Ties: 282
+Episode 935/1000, BLACK: 464, WHITE: 189, Ties: 282
+Episode 936/1000, BLACK: 464, WHITE: 190, Ties: 282
+Episode 937/1000, BLACK: 465, WHITE: 190, Ties: 282
+has 3 identical moves
+has 3 identical moves
+Episode 938/1000, BLACK: 465, WHITE: 190, Ties: 283
+Episode 939/1000, BLACK: 466, WHITE: 190, Ties: 283
+has 3 identical moves
+has 3 identical moves
+Episode 940/1000, BLACK: 466, WHITE: 190, Ties: 284
+has 3 identical moves
+has 3 identical moves
+Episode 941/1000, BLACK: 466, WHITE: 190, Ties: 285
+Episode 942/1000, BLACK: 467, WHITE: 190, Ties: 285
+Episode 943/1000, BLACK: 468, WHITE: 190, Ties: 285
+has 3 identical moves
+has 3 identical moves
+Episode 944/1000, BLACK: 468, WHITE: 190, Ties: 286
+has 3 identical moves
+has 3 identical moves
+Episode 945/1000, BLACK: 468, WHITE: 190, Ties: 287
+Episode 946/1000, BLACK: 469, WHITE: 190, Ties: 287
+has 3 identical moves
+has 3 identical moves
+Episode 947/1000, BLACK: 469, WHITE: 190, Ties: 288
+Episode 948/1000, BLACK: 470, WHITE: 190, Ties: 288
+has 3 identical moves
+has 3 identical moves
+Episode 949/1000, BLACK: 470, WHITE: 190, Ties: 289
+Episode 950/1000, BLACK: 471, WHITE: 190, Ties: 289
+Episode 951/1000, BLACK: 472, WHITE: 190, Ties: 289
+has 3 identical moves
+has 3 identical moves
+Episode 952/1000, BLACK: 472, WHITE: 190, Ties: 290
+Episode 953/1000, BLACK: 473, WHITE: 190, Ties: 290
+Episode 954/1000, BLACK: 473, WHITE: 191, Ties: 290
+Episode 955/1000, BLACK: 473, WHITE: 192, Ties: 290
+Episode 956/1000, BLACK: 474, WHITE: 192, Ties: 290
+Episode 957/1000, BLACK: 474, WHITE: 193, Ties: 290
+Episode 958/1000, BLACK: 475, WHITE: 193, Ties: 290
+Episode 959/1000, BLACK: 475, WHITE: 194, Ties: 290
+has 3 identical moves
+has 3 identical moves
+Episode 960/1000, BLACK: 475, WHITE: 194, Ties: 291
+Episode 961/1000, BLACK: 476, WHITE: 194, Ties: 291
+has 3 identical moves
+has 3 identical moves
+Episode 962/1000, BLACK: 476, WHITE: 194, Ties: 292
+Episode 963/1000, BLACK: 477, WHITE: 194, Ties: 292
+Episode 964/1000, BLACK: 478, WHITE: 194, Ties: 292
+Episode 965/1000, BLACK: 478, WHITE: 194, Ties: 293
+Episode 966/1000, BLACK: 479, WHITE: 194, Ties: 293
+Episode 967/1000, BLACK: 479, WHITE: 195, Ties: 293
+Episode 968/1000, BLACK: 480, WHITE: 195, Ties: 293
+Episode 969/1000, BLACK: 480, WHITE: 196, Ties: 293
+has 3 identical moves
+has 3 identical moves
+Episode 970/1000, BLACK: 480, WHITE: 196, Ties: 294
+Episode 971/1000, BLACK: 481, WHITE: 196, Ties: 294
+Episode 972/1000, BLACK: 482, WHITE: 196, Ties: 294
+Episode 973/1000, BLACK: 483, WHITE: 196, Ties: 294
+Episode 974/1000, BLACK: 484, WHITE: 196, Ties: 294
+Episode 975/1000, BLACK: 485, WHITE: 196, Ties: 294
+Episode 976/1000, BLACK: 486, WHITE: 196, Ties: 294
+Episode 977/1000, BLACK: 487, WHITE: 196, Ties: 294
+Episode 978/1000, BLACK: 488, WHITE: 196, Ties: 294
+Episode 979/1000, BLACK: 488, WHITE: 197, Ties: 294
+Episode 980/1000, BLACK: 489, WHITE: 197, Ties: 294
+Episode 981/1000, BLACK: 490, WHITE: 197, Ties: 294
+Episode 982/1000, BLACK: 491, WHITE: 197, Ties: 294
+has 3 identical moves
+has 3 identical moves
+Episode 983/1000, BLACK: 491, WHITE: 197, Ties: 295
+has 3 identical moves
+has 3 identical moves
+Episode 984/1000, BLACK: 491, WHITE: 197, Ties: 296
+Episode 985/1000, BLACK: 492, WHITE: 197, Ties: 296
+has 3 identical moves
+has 3 identical moves
+Episode 986/1000, BLACK: 492, WHITE: 197, Ties: 297
+Episode 987/1000, BLACK: 493, WHITE: 197, Ties: 297
+has 3 identical moves
+has 3 identical moves
+Episode 988/1000, BLACK: 493, WHITE: 197, Ties: 298
+Episode 989/1000, BLACK: 494, WHITE: 197, Ties: 298
+Episode 990/1000, BLACK: 494, WHITE: 198, Ties: 298
+Episode 991/1000, BLACK: 494, WHITE: 198, Ties: 299
+Episode 992/1000, BLACK: 495, WHITE: 198, Ties: 299
+Episode 993/1000, BLACK: 496, WHITE: 198, Ties: 299
+Episode 994/1000, BLACK: 497, WHITE: 198, Ties: 299
+has 3 identical moves
+has 3 identical moves
+Episode 995/1000, BLACK: 497, WHITE: 198, Ties: 300
+has 3 identical moves
+has 3 identical moves
+Episode 996/1000, BLACK: 497, WHITE: 198, Ties: 301
+has 3 identical moves
+has 3 identical moves
+Episode 997/1000, BLACK: 497, WHITE: 198, Ties: 302
+Episode 998/1000, BLACK: 498, WHITE: 198, Ties: 302
+Episode 999/1000, BLACK: 499, WHITE: 198, Ties: 302
+Episode 1000/1000, BLACK: 500, WHITE: 198, Ties: 302
+BLACK: 500, WHITE: 198, Ties: 302
+RL weights file saved to path: objects/pa_Q_LearningAgent.pkl
+
+Process finished with exit code 0

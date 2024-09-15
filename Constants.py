@@ -25,7 +25,9 @@ TESTING_MODE = "test"
 MODE = [EVAL_MODE]
 PROG_MODE = [TRAINING_MODE, EVAL_MODE, TESTING_MODE]
 DQN = 'dqn'
-TYPE_PLAYERS = ['random', HUMAN, 'minimax', 'rl', DQN, 'first_choice', AlphaZero]
+# TYPE_PLAYERS = ['random', HUMAN, 'minimax', 'rl', DQN, 'first_choice', AlphaZero]
+TYPE_PLAYERS = ['random', HUMAN, 'minimax', 'rl', 'first_choice', AlphaZero]
+
 ADVANCED_PLAYERS = []
 UCT_C = 1.41
 NUM_SIMULATIONS = 800

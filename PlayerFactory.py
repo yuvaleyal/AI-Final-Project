@@ -1,7 +1,7 @@
 import Player
 from AlphaZeroPlayer import AlphaZeroPlayer
 from Constants import AlphaZero, HUMAN, DQN
-from DQNPlayer import DQN_Player
+# from DQNPlayer import DQN_Player
 from FirstChoicePlayer import FirstChoicePlayer
 from HumanPlayer import HumanPlayer
 from MinimaxPlayer import MinimaxPlayer
@@ -19,7 +19,7 @@ class PlayerFactory:
             return RandomPlayer(color)
         elif player_type == 'minimax':
             player = MinimaxPlayer(color)
-            player.set_depth(3)
+            player.set_depth(4)
             return player
         elif player_type == 'rl':
             player = ReinforcementPlayer(color)
@@ -29,10 +29,10 @@ class PlayerFactory:
             player = AlphaZeroPlayer(color)
             player.load_object()
             return player
-        elif player_type == DQN:
-            player = DQN_Player(color)
-            player.load_object()
-            return player
+        # elif player_type == DQN:
+        #     player = DQN_Player(color)
+        #     player.load_object()
+        #     return player
         elif player_type == 'first_choice':
             return FirstChoicePlayer(color)
         elif player_type == HUMAN:

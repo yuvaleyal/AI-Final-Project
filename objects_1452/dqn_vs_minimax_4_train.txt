@@ -1,0 +1,132 @@
+/Users/shmuel/VENVs/AI-Final-Project/bin/python /Users/shmuel/PycharmProjects/AI-Final-Project/Checkers.py -a=dqn -b=minimax -d=no -n=100 -m=train
+Game Mode: ['train']
+Episode 1/100, BLACK: 0, WHITE: 1, Ties: 0
+Episode 2/100, BLACK: 0, WHITE: 2, Ties: 0
+Episode 3/100, BLACK: 0, WHITE: 3, Ties: 0
+Episode 4/100, BLACK: 0, WHITE: 4, Ties: 0
+Episode 5/100, BLACK: 0, WHITE: 5, Ties: 0
+Episode 6/100, BLACK: 0, WHITE: 6, Ties: 0
+Episode 7/100, BLACK: 0, WHITE: 7, Ties: 0
+Episode 8/100, BLACK: 0, WHITE: 8, Ties: 0
+Episode 9/100, BLACK: 0, WHITE: 9, Ties: 0
+Episode 10/100, BLACK: 0, WHITE: 10, Ties: 0
+Episode 11/100, BLACK: 0, WHITE: 11, Ties: 0
+Episode 12/100, BLACK: 0, WHITE: 12, Ties: 0
+Episode 13/100, BLACK: 0, WHITE: 13, Ties: 0
+Episode 14/100, BLACK: 0, WHITE: 14, Ties: 0
+Episode 15/100, BLACK: 0, WHITE: 15, Ties: 0
+Episode 16/100, BLACK: 0, WHITE: 16, Ties: 0
+Episode 17/100, BLACK: 0, WHITE: 17, Ties: 0
+Episode 18/100, BLACK: 0, WHITE: 18, Ties: 0
+Episode 19/100, BLACK: 0, WHITE: 19, Ties: 0
+Episode 20/100, BLACK: 0, WHITE: 20, Ties: 0
+Episode 21/100, BLACK: 0, WHITE: 21, Ties: 0
+Episode 22/100, BLACK: 0, WHITE: 22, Ties: 0
+Episode 23/100, BLACK: 0, WHITE: 23, Ties: 0
+Episode 24/100, BLACK: 0, WHITE: 24, Ties: 0
+Episode 25/100, BLACK: 0, WHITE: 25, Ties: 0
+Episode 26/100, BLACK: 0, WHITE: 26, Ties: 0
+Episode 27/100, BLACK: 0, WHITE: 27, Ties: 0
+Episode 28/100, BLACK: 0, WHITE: 28, Ties: 0
+Episode 29/100, BLACK: 0, WHITE: 29, Ties: 0
+Episode 30/100, BLACK: 0, WHITE: 30, Ties: 0
+Episode 31/100, BLACK: 0, WHITE: 31, Ties: 0
+Episode 32/100, BLACK: 0, WHITE: 32, Ties: 0
+Episode 33/100, BLACK: 0, WHITE: 33, Ties: 0
+Episode 34/100, BLACK: 0, WHITE: 34, Ties: 0
+Episode 35/100, BLACK: 0, WHITE: 35, Ties: 0
+Episode 36/100, BLACK: 0, WHITE: 36, Ties: 0
+Episode 37/100, BLACK: 0, WHITE: 37, Ties: 0
+Episode 38/100, BLACK: 0, WHITE: 38, Ties: 0
+has 3 identical moves
+has 3 identical moves
+has 3 identical moves
+has 3 identical moves
+has 3 identical moves
+Episode 39/100, BLACK: 0, WHITE: 38, Ties: 1
+Episode 40/100, BLACK: 0, WHITE: 39, Ties: 1
+Episode 41/100, BLACK: 0, WHITE: 40, Ties: 1
+Episode 42/100, BLACK: 0, WHITE: 41, Ties: 1
+Episode 43/100, BLACK: 0, WHITE: 42, Ties: 1
+Episode 44/100, BLACK: 0, WHITE: 43, Ties: 1
+Episode 45/100, BLACK: 0, WHITE: 44, Ties: 1
+Episode 46/100, BLACK: 0, WHITE: 45, Ties: 1
+Episode 47/100, BLACK: 0, WHITE: 46, Ties: 1
+has 3 identical moves
+has 3 identical moves
+has 3 identical moves
+has 3 identical moves
+has 3 identical moves
+Episode 48/100, BLACK: 0, WHITE: 46, Ties: 2
+Episode 49/100, BLACK: 0, WHITE: 47, Ties: 2
+Episode 50/100, BLACK: 0, WHITE: 48, Ties: 2
+Episode 51/100, BLACK: 0, WHITE: 49, Ties: 2
+Episode 52/100, BLACK: 0, WHITE: 50, Ties: 2
+Episode 53/100, BLACK: 0, WHITE: 51, Ties: 2
+Episode 54/100, BLACK: 0, WHITE: 52, Ties: 2
+Episode 55/100, BLACK: 0, WHITE: 53, Ties: 2
+Episode 56/100, BLACK: 0, WHITE: 54, Ties: 2
+Episode 57/100, BLACK: 0, WHITE: 55, Ties: 2
+Episode 58/100, BLACK: 0, WHITE: 56, Ties: 2
+Episode 59/100, BLACK: 0, WHITE: 57, Ties: 2
+Episode 60/100, BLACK: 0, WHITE: 58, Ties: 2
+Episode 61/100, BLACK: 0, WHITE: 59, Ties: 2
+Episode 62/100, BLACK: 0, WHITE: 60, Ties: 2
+Episode 63/100, BLACK: 0, WHITE: 61, Ties: 2
+Episode 64/100, BLACK: 0, WHITE: 62, Ties: 2
+Episode 65/100, BLACK: 0, WHITE: 63, Ties: 2
+Episode 66/100, BLACK: 0, WHITE: 64, Ties: 2
+Episode 67/100, BLACK: 0, WHITE: 65, Ties: 2
+Episode 68/100, BLACK: 0, WHITE: 66, Ties: 2
+Episode 69/100, BLACK: 0, WHITE: 67, Ties: 2
+has 3 identical moves
+has 3 identical moves
+Episode 70/100, BLACK: 0, WHITE: 67, Ties: 3
+Episode 71/100, BLACK: 0, WHITE: 68, Ties: 3
+Episode 72/100, BLACK: 0, WHITE: 69, Ties: 3
+Episode 73/100, BLACK: 0, WHITE: 70, Ties: 3
+Episode 74/100, BLACK: 0, WHITE: 71, Ties: 3
+Episode 75/100, BLACK: 0, WHITE: 72, Ties: 3
+Episode 76/100, BLACK: 0, WHITE: 73, Ties: 3
+Episode 77/100, BLACK: 0, WHITE: 74, Ties: 3
+Episode 78/100, BLACK: 0, WHITE: 75, Ties: 3
+Episode 79/100, BLACK: 0, WHITE: 76, Ties: 3
+Episode 80/100, BLACK: 0, WHITE: 77, Ties: 3
+Episode 81/100, BLACK: 0, WHITE: 78, Ties: 3
+has 3 identical moves
+has 3 identical moves
+has 3 identical moves
+has 3 identical moves
+has 3 identical moves
+Episode 82/100, BLACK: 0, WHITE: 78, Ties: 4
+Episode 83/100, BLACK: 0, WHITE: 79, Ties: 4
+Episode 84/100, BLACK: 0, WHITE: 80, Ties: 4
+Episode 85/100, BLACK: 0, WHITE: 81, Ties: 4
+Episode 86/100, BLACK: 0, WHITE: 82, Ties: 4
+Episode 87/100, BLACK: 0, WHITE: 83, Ties: 4
+Episode 88/100, BLACK: 0, WHITE: 84, Ties: 4
+Episode 89/100, BLACK: 0, WHITE: 85, Ties: 4
+Episode 90/100, BLACK: 0, WHITE: 86, Ties: 4
+Episode 91/100, BLACK: 0, WHITE: 87, Ties: 4
+Episode 92/100, BLACK: 0, WHITE: 88, Ties: 4
+Episode 93/100, BLACK: 0, WHITE: 89, Ties: 4
+Episode 94/100, BLACK: 0, WHITE: 90, Ties: 4
+Episode 95/100, BLACK: 0, WHITE: 91, Ties: 4
+has 3 identical moves
+has 3 identical moves
+has 3 identical moves
+has 3 identical moves
+has 3 identical moves
+Episode 96/100, BLACK: 0, WHITE: 91, Ties: 5
+Episode 97/100, BLACK: 0, WHITE: 92, Ties: 5
+Episode 98/100, BLACK: 0, WHITE: 93, Ties: 5
+has 3 identical moves
+has 3 identical moves
+has 3 identical moves
+has 3 identical moves
+has 3 identical moves
+Episode 99/100, BLACK: 0, WHITE: 93, Ties: 6
+Episode 100/100, BLACK: 0, WHITE: 94, Ties: 6
+BLACK: 0, WHITE: 94, Ties: 6
+
+Process finished with exit code 0

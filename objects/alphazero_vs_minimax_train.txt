@@ -1,0 +1,306 @@
+AZ weights file load from path: objects/pa_cpu_AlphaZeroNET.pth
+AZ weights file load from path: objects/pa_cpu_AlphaZeroNET.pth
+has last 3 identical moves
+has last 3 identical moves
+Episode 1/105, BLACK: 0, WHITE: 0, Ties: 1
+has last 3 identical moves
+has last 3 identical moves
+Episode 2/105, BLACK: 0, WHITE: 0, Ties: 2
+has last 3 identical moves
+has last 3 identical moves
+Episode 3/105, BLACK: 0, WHITE: 0, Ties: 3
+has last 3 identical moves
+has last 3 identical moves
+Episode 4/105, BLACK: 0, WHITE: 0, Ties: 4
+has last 3 identical moves
+has last 3 identical moves
+Episode 5/105, BLACK: 0, WHITE: 0, Ties: 5
+Episode 6/105, BLACK: 0, WHITE: 1, Ties: 5
+has last 3 identical moves
+has last 3 identical moves
+Episode 7/105, BLACK: 0, WHITE: 1, Ties: 6
+Episode 8/105, BLACK: 0, WHITE: 2, Ties: 6
+has last 3 identical moves
+has last 3 identical moves
+Episode 9/105, BLACK: 0, WHITE: 2, Ties: 7
+Episode 10/105, BLACK: 0, WHITE: 3, Ties: 7
+AZ weights file saved to path: objects/pa_cpu_AlphaZeroNET.pth
+has last 3 identical moves
+has last 3 identical moves
+Episode 11/105, BLACK: 0, WHITE: 3, Ties: 8
+Episode 12/105, BLACK: 0, WHITE: 4, Ties: 8
+has last 3 identical moves
+has last 3 identical moves
+Episode 13/105, BLACK: 0, WHITE: 4, Ties: 9
+has last 3 identical moves
+has last 3 identical moves
+Episode 14/105, BLACK: 0, WHITE: 4, Ties: 10
+has last 3 identical moves
+has last 3 identical moves
+Episode 15/105, BLACK: 0, WHITE: 4, Ties: 11
+has last 3 identical moves
+has last 3 identical moves
+Episode 16/105, BLACK: 0, WHITE: 4, Ties: 12
+has last 3 identical moves
+has last 3 identical moves
+Episode 17/105, BLACK: 0, WHITE: 4, Ties: 13
+has last 3 identical moves
+has last 3 identical moves
+Episode 18/105, BLACK: 0, WHITE: 4, Ties: 14
+
+
+
+
+
+
+has last 3 identical moves
+has last 3 identical moves
+Episode 19/105, BLACK: 0, WHITE: 4, Ties: 15
+Episode 20/105, BLACK: 0, WHITE: 5, Ties: 15
+AZ weights file saved to path: objects/pa_cpu_AlphaZeroNET.pth
+has last 3 identical moves
+has last 3 identical moves
+Episode 21/105, BLACK: 0, WHITE: 5, Ties: 16
+Episode 22/105, BLACK: 0, WHITE: 6, Ties: 16
+has last 3 identical moves
+has last 3 identical moves
+Episode 23/105, BLACK: 0, WHITE: 6, Ties: 17
+Episode 24/105, BLACK: 0, WHITE: 7, Ties: 17
+has last 3 identical moves
+has last 3 identical moves
+Episode 25/105, BLACK: 0, WHITE: 7, Ties: 18
+has last 3 identical moves
+has last 3 identical moves
+Episode 26/105, BLACK: 0, WHITE: 7, Ties: 19
+has last 3 identical moves
+has last 3 identical moves
+Episode 27/105, BLACK: 0, WHITE: 7, Ties: 20
+has last 3 identical moves
+has last 3 identical moves
+Episode 28/105, BLACK: 0, WHITE: 7, Ties: 21
+has last 3 identical moves
+has last 3 identical moves
+Episode 29/105, BLACK: 0, WHITE: 7, Ties: 22
+Episode 30/105, BLACK: 0, WHITE: 8, Ties: 22
+AZ weights file saved to path: objects/pa_cpu_AlphaZeroNET.pth
+Episode 31/105, BLACK: 0, WHITE: 9, Ties: 22
+has last 3 identical moves
+has last 3 identical moves
+Episode 32/105, BLACK: 0, WHITE: 9, Ties: 23
+Episode 33/105, BLACK: 0, WHITE: 10, Ties: 23
+has last 3 identical moves
+has last 3 identical moves
+Episode 34/105, BLACK: 0, WHITE: 10, Ties: 24
+has last 3 identical moves
+has last 3 identical moves
+Episode 35/105, BLACK: 0, WHITE: 10, Ties: 25
+has last 3 identical moves
+has last 3 identical moves
+Episode 36/105, BLACK: 0, WHITE: 10, Ties: 26
+Episode 37/105, BLACK: 0, WHITE: 11, Ties: 26
+has last 3 identical moves
+has last 3 identical moves
+Episode 38/105, BLACK: 0, WHITE: 11, Ties: 27
+Episode 39/105, BLACK: 0, WHITE: 12, Ties: 27
+Episode 40/105, BLACK: 0, WHITE: 13, Ties: 27
+AZ weights file saved to path: objects/pa_cpu_AlphaZeroNET.pth
+has last 3 identical moves
+has last 3 identical moves
+Episode 41/105, BLACK: 0, WHITE: 13, Ties: 28
+has last 3 identical moves
+has last 3 identical moves
+Episode 42/105, BLACK: 0, WHITE: 13, Ties: 29
+has last 3 identical moves
+has last 3 identical moves
+Episode 43/105, BLACK: 0, WHITE: 13, Ties: 30
+has last 3 identical moves
+has last 3 identical moves
+Episode 44/105, BLACK: 0, WHITE: 13, Ties: 31
+has last 3 identical moves
+has last 3 identical moves
+Episode 45/105, BLACK: 0, WHITE: 13, Ties: 32
+has last 3 identical moves
+has last 3 identical moves
+Episode 46/105, BLACK: 0, WHITE: 13, Ties: 33
+has last 3 identical moves
+has last 3 identical moves
+Episode 47/105, BLACK: 0, WHITE: 13, Ties: 34
+has last 3 identical moves
+has last 3 identical moves
+Episode 48/105, BLACK: 0, WHITE: 13, Ties: 35
+has last 3 identical moves
+has last 3 identical moves
+Episode 49/105, BLACK: 0, WHITE: 13, Ties: 36
+has last 3 identical moves
+has last 3 identical moves
+Episode 50/105, BLACK: 0, WHITE: 13, Ties: 37
+AZ weights file saved to path: objects/pa_cpu_AlphaZeroNET.pth
+has last 3 identical moves
+has last 3 identical moves
+Episode 51/105, BLACK: 0, WHITE: 13, Ties: 38
+has last 3 identical moves
+has last 3 identical moves
+Episode 52/105, BLACK: 0, WHITE: 13, Ties: 39
+has last 3 identical moves
+has last 3 identical moves
+Episode 53/105, BLACK: 0, WHITE: 13, Ties: 40
+has last 3 identical moves
+has last 3 identical moves
+Episode 54/105, BLACK: 0, WHITE: 13, Ties: 41
+has last 3 identical moves
+has last 3 identical moves
+Episode 55/105, BLACK: 0, WHITE: 13, Ties: 42
+has last 3 identical moves
+has last 3 identical moves
+Episode 56/105, BLACK: 0, WHITE: 13, Ties: 43
+has last 3 identical moves
+has last 3 identical moves
+Episode 57/105, BLACK: 0, WHITE: 13, Ties: 44
+has last 3 identical moves
+has last 3 identical moves
+Episode 58/105, BLACK: 0, WHITE: 13, Ties: 45
+has last 3 identical moves
+has last 3 identical moves
+Episode 59/105, BLACK: 0, WHITE: 13, Ties: 46
+Episode 60/105, BLACK: 0, WHITE: 14, Ties: 46
+AZ weights file saved to path: objects/pa_cpu_AlphaZeroNET.pth
+has last 3 identical moves
+has last 3 identical moves
+Episode 61/105, BLACK: 0, WHITE: 14, Ties: 47
+has last 3 identical moves
+has last 3 identical moves
+Episode 62/105, BLACK: 0, WHITE: 14, Ties: 48
+has last 3 identical moves
+has last 3 identical moves
+Episode 63/105, BLACK: 0, WHITE: 14, Ties: 49
+has last 3 identical moves
+has last 3 identical moves
+Episode 64/105, BLACK: 0, WHITE: 14, Ties: 50
+has last 3 identical moves
+has last 3 identical moves
+Episode 65/105, BLACK: 0, WHITE: 14, Ties: 51
+Episode 66/105, BLACK: 0, WHITE: 15, Ties: 51
+has last 3 identical moves
+has last 3 identical moves
+Episode 67/105, BLACK: 0, WHITE: 15, Ties: 52
+Episode 68/105, BLACK: 0, WHITE: 16, Ties: 52
+Episode 69/105, BLACK: 0, WHITE: 17, Ties: 52
+has last 3 identical moves
+has last 3 identical moves
+Episode 70/105, BLACK: 0, WHITE: 17, Ties: 53
+AZ weights file saved to path: objects/pa_cpu_AlphaZeroNET.pth
+Episode 71/105, BLACK: 0, WHITE: 18, Ties: 53
+Episode 72/105, BLACK: 0, WHITE: 19, Ties: 53
+has last 3 identical moves
+has last 3 identical moves
+Episode 73/105, BLACK: 0, WHITE: 19, Ties: 54
+has last 3 identical moves
+has last 3 identical moves
+Episode 74/105, BLACK: 0, WHITE: 19, Ties: 55
+has last 3 identical moves
+has last 3 identical moves
+Episode 75/105, BLACK: 0, WHITE: 19, Ties: 56
+has last 3 identical moves
+has last 3 identical moves
+Episode 76/105, BLACK: 0, WHITE: 19, Ties: 57
+Episode 77/105, BLACK: 0, WHITE: 20, Ties: 57
+has last 3 identical moves
+has last 3 identical moves
+Episode 78/105, BLACK: 0, WHITE: 20, Ties: 58
+has last 3 identical moves
+has last 3 identical moves
+Episode 79/105, BLACK: 0, WHITE: 20, Ties: 59
+has last 3 identical moves
+has last 3 identical moves
+Episode 80/105, BLACK: 0, WHITE: 20, Ties: 60
+AZ weights file saved to path: objects/pa_cpu_AlphaZeroNET.pth
+
+
+
+
+
+
+
+has last 3 identical moves
+has last 3 identical moves
+Episode 81/105, BLACK: 0, WHITE: 20, Ties: 61
+has last 3 identical moves
+has last 3 identical moves
+Episode 82/105, BLACK: 0, WHITE: 20, Ties: 62
+has last 3 identical moves
+has last 3 identical moves
+Episode 83/105, BLACK: 0, WHITE: 20, Ties: 63
+has last 3 identical moves
+has last 3 identical moves
+Episode 84/105, BLACK: 0, WHITE: 20, Ties: 64
+has last 3 identical moves
+has last 3 identical moves
+Episode 85/105, BLACK: 0, WHITE: 20, Ties: 65
+
+
+
+
+
+
+
+
+
+
+Episode 86/105, BLACK: 0, WHITE: 21, Ties: 65
+Episode 87/105, BLACK: 0, WHITE: 22, Ties: 65
+has last 3 identical moves
+has last 3 identical moves
+Episode 88/105, BLACK: 0, WHITE: 22, Ties: 66
+has last 3 identical moves
+has last 3 identical moves
+Episode 89/105, BLACK: 0, WHITE: 22, Ties: 67
+Episode 90/105, BLACK: 0, WHITE: 23, Ties: 67
+AZ weights file saved to path: objects/pa_cpu_AlphaZeroNET.pth
+has last 3 identical moves
+has last 3 identical moves
+Episode 91/105, BLACK: 0, WHITE: 23, Ties: 68
+has last 3 identical moves
+has last 3 identical moves
+Episode 92/105, BLACK: 0, WHITE: 23, Ties: 69
+has last 3 identical moves
+has last 3 identical moves
+Episode 93/105, BLACK: 0, WHITE: 23, Ties: 70
+has last 3 identical moves
+has last 3 identical moves
+Episode 94/105, BLACK: 0, WHITE: 23, Ties: 71
+has last 3 identical moves
+has last 3 identical moves
+Episode 95/105, BLACK: 0, WHITE: 23, Ties: 72
+has last 3 identical moves
+has last 3 identical moves
+Episode 96/105, BLACK: 0, WHITE: 23, Ties: 73
+has last 3 identical moves
+has last 3 identical moves
+Episode 97/105, BLACK: 0, WHITE: 23, Ties: 74
+Episode 98/105, BLACK: 0, WHITE: 24, Ties: 74
+
+
+
+Episode 99/105, BLACK: 0, WHITE: 25, Ties: 74
+Episode 100/105, BLACK: 0, WHITE: 26, Ties: 74
+AZ weights file saved to path: objects/pa_cpu_AlphaZeroNET.pth
+has last 3 identical moves
+has last 3 identical moves
+Episode 101/105, BLACK: 0, WHITE: 26, Ties: 75
+has last 3 identical moves
+has last 3 identical moves
+Episode 102/105, BLACK: 0, WHITE: 26, Ties: 76
+
+
+
+has last 3 identical moves
+has last 3 identical moves
+Episode 103/105, BLACK: 0, WHITE: 26, Ties: 77
+has last 3 identical moves
+has last 3 identical moves
+Episode 104/105, BLACK: 0, WHITE: 26, Ties: 78
+has last 3 identical moves
+has last 3 identical moves
+Episode 105/105, BLACK: 0, WHITE: 26, Ties: 79
+BLACK: 0, WHITE: 26, Ties: 79
+AZ weights file saved to path: objects/pa_cpu_AlphaZeroNET.pth

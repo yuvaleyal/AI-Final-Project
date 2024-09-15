@@ -18,7 +18,9 @@ class PlayerFactory:
         if player_type == 'random':
             return RandomPlayer(color)
         elif player_type == 'minimax':
-            return MinimaxPlayer(color)
+            player = MinimaxPlayer(color)
+            player.set_depth(3)
+            return player
         elif player_type == 'rl':
             player = ReinforcementPlayer(color)
             player.load_object()
@@ -36,4 +38,3 @@ class PlayerFactory:
         elif player_type == HUMAN:
             return HumanPlayer(color, display)
         return None
-

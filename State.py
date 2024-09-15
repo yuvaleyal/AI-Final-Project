@@ -205,6 +205,6 @@ def has_3_identical_arrays_in_game(outer_array):
     element_counts = Counter(outer_array)
     for str_state, count in element_counts.items():
         if count >= 3:
-            print("has last 3 identical moves")
+            print("has 3 identical moves")
             return True
     return False

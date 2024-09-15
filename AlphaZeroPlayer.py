@@ -1,3 +1,4 @@
+
 # AlphaZeroPlayer.py
 import os
 import torch
@@ -43,19 +44,15 @@ class AlphaZeroPlayer(AdvancedPlayer):
         return next_state
 
     def update_player(self, winner):
-        # Update the winner information in the buffer
         reward = 1 if winner == self.color else -1 if winner == -self.color else 0
-        # Update the last game entries with the reward
         num_entries = len(self.buffer)
         for idx in range(num_entries - self.game_length, num_entries):
             state_tensor, pi, _ = self.buffer[idx]
             self.buffer[idx] = (state_tensor, pi, reward)
         self.game_length = 0
-        # Update neural network with self-play data
         if len(self.buffer) >= self.batch_size:
             self.train_network()
 
-        # Save the network weights periodically
         if len(self.buffer) % (self.batch_size * 10) == 0:
             self.save_object()
         self.mcts = MCTS(self.policy_value_net, self.num_simulations, self.c_puct, self.device)
@@ -66,9 +63,7 @@ class AlphaZeroPlayer(AdvancedPlayer):
         mcts_probs_batch = torch.stack([mp for _, mp, _ in mini_batch]).to(self.device)
         winner_batch = torch.tensor([w for _, _, w in mini_batch], dtype=torch.float32).to(self.device)
 
-        # Zero the parameter gradients
         self.optimizer.zero_grad()
-        # Forward + backward + optimize
         log_probs, values = self.policy_value_net(state_batch)
         value_loss = F.mse_loss(values.view(-1), winner_batch)
         policy_loss = -torch.mean(torch.sum(mcts_probs_batch * log_probs, dim=1))
@@ -81,7 +76,6 @@ class AlphaZeroPlayer(AdvancedPlayer):
 
     def save_object(self):
         AdvancedPlayer.rename_old_state_file(self.alpha_zero_net_path)
-        # Save the neural network's weights
         torch.save(self.policy_value_net.state_dict(), self.alpha_zero_net_path)
         print(f"AZ weights file saved to path: {self.alpha_zero_net_path}")
 

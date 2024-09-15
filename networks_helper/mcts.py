@@ -2,7 +2,7 @@
 import math
 import numpy as np
 import torch
-from Constants import *
+from Constants import ACTION_SIZE
 from networks_helper.func_helper import state_to_tensor, move_to_action_index
 
 
